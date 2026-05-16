@@ -15,7 +15,6 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* CSS Variables for Theming */
         :root {
             --bg-color: #0A0A0A;
             --card-color: #1A1A1A;
@@ -28,10 +27,6 @@
             --error: #E53935;
             --discount: #FF4444;
             --gradient: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            --glass: rgba(255,255,255,0.05);
-            --border-radius-lg: 28px;
-            --border-radius-md: 20px;
-            --border-radius-sm: 16px;
         }
 
         body.light-theme {
@@ -42,33 +37,18 @@
             --gold: #DAA520;
             --gold-dark: #B8860B;
             --border-color: #E0E0E0;
-            --glass: rgba(0,0,0,0.03);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--bg-color);
             color: var(--text-color);
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: all 0.3s ease;
             padding-bottom: 70px;
             overflow-x: hidden;
         }
 
-        /* Improved Scrollbar */
-        ::-webkit-scrollbar {
-            width: 4px;
-            height: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--border-color);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 10px;
-        }
-
-        /* Header - Glass Effect */
+        /* Header */
         .header {
             background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(12px);
@@ -79,9 +59,6 @@
             left: 0;
             right: 0;
             z-index: 100;
-        }
-        body.light-theme .header {
-            background: rgba(245, 245, 245, 0.95);
         }
 
         .header-content {
@@ -95,7 +72,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            flex-shrink: 0;
         }
 
         .app-logo {
@@ -107,32 +83,22 @@
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            flex-shrink: 0;
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255,215,0,0.5); }
         }
 
         .app-title h1 {
             font-size: 18px;
             color: var(--gold);
-            white-space: nowrap;
         }
         .app-title p {
             font-size: 9px;
             color: var(--text-dim);
-            white-space: nowrap;
         }
 
         .header-icons {
             display: flex;
             gap: 8px;
             align-items: center;
-            flex-shrink: 0;
         }
 
         .icon-btn {
@@ -146,8 +112,7 @@
             justify-content: center;
             cursor: pointer;
             position: relative;
-            transition: all 0.2s ease;
-            font-size: 16px;
+            transition: all 0.2s;
             color: var(--text-color);
         }
         .icon-btn:active { transform: scale(0.92); }
@@ -166,11 +131,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: bounce 0.3s ease;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
         }
 
         .theme-toggle {
@@ -180,78 +140,31 @@
             cursor: pointer;
             font-size: 14px;
             border: 1px solid var(--border-color);
-            transition: all 0.2s;
         }
-        .theme-toggle:active { transform: scale(0.95); }
 
-        /* Notifications Dropdown */
-        .notifications-dropdown {
-            position: fixed;
-            top: 70px;
-            right: 10px;
-            left: 10px;
-            max-height: 380px;
-            background: var(--card-color);
-            border-radius: var(--border-radius-md);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            border: 1px solid var(--border-color);
-            z-index: 200;
-            overflow: hidden;
-            animation: slideDown 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
-        @keyframes slideDown {
-            from { transform: translateY(-100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .notifications-header {
-            padding: 14px;
-            background: var(--gradient);
-            color: #0A0A0A;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-        }
-        .notifications-list { max-height: 320px; overflow-y: auto; }
-        .notification-item {
-            padding: 12px 14px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            gap: 12px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .notification-item:active { background: var(--glass); }
-        .notification-item.discount { border-right: 3px solid var(--discount); }
-        .notification-icon { font-size: 18px; flex-shrink: 0; }
-        .notification-text { flex: 1; font-size: 12px; line-height: 1.4; }
-        .notification-time { font-size: 10px; color: var(--text-dim); margin-top: 3px; }
-
-        /* Hero Slider - Touch Enabled */
+        /* Hero Slider */
         .hero-slider {
             margin: 12px;
-            border-radius: var(--border-radius-lg);
+            border-radius: 28px;
             overflow: hidden;
             position: relative;
             margin-top: 80px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            touch-action: pan-y pinch-zoom;
         }
         .slider-container {
             display: flex;
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: transform 0.4s ease;
             cursor: grab;
         }
-        .slider-container:active { cursor: grabbing; }
         .slide {
             min-width: 100%;
             background: var(--gradient);
             padding: 18px;
             text-align: center;
             color: #0A0A0A;
-            user-select: none;
         }
         .slide-icon { font-size: 44px; margin-bottom: 8px; }
-        .slide-title { font-size: 18px; font-weight: bold; margin-bottom: 4px; }
+        .slide-title { font-size: 18px; font-weight: bold; }
         .slide-desc { font-size: 12px; opacity: 0.9; }
         .slider-dots {
             display: flex;
@@ -263,7 +176,6 @@
             left: 0;
             right: 0;
             background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(4px);
         }
         .dot {
             width: 8px;
@@ -271,26 +183,17 @@
             background: rgba(255,255,255,0.5);
             border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
-        .dot.active {
-            background: white;
-            width: 24px;
-            border-radius: 10px;
-        }
+        .dot.active { background: white; width: 24px; border-radius: 10px; }
 
-        /* Category Tabs - Improved Scrolling */
+        /* Category Tabs */
         .category-tabs {
             display: flex;
             gap: 10px;
             padding: 12px;
             overflow-x: auto;
             scrollbar-width: thin;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
         }
-        .category-tabs::-webkit-scrollbar { height: 3px; }
         .category-btn {
             padding: 8px 18px;
             background: var(--card-color);
@@ -300,19 +203,15 @@
             font-size: 13px;
             font-weight: bold;
             cursor: pointer;
-            flex-shrink: 0;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.2s ease;
+            white-space: nowrap;
         }
-        .category-btn:active { transform: scale(0.96); }
-        .category-btn i { font-size: 13px; }
         .category-btn.active {
             background: var(--gradient);
             color: #0A0A0A;
             border-color: var(--gold);
-            box-shadow: 0 2px 8px rgba(255,215,0,0.3);
         }
 
         /* Search Bar */
@@ -324,11 +223,6 @@
             border-radius: 50px;
             padding: 12px 18px;
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-        .search-box:focus-within {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(255,215,0,0.1);
         }
         .search-input {
             flex: 1;
@@ -337,7 +231,6 @@
             color: var(--text-color);
             font-size: 14px;
             outline: none;
-            padding: 0 8px;
         }
         .clear-btn {
             background: var(--border-color);
@@ -347,9 +240,7 @@
             border-radius: 50%;
             cursor: pointer;
             display: none;
-            transition: all 0.2s;
         }
-        .clear-btn:active { transform: scale(0.9); }
 
         /* Products Grid */
         .products-grid {
@@ -358,26 +249,15 @@
             gap: 14px;
             padding: 12px;
         }
-        @media (max-width: 380px) {
-            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        }
-
         .product-card {
             background: var(--card-color);
-            border-radius: var(--border-radius-md);
+            border-radius: 20px;
             padding: 14px 10px;
             border: 1px solid var(--border-color);
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: all 0.3s ease;
             position: relative;
-            animation: fadeInUp 0.4s ease backwards;
-            cursor: pointer;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         .product-card:active { transform: scale(0.97); }
-
         .discount-badge {
             position: absolute;
             top: 10px;
@@ -385,53 +265,17 @@
             background: var(--discount);
             color: white;
             font-size: 10px;
-            font-weight: bold;
             padding: 3px 10px;
             border-radius: 30px;
-            z-index: 2;
             display: flex;
             align-items: center;
             gap: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
-
-        .product-icon {
-            font-size: 52px;
-            text-align: center;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .product-name {
-            font-size: 13px;
-            font-weight: bold;
-            text-align: center;
-            margin: 8px 0 5px;
-            color: var(--gold);
-            line-height: 1.3;
-            min-height: 34px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .product-price {
-            font-size: 15px;
-            font-weight: bold;
-            text-align: center;
-            color: var(--gold);
-        }
-        .old-price {
-            color: var(--text-dim);
-            font-size: 11px;
-            text-decoration: line-through;
-            margin-left: 5px;
-        }
-
-        .product-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-        }
+        .product-icon { font-size: 48px; text-align: center; display: block; }
+        .product-name { font-size: 13px; font-weight: bold; text-align: center; margin: 8px 0; color: var(--gold); }
+        .product-price { font-size: 15px; font-weight: bold; text-align: center; color: var(--gold); }
+        .old-price { color: var(--text-dim); font-size: 11px; text-decoration: line-through; margin-left: 5px; }
+        .product-actions { display: flex; gap: 8px; margin-top: 12px; }
         .action-btn {
             flex: 1;
             background: var(--bg-color);
@@ -441,19 +285,15 @@
             font-size: 11px;
             cursor: pointer;
             text-align: center;
-            transition: all 0.2s ease;
-            font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 5px;
         }
-        .action-btn:active { transform: scale(0.94); }
-        .action-btn i { font-size: 11px; }
-        .fav-active { background: var(--error); color: white; border-color: var(--error); }
-        .cart-active { background: var(--gold); color: #0A0A0A; border-color: var(--gold); }
+        .fav-active { background: var(--error); color: white; }
+        .cart-active { background: var(--gold); color: #0A0A0A; }
 
-        /* Bottom Navigation - Improved */
+        /* Bottom Navigation */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -467,16 +307,13 @@
             border-top: 1px solid rgba(255, 215, 0, 0.2);
             z-index: 100;
         }
-        body.light-theme .bottom-nav {
-            background: rgba(245, 245, 245, 0.95);
-        }
         .nav-item {
             flex: 1;
             text-align: center;
             padding: 8px;
             cursor: pointer;
             border-radius: 40px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             font-size: 12px;
             font-weight: bold;
             display: flex;
@@ -484,21 +321,66 @@
             justify-content: center;
             gap: 6px;
         }
-        .nav-item:active { transform: scale(0.96); }
-        .nav-item i { font-size: 14px; }
         .nav-item.active {
             background: var(--gradient);
             color: #0A0A0A;
-            box-shadow: 0 2px 10px rgba(255,215,0,0.3);
         }
 
         /* About Section */
+        .library-info {
+            background: var(--card-color);
+            margin: 12px;
+            border-radius: 28px;
+            overflow: hidden;
+        }
+        .library-header {
+            background: var(--gradient);
+            padding: 20px;
+            text-align: center;
+            color: #0A0A0A;
+        }
+        .services-badge {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 10px;
+            padding: 18px;
+        }
+        .service-badge {
+            background: var(--bg-color);
+            border-radius: 40px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .service-badge i { font-size: 18px; color: var(--gold); }
+        .service-badge span { font-size: 12px; font-weight: bold; }
+
+        .library-address {
+            padding: 18px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        .copy-address-btn {
+            background: var(--card-color);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 16px;
+            border-radius: 30px;
+            margin-top: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .about-section {
             background: var(--card-color);
             margin: 12px;
-            border-radius: var(--border-radius-lg);
+            border-radius: 28px;
             overflow: hidden;
-            border: 1px solid var(--border-color);
         }
         .about-header {
             background: var(--gradient);
@@ -506,7 +388,6 @@
             text-align: center;
             color: #0A0A0A;
         }
-        .about-header h2 { font-size: 22px; margin-bottom: 4px; }
         .about-content { padding: 18px; }
         .info-row {
             display: flex;
@@ -516,51 +397,23 @@
             border-bottom: 1px solid var(--border-color);
         }
         .info-icon { font-size: 22px; width: 45px; text-align: center; color: var(--gold); }
-        .info-text strong { color: var(--gold); display: block; font-size: 12px; margin-bottom: 2px; }
-        .info-text span { font-size: 12px; }
-
         .social-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin: 18px 0;
         }
-        @media (max-width: 450px) {
-            .social-grid { grid-template-columns: repeat(3, 1fr); }
-        }
         .social-card {
             background: var(--bg-color);
-            border-radius: var(--border-radius-sm);
+            border-radius: 16px;
             padding: 12px;
             text-align: center;
             cursor: pointer;
             border: 1px solid var(--border-color);
-            transition: all 0.2s ease;
         }
         .social-card:active { transform: scale(0.95); }
-        .social-icon { font-size: 30px; display: block; margin-bottom: 6px; }
+        .social-icon { font-size: 32px; display: block; margin-bottom: 6px; }
         .social-name { font-size: 11px; font-weight: bold; color: var(--gold); }
-
-        .brands-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin: 18px 0;
-        }
-        @media (max-width: 450px) {
-            .brands-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        .brand-card {
-            background: var(--bg-color);
-            border-radius: var(--border-radius-sm);
-            padding: 12px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            transition: all 0.2s;
-        }
-        .brand-card:active { transform: scale(0.95); }
-        .brand-icon { font-size: 34px; display: block; margin-bottom: 6px; }
-        .brand-name { font-size: 11px; font-weight: bold; color: var(--gold); }
 
         .location-btn {
             background: var(--gradient);
@@ -572,21 +425,13 @@
             font-weight: bold;
             margin-top: 15px;
             cursor: pointer;
-            font-size: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: all 0.2s;
-        }
-        .location-btn:active { transform: scale(0.97); }
-
-        .empty-state {
-            text-align: center;
-            padding: 50px;
-            color: var(--text-dim);
         }
 
+        .empty-state { text-align: center; padding: 50px; color: var(--text-dim); }
         .notification {
             position: fixed;
             top: 80px;
@@ -598,17 +443,13 @@
             border-radius: 60px;
             text-align: center;
             z-index: 200;
-            animation: slideDown 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            animation: slideDown 0.3s ease;
             font-weight: bold;
-            font-size: 13px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
-        .notification.discount { background: var(--discount); }
-
         .footer {
             text-align: center;
             padding: 18px;
@@ -617,33 +458,24 @@
             border-top: 1px solid var(--border-color);
             margin-top: 15px;
         }
-        .loading { text-align: center; padding: 50px; }
-        .loading-spinner {
-            width: 45px;
-            height: 45px;
-            border: 3px solid var(--border-color);
-            border-top-color: var(--gold);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<!-- Fixed Header -->
 <div class="header">
     <div class="header-content">
         <div class="logo-area">
             <div class="app-logo"><i class="fas fa-store"></i></div>
             <div class="app-title">
                 <h1>مكتبة حكايه</h1>
-                <p>✨ متجر الإلكترونيات ✨</p>
+                <p>✨ متجر الإلكترونيات والمستلزمات المدرسية ✨</p>
             </div>
         </div>
         <div class="header-icons">
-            <div class="icon-btn" id="notificationsBtn"><i class="fas fa-bell"></i><span class="badge" id="notifBadge" style="display:none;">0</span></div>
             <div class="icon-btn" id="favoritesIconBtn"><i class="far fa-heart"></i><span class="badge" id="favoritesBadge" style="display:none;">0</span></div>
             <div class="icon-btn" id="cartIconBtn"><i class="fas fa-shopping-cart"></i><span class="badge" id="cartBadge" style="display:none;">0</span></div>
             <div class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></div>
@@ -651,13 +483,7 @@
     </div>
 </div>
 
-<!-- Notifications Dropdown -->
-<div id="notificationsDropdown" class="notifications-dropdown" style="display: none;">
-    <div class="notifications-header"><span><i class="fas fa-bell"></i> الإشعارات</span><span id="clearNotifs" style="cursor:pointer;"><i class="fas fa-trash-alt"></i> مسح الكل</span></div>
-    <div class="notifications-list" id="notificationsList"></div>
-</div>
-
-<!-- Hero Slider (Touch Enabled) -->
+<!-- Hero Slider -->
 <div class="hero-slider" id="heroSlider">
     <div class="slider-container" id="sliderContainer">
         <div class="slide"><div class="slide-icon"><i class="fas fa-gift"></i> <i class="fas fa-star"></i></div><div class="slide-title">خصم يصل إلى 30%</div><div class="slide-desc">على جميع الشواحن السريعة</div></div>
@@ -672,13 +498,14 @@
     <button class="category-btn active" data-cat="all"><i class="fas fa-star"></i> الكل</button>
     <button class="category-btn" data-cat="charger"><i class="fas fa-bolt"></i> شواحن</button>
     <button class="category-btn" data-cat="audio"><i class="fas fa-headphones"></i> سماعات</button>
-    <button class="category-btn" data-cat="case"><i class="fas fa-mobile-alt"></i> جرابات</button>
+    <button class="category-btn" data-cat="pens"><i class="fas fa-pen"></i> أقلام</button>
+    <button class="category-btn" data-cat="notebooks"><i class="fas fa-book"></i> دفاتر</button>
+    <button class="category-btn" data-cat="colors"><i class="fas fa-palette"></i> ألوان</button>
+    <button class="category-btn" data-cat="rollers"><i class="fas fa-paint-roller"></i> رولر</button>
     <button class="category-btn" data-cat="cable"><i class="fas fa-plug"></i> كوابل</button>
     <button class="category-btn" data-cat="powerbank"><i class="fas fa-battery-full"></i> باور بانك</button>
-    <button class="category-btn" data-cat="mount"><i class="fas fa-car"></i> حوامل</button>
 </div>
 
-<!-- Search -->
 <div class="search-container">
     <div class="search-box">
         <i class="fas fa-search" style="color: var(--text-dim); margin-left: 8px;"></i>
@@ -687,12 +514,10 @@
     </div>
 </div>
 
-<!-- Products Container -->
 <div id="productsContainer" class="products-grid">
-    <div class="loading"><div class="loading-spinner"></div><p style="margin-top:10px;">جاري التحميل...</p></div>
+    <div class="loading">⏳ جاري التحميل...</div>
 </div>
 
-<!-- Bottom Navigation -->
 <div class="bottom-nav">
     <div class="nav-item active" data-tab="all"><i class="fas fa-home"></i> الرئيسية</div>
     <div class="nav-item" data-tab="favorites"><i class="fas fa-heart"></i> المفضلة</div>
@@ -708,188 +533,46 @@
 <script>
     // ======================= PRODUCTS DATA =======================
     let products = [
-        { id: 1, name: "شاحن سريع 33W", price: 25000, oldPrice: 35000, icon: "⚡", category: "charger", group: "شواحن", rating: 4.8 },
-        { id: 2, name: "شاحن سيارة 45W", price: 20000, oldPrice: null, icon: "🚗", category: "charger", group: "شواحن", rating: 4.6 },
-        { id: 3, name: "شاحن لاسلكي 15W", price: 30000, oldPrice: 45000, icon: "📡", category: "charger", group: "شواحن", rating: 4.7 },
-        { id: 4, name: "شاحن 65W لابتوب", price: 50000, oldPrice: null, icon: "💻", category: "charger", group: "شواحن", rating: 4.9 },
-        { id: 5, name: "سماعة بلوتوث TWS", price: 25000, oldPrice: null, icon: "🎧", category: "audio", group: "سماعات", rating: 4.5 },
-        { id: 6, name: "سماعة رأس لاسلكية", price: 50000, oldPrice: 75000, icon: "🎧", category: "audio", group: "سماعات", rating: 4.7 },
-        { id: 7, name: "سماعة سلكية", price: 15000, oldPrice: null, icon: "🎧", category: "audio", group: "سماعات", rating: 4.3 },
-        { id: 8, name: "جراب سيليكون شفاف", price: 8000, oldPrice: null, icon: "📱", category: "case", group: "جرابات", rating: 4.4 },
-        { id: 9, name: "جراب حماية قوي", price: 20000, oldPrice: 30000, icon: "🛡️", category: "case", group: "جرابات", rating: 4.8 },
-        { id: 10, name: "جراب بطارية مدمج", price: 28000, oldPrice: null, icon: "🔋", category: "case", group: "جرابات", rating: 4.6 },
-        { id: 11, name: "كابل USB-C 2م", price: 8000, oldPrice: null, icon: "🔌", category: "cable", group: "كوابل", rating: 4.5 },
-        { id: 12, name: "كابل Lightning 1.5م", price: 10000, oldPrice: 15000, icon: "🍎", category: "cable", group: "كوابل", rating: 4.6 },
-        { id: 13, name: "كابل USB 3.0", price: 5000, oldPrice: null, icon: "🔌", category: "cable", group: "كوابل", rating: 4.4 },
-        { id: 14, name: "باور بانك 10000mAh", price: 35000, oldPrice: null, icon: "🔋", category: "powerbank", group: "باور بانك", rating: 4.7 },
-        { id: 15, name: "باور بانك 20000mAh", price: 55000, oldPrice: 80000, icon: "🔋", category: "powerbank", group: "باور بانك", rating: 4.9 },
-        { id: 16, name: "حامل سيارة مغناطيسي", price: 15000, oldPrice: null, icon: "🚗", category: "mount", group: "حوامل", rating: 4.5 },
-        { id: 17, name: "حامل منضدي", price: 10000, oldPrice: null, icon: "🖥️", category: "mount", group: "حوامل", rating: 4.3 }
+        // شواحن
+        { id: 1, name: "شاحن سريع 33W", price: 25000, oldPrice: 35000, icon: "⚡", category: "charger", group: "شواحن" },
+        { id: 2, name: "شاحن سيارة 45W", price: 20000, oldPrice: null, icon: "🚗", category: "charger", group: "شواحن" },
+        { id: 3, name: "شاحن لاسلكي 15W", price: 30000, oldPrice: 45000, icon: "📡", category: "charger", group: "شواحن" },
+        // سماعات
+        { id: 4, name: "سماعة بلوتوث TWS", price: 25000, oldPrice: null, icon: "🎧", category: "audio", group: "سماعات" },
+        { id: 5, name: "سماعة رأس لاسلكية", price: 50000, oldPrice: 75000, icon: "🎧", category: "audio", group: "سماعات" },
+        // أقلام
+        { id: 6, name: "قلم حبر أزرق", price: 1500, oldPrice: null, icon: "✒️", category: "pens", group: "أقلام" },
+        { id: 7, name: "قلم حبر أسود", price: 1500, oldPrice: null, icon: "✒️", category: "pens", group: "أقلام" },
+        { id: 8, name: "قلم رصاص HB", price: 1000, oldPrice: null, icon: "✏️", category: "pens", group: "أقلام" },
+        { id: 9, name: "قلم ماركر", price: 2500, oldPrice: null, icon: "🖍️", category: "pens", group: "أقلام" },
+        { id: 10, name: "قلم حبر أحمر", price: 1500, oldPrice: null, icon: "✒️", category: "pens", group: "أقلام" },
+        // دفاتر
+        { id: 11, name: "دفتر 40 ورقة", price: 3000, oldPrice: null, icon: "📓", category: "notebooks", group: "دفاتر" },
+        { id: 12, name: "دفتر 100 ورقة", price: 7000, oldPrice: null, icon: "📔", category: "notebooks", group: "دفاتر" },
+        { id: 13, name: "دفتر ملاحظات صغير", price: 2000, oldPrice: null, icon: "📘", category: "notebooks", group: "دفاتر" },
+        { id: 14, name: "دفتر رسم", price: 5000, oldPrice: null, icon: "🎨", category: "notebooks", group: "دفاتر" },
+        // ألوان
+        { id: 15, name: "ألوان خشبية 12 لون", price: 8000, oldPrice: null, icon: "🖍️", category: "colors", group: "ألوان" },
+        { id: 16, name: "ألوان مائية", price: 12000, oldPrice: 18000, icon: "🎨", category: "colors", group: "ألوان" },
+        { id: 17, name: "فلوماستر 12 لون", price: 10000, oldPrice: null, icon: "🖌️", category: "colors", group: "ألوان" },
+        { id: 18, name: "باستيل طباشير", price: 15000, oldPrice: null, icon: "🎨", category: "colors", group: "ألوان" },
+        // رولر
+        { id: 19, name: "رولر 5 مم", price: 3500, oldPrice: null, icon: "📏", category: "rollers", group: "رولر" },
+        { id: 20, name: "رولر 10 مم", price: 4500, oldPrice: null, icon: "📏", category: "rollers", group: "رولر" },
+        { id: 21, name: "رولر لاصق", price: 5000, oldPrice: null, icon: "📏", category: "rollers", group: "رولر" },
+        // كوابل
+        { id: 22, name: "كابل USB-C 2م", price: 8000, oldPrice: null, icon: "🔌", category: "cable", group: "كوابل" },
+        { id: 23, name: "كابل Lightning", price: 10000, oldPrice: 15000, icon: "🍎", category: "cable", group: "كوابل" },
+        // باور بانك
+        { id: 24, name: "باور بانك 10000mAh", price: 35000, oldPrice: null, icon: "🔋", category: "powerbank", group: "باور بانك" },
+        { id: 25, name: "باور بانك 20000mAh", price: 55000, oldPrice: 80000, icon: "🔋", category: "powerbank", group: "باور بانك" }
     ];
 
     let cart = JSON.parse(localStorage.getItem('hekaya_cart')) || [];
     let favorites = JSON.parse(localStorage.getItem('hekaya_favorites')) || [];
-    let notifications = JSON.parse(localStorage.getItem('hekaya_notifications')) || [
-        { id: 1, type: 'discount', message: '🔥 خصم 30% على جميع الشواحن لفترة محدودة!', time: new Date().toLocaleTimeString('ar-IQ'), read: false },
-        { id: 2, type: 'info', message: '✨ توصيل مجاني للطلبات فوق 50,000 دينار', time: new Date().toLocaleTimeString('ar-IQ'), read: false },
-        { id: 3, type: 'info', message: '🎁 هدية مجانية مع كل طلب بقيمة 20,000 دينار', time: new Date().toLocaleTimeString('ar-IQ'), read: false }
-    ];
     let currentTab = 'all';
     let currentCategory = 'all';
     let searchQuery = '';
-
-    // Notifications
-    function updateNotifBadge() {
-        const unread = notifications.filter(n => !n.read).length;
-        const badge = document.getElementById('notifBadge');
-        if(unread > 0) { badge.style.display = 'flex'; badge.innerText = unread; }
-        else badge.style.display = 'none';
-    }
-    function renderNotifications() {
-        const container = document.getElementById('notificationsList');
-        if(notifications.length === 0) { container.innerHTML = '<div class="notification-item">لا توجد إشعارات</div>'; return; }
-        container.innerHTML = notifications.map(n => `
-            <div class="notification-item ${n.type === 'discount' ? 'discount' : ''}" onclick="markAsRead(${n.id})">
-                <div class="notification-icon">${n.type === 'discount' ? '🔥' : (n.type === 'urgent' ? '⚠️' : '📢')}</div>
-                <div class="notification-text"><div>${n.message}</div><div class="notification-time">${n.time}</div></div>
-                <div>${n.read ? '✓' : '●'}</div>
-            </div>
-        `).join('');
-        updateNotifBadge();
-    }
-    function addNotification(message, type = 'info') {
-        const newNotif = { id: Date.now(), type: type, message: message, time: new Date().toLocaleTimeString('ar-IQ'), read: false };
-        notifications.unshift(newNotif);
-        if(notifications.length > 20) notifications.pop();
-        localStorage.setItem('hekaya_notifications', JSON.stringify(notifications));
-        renderNotifications();
-        showNotification(message, type === 'discount');
-    }
-    window.markAsRead = function(id) {
-        const notif = notifications.find(n => n.id === id);
-        if(notif) notif.read = true;
-        localStorage.setItem('hekaya_notifications', JSON.stringify(notifications));
-        renderNotifications();
-    };
-    document.getElementById('clearNotifs')?.addEventListener('click', () => {
-        notifications = [];
-        localStorage.setItem('hekaya_notifications', JSON.stringify(notifications));
-        renderNotifications();
-    });
-    document.getElementById('notificationsBtn').addEventListener('click', () => {
-        const dropdown = document.getElementById('notificationsDropdown');
-        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-        renderNotifications();
-    });
-    document.addEventListener('click', (e) => {
-        const dropdown = document.getElementById('notificationsDropdown');
-        const btn = document.getElementById('notificationsBtn');
-        if(dropdown && !dropdown.contains(e.target) && e.target !== btn && !btn.contains(e.target)) dropdown.style.display = 'none';
-    });
-
-    // ======================= TOUCH SLIDER =======================
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dotsContainer = document.getElementById('sliderDots');
-    const sliderContainer = document.getElementById('sliderContainer');
-    let startX = 0;
-    let currentX = 0;
-    let isDragging = false;
-    let dragThreshold = 50;
-
-    function initSlider() {
-        if(!slides.length) return;
-        for(let i = 0; i < slides.length; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            dot.onclick = () => goToSlide(i);
-            dotsContainer.appendChild(dot);
-        }
-        goToSlide(0);
-        startAutoSlide();
-        
-        // Touch events for mobile
-        sliderContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
-        sliderContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
-        sliderContainer.addEventListener('touchend', handleTouchEnd);
-        sliderContainer.addEventListener('mousedown', handleMouseDown);
-        sliderContainer.addEventListener('mousemove', handleMouseMove);
-        sliderContainer.addEventListener('mouseup', handleMouseUp);
-    }
-    
-    let autoSlideInterval;
-    function startAutoSlide() {
-        if(autoSlideInterval) clearInterval(autoSlideInterval);
-        autoSlideInterval = setInterval(() => goToSlide(currentSlide + 1), 5000);
-    }
-    function stopAutoSlide() {
-        if(autoSlideInterval) clearInterval(autoSlideInterval);
-    }
-    
-    function goToSlide(index) {
-        currentSlide = (index + slides.length) % slides.length;
-        sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-        document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-        startAutoSlide();
-    }
-    
-    function handleTouchStart(e) {
-        stopAutoSlide();
-        startX = e.touches[0].clientX;
-        isDragging = true;
-        sliderContainer.style.transition = 'none';
-    }
-    function handleTouchMove(e) {
-        if(!isDragging) return;
-        currentX = e.touches[0].clientX;
-        const diff = currentX - startX;
-        const currentOffset = -currentSlide * 100;
-        const newOffset = currentOffset + (diff / sliderContainer.parentElement.offsetWidth * 100);
-        sliderContainer.style.transform = `translateX(${newOffset}%)`;
-        e.preventDefault();
-    }
-    function handleTouchEnd(e) {
-        if(!isDragging) return;
-        isDragging = false;
-        sliderContainer.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
-        const diff = currentX - startX;
-        const threshold = dragThreshold;
-        if(Math.abs(diff) > threshold) {
-            if(diff > 0) goToSlide(currentSlide - 1);
-            else goToSlide(currentSlide + 1);
-        } else {
-            goToSlide(currentSlide);
-        }
-        startAutoSlide();
-    }
-    function handleMouseDown(e) {
-        stopAutoSlide();
-        startX = e.clientX;
-        isDragging = true;
-        sliderContainer.style.transition = 'none';
-        e.preventDefault();
-    }
-    function handleMouseMove(e) {
-        if(!isDragging) return;
-        currentX = e.clientX;
-        const diff = currentX - startX;
-        const currentOffset = -currentSlide * 100;
-        const newOffset = currentOffset + (diff / sliderContainer.parentElement.offsetWidth * 100);
-        sliderContainer.style.transform = `translateX(${newOffset}%)`;
-    }
-    function handleMouseUp(e) {
-        if(!isDragging) return;
-        isDragging = false;
-        sliderContainer.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
-        const diff = currentX - startX;
-        if(Math.abs(diff) > dragThreshold) {
-            if(diff > 0) goToSlide(currentSlide - 1);
-            else goToSlide(currentSlide + 1);
-        } else {
-            goToSlide(currentSlide);
-        }
-        startAutoSlide();
-    }
 
     // Core Functions
     function saveToLocalStorage() {
@@ -897,6 +580,7 @@
         localStorage.setItem('hekaya_favorites', JSON.stringify(favorites));
         updateBadges();
     }
+
     function updateBadges() {
         const cartBadge = document.getElementById('cartBadge');
         const favBadge = document.getElementById('favoritesBadge');
@@ -905,33 +589,37 @@
         favBadge.style.display = favorites.length > 0 ? 'flex' : 'none';
         if(favorites.length > 0) favBadge.innerText = favorites.length;
     }
+
     function isInCart(id) { return cart.some(item => item.id === id); }
     function isInFavorites(id) { return favorites.includes(id); }
+
     function addToCart(product) {
         if (!isInCart(product.id)) {
             cart.push({ id: product.id, name: product.name, price: product.price });
             saveToLocalStorage();
-            addNotification(`✅ تمت إضافة ${product.name} إلى السلة`, 'info');
+            showNotification(`✅ تمت إضافة ${product.name} إلى السلة`);
             if(currentTab === 'cart') renderProducts();
         } else {
-            addNotification(`⚠️ ${product.name} موجود بالفعل في السلة`, 'info');
+            showNotification(`⚠️ ${product.name} موجود بالفعل في السلة`);
         }
     }
+
     function removeFromCart(productId) {
         const product = products.find(p => p.id === productId);
         cart = cart.filter(item => item.id !== productId);
         saveToLocalStorage();
-        addNotification(`🗑️ تم إزالة ${product.name} من السلة`, 'info');
+        showNotification(`🗑️ تم إزالة ${product.name} من السلة`);
         if(currentTab === 'cart') renderProducts();
     }
+
     function toggleFavorite(productId) {
         const product = products.find(p => p.id === productId);
         if (isInFavorites(productId)) {
             favorites = favorites.filter(id => id !== productId);
-            addNotification(`💔 تم إزالة ${product.name} من المفضلة`, 'info');
+            showNotification(`💔 تم إزالة ${product.name} من المفضلة`);
         } else {
             favorites.push(productId);
-            addNotification(`❤️ تمت إضافة ${product.name} إلى المفضلة`, 'info');
+            showNotification(`❤️ تمت إضافة ${product.name} إلى المفضلة`);
         }
         saveToLocalStorage();
         if(currentTab === 'favorites') renderProducts();
@@ -956,7 +644,7 @@
             const inFav = isInFavorites(product.id);
             const hasDiscount = product.oldPrice && product.oldPrice > product.price;
             return `
-                <div class="product-card" style="animation-delay: ${product.id * 0.02}s">
+                <div class="product-card">
                     ${hasDiscount ? `<div class="discount-badge"><i class="fas fa-fire"></i> خصم ${Math.round((1 - product.price/product.oldPrice)*100)}%</div>` : ''}
                     <div class="product-icon">${product.icon}</div>
                     <div class="product-name">${product.name}</div>
@@ -984,39 +672,61 @@
         if(currentTab !== 'about') renderProducts();
     }
 
+    function copyAddress() {
+        navigator.clipboard.writeText("كوت - حي الحكيم الاولى - قرب سيطرة العمارة القديمة");
+        showNotification("📋 تم نسخ العنوان");
+    }
+
+    function renderLibrarySection() {
+        const container = document.getElementById('productsContainer');
+        container.innerHTML = `
+            <div class="library-info">
+                <div class="library-header">
+                    <h2><i class="fas fa-store"></i> مكتبة حكايه</h2>
+                    <p>✨ قرطاسية - اكسسوارات - موبايلات - العاب - هدايا ✨</p>
+                </div>
+                <div class="services-badge">
+                    <div class="service-badge"><i class="fas fa-book"></i><span>قرطاسية</span></div>
+                    <div class="service-badge"><i class="fas fa-headphones"></i><span>اكسسوارات</span></div>
+                    <div class="service-badge"><i class="fas fa-mobile-alt"></i><span>موبايلات</span></div>
+                    <div class="service-badge"><i class="fas fa-gamepad"></i><span>العاب</span></div>
+                    <div class="service-badge"><i class="fas fa-gift"></i><span>هدايا</span></div>
+                    <div class="service-badge"><i class="fas fa-copy"></i><span>استنساخ</span></div>
+                    <div class="service-badge"><i class="fas fa-flask"></i><span>بحوث</span></div>
+                    <div class="service-badge"><i class="fas fa-camera"></i><span>تصوير</span></div>
+                    <div class="service-badge"><i class="fas fa-pen-fancy"></i><span>خطوط</span></div>
+                    <div class="service-badge"><i class="fas fa-money-bill-wave"></i><span>منفذ توزيع رواتب</span></div>
+                </div>
+                <div class="library-address">
+                    <div class="address-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="address-text">📍 كوت - حي الحكيم الاولى</div>
+                    <div class="address-detail">قرب سيطرة العمارة القديمة</div>
+                    <button class="copy-address-btn" onclick="copyAddress()"><i class="fas fa-copy"></i> نسخ العنوان</button>
+                </div>
+            </div>
+        `;
+    }
+
     function renderAboutSection() {
         const container = document.getElementById('productsContainer');
         container.innerHTML = `
             <div class="about-section">
-                <div class="about-header"><h2><i class="fas fa-store"></i> مكتبة حكايه</h2><p><i class="fas fa-star"></i> قرطاسية - اكسسوارات - موبايلات - العاب - هدايا <i class="fas fa-star"></i></p></div>
+                <div class="about-header"><h2><i class="fas fa-info-circle"></i> عن المتجر</h2></div>
                 <div class="about-content">
                     <div class="info-row"><div class="info-icon"><i class="fas fa-map-marker-alt"></i></div><div class="info-text"><strong>العنوان</strong><span>كوت - حي الحكيم الاولى - قرب سيطرة العمارة القديمة</span></div></div>
                     <div class="info-row"><div class="info-icon"><i class="fas fa-phone-alt"></i></div><div class="info-text"><strong>اتصال</strong><span>07757777566</span></div></div>
                     <div class="info-row"><div class="info-icon"><i class="fab fa-whatsapp"></i></div><div class="info-text"><strong>واتساب</strong><span>07757777566</span></div></div>
                     <div class="info-row"><div class="info-icon"><i class="fab fa-telegram"></i></div><div class="info-text"><strong>تيليجرام</strong><span>@hikaya_b</span></div></div>
-                    <h3 style="color: var(--gold); margin: 18px 0 12px; text-align: center;"><i class="fas fa-hashtag"></i> تابعونا</h3>
+                    <div class="info-row"><div class="info-icon"><i class="fab fa-instagram"></i></div><div class="info-text"><strong>انستقرام</strong><span>@hikaya_store</span></div></div>
+                    <div class="info-row"><div class="info-icon"><i class="fab fa-facebook"></i></div><div class="info-text"><strong>فيسبوك</strong><span>Hikaya Store</span></div></div>
+                    <div class="info-row"><div class="info-icon"><i class="fab fa-tiktok"></i></div><div class="info-text"><strong>تيك توك</strong><span>@hikaya_store</span></div></div>
                     <div class="social-grid">
                         <div class="social-card" onclick="window.open('https://wa.me/9647757777566', '_blank')"><div class="social-icon"><i class="fab fa-whatsapp"></i></div><div class="social-name">واتساب</div></div>
                         <div class="social-card" onclick="window.open('https://t.me/hikaya_b', '_blank')"><div class="social-icon"><i class="fab fa-telegram"></i></div><div class="social-name">تيليجرام</div></div>
-                        <div class="social-card" onclick="window.open('https://instagram.com/hikaya', '_blank')"><div class="social-icon"><i class="fab fa-instagram"></i></div><div class="social-name">انستقرام</div></div>
-                        <div class="social-card" onclick="window.open('https://facebook.com/hikaya', '_blank')"><div class="social-icon"><i class="fab fa-facebook"></i></div><div class="social-name">فيسبوك</div></div>
-                        <div class="social-card" onclick="window.open('https://tiktok.com/@hikaya', '_blank')"><div class="social-icon"><i class="fab fa-tiktok"></i></div><div class="social-name">تيك توك</div></div>
+                        <div class="social-card" onclick="window.open('https://instagram.com/hikaya_store', '_blank')"><div class="social-icon"><i class="fab fa-instagram"></i></div><div class="social-name">انستقرام</div></div>
+                        <div class="social-card" onclick="window.open('https://facebook.com/hikayastore', '_blank')"><div class="social-icon"><i class="fab fa-facebook"></i></div><div class="social-name">فيسبوك</div></div>
+                        <div class="social-card" onclick="window.open('https://tiktok.com/@hikaya_store', '_blank')"><div class="social-icon"><i class="fab fa-tiktok"></i></div><div class="social-name">تيك توك</div></div>
                         <div class="social-card" onclick="window.open('https://maps.app.goo.gl/FeFawvomK2qhTJxdA', '_blank')"><div class="social-icon"><i class="fas fa-map-marked-alt"></i></div><div class="social-name">الموقع</div></div>
-                    </div>
-                    <h3 style="color: var(--gold); margin: 18px 0 12px; text-align: center;"><i class="fas fa-tag"></i> العلامات التجارية</h3>
-                    <div class="brands-grid">
-                        <div class="brand-card"><div class="brand-icon"><i class="fab fa-samsung"></i></div><div class="brand-name">سامسونج</div></div>
-                        <div class="brand-card"><div class="brand-icon"><i class="fab fa-apple"></i></div><div class="brand-name">أبل</div></div>
-                        <div class="brand-card"><div class="brand-icon"><i class="fab fa-xiaomi"></i></div><div class="brand-name">شاومي</div></div>
-                        <div class="brand-card"><div class="brand-icon"><i class="fas fa-microchip"></i></div><div class="brand-name">هواوي</div></div>
-                        <div class="brand-card"><div class="brand-icon"><i class="fas fa-mobile-alt"></i></div><div class="brand-name">أونور</div></div>
-                        <div class="brand-card"><div class="brand-icon"><i class="fas fa-gamepad"></i></div><div class="brand-name">ريلمي</div></div>
-                        <div class="brand-card"><div class="brand-icon"><i class="fas fa-bolt"></i></div><div class="brand-name">إنفينيكس</div></div>
-                        <div class="brand-card"><div class="brand-icon"><i class="fas fa-tachometer-alt"></i></div><div class="brand-name">تكنو</div></div>
-                        <div class="brand-card"><div class="brand-icon"><i class="fas fa-heart"></i></div><div class="brand-name">ون بلس</div></div>
-                        <div class="brand-card"><div class="brand-icon"><i class="fas fa-leaf"></i></div><div class="brand-name">نوكيا</div></div>
-                        <div class="brand-card"><div class="brand-icon"><i class="fas fa-motorcycle"></i></div><div class="brand-name">موتورولا</div></div>
-                        <div class="brand-card"><div class="brand-icon"><i class="fas fa-headphones"></i></div><div class="brand-name">سوني</div></div>
                     </div>
                     <div class="info-row" style="border-bottom: none;"><div class="info-icon"><i class="fas fa-clock"></i></div><div class="info-text"><strong>أوقات العمل</strong><span>السبت - الخميس: 9ص - 9م<br>الجمعة: 4م - 9م</span></div></div>
                     <button class="location-btn" onclick="window.open('https://maps.app.goo.gl/FeFawvomK2qhTJxdA', '_blank')"><i class="fas fa-map-marker-alt"></i> فتح الموقع على الخريطة</button>
@@ -1029,6 +739,7 @@
         currentTab = tab;
         document.querySelectorAll('.nav-item').forEach(item => item.classList.toggle('active', item.dataset.tab === tab));
         if(tab === 'about') renderAboutSection();
+        else if(tab === 'library') renderLibrarySection();
         else renderProducts();
     }
 
@@ -1038,18 +749,45 @@
     searchInput.addEventListener('input', (e) => {
         searchQuery = e.target.value;
         clearBtn.style.display = searchQuery ? 'block' : 'none';
-        if(currentTab !== 'about') renderProducts();
+        if(currentTab !== 'about' && currentTab !== 'library') renderProducts();
     });
-    clearBtn.addEventListener('click', () => { searchInput.value = ''; searchQuery = ''; clearBtn.style.display = 'none'; if(currentTab !== 'about') renderProducts(); });
+    clearBtn.addEventListener('click', () => { searchInput.value = ''; searchQuery = ''; clearBtn.style.display = 'none'; if(currentTab !== 'about' && currentTab !== 'library') renderProducts(); });
 
-    function showNotification(message, isDiscount = false) {
+    function showNotification(message) {
         const existing = document.querySelector('.notification');
         if(existing) existing.remove();
         const notif = document.createElement('div');
-        notif.className = 'notification' + (isDiscount ? ' discount' : '');
-        notif.innerHTML = `<i class="fas fa-${isDiscount ? 'fire' : 'check-circle'}"></i> ${message}`;
+        notif.className = 'notification';
+        notif.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
         document.body.appendChild(notif);
         setTimeout(() => notif.remove(), 2500);
+    }
+
+    // Slider
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('sliderDots');
+    const sliderContainer = document.getElementById('sliderContainer');
+    let startX = 0, currentX = 0, isDragging = false;
+
+    function initSlider() {
+        for(let i = 0; i < slides.length; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+        goToSlide(0);
+        setInterval(() => goToSlide(currentSlide + 1), 5000);
+        
+        sliderContainer.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isDragging = true; sliderContainer.style.transition = 'none'; });
+        sliderContainer.addEventListener('touchmove', (e) => { if(!isDragging) return; currentX = e.touches[0].clientX; const diff = currentX - startX; const offset = -currentSlide * 100 + (diff / sliderContainer.parentElement.offsetWidth * 100); sliderContainer.style.transform = `translateX(${offset}%)`; });
+        sliderContainer.addEventListener('touchend', () => { isDragging = false; sliderContainer.style.transition = 'transform 0.4s ease'; const diff = currentX - startX; if(Math.abs(diff) > 50) goToSlide(diff > 0 ? currentSlide - 1 : currentSlide + 1); else goToSlide(currentSlide); });
+    }
+    function goToSlide(index) {
+        currentSlide = (index + slides.length) % slides.length;
+        sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
     }
 
     // Theme
@@ -1071,19 +809,15 @@
     document.getElementById('favoritesIconBtn').addEventListener('click', () => setActiveTab('favorites'));
     document.getElementById('cartIconBtn').addEventListener('click', () => setActiveTab('cart'));
 
-    // Expose functions globally
     window.toggleFavorite = toggleFavorite;
     window.addToCart = addToCart;
     window.removeFromCart = removeFromCart;
+    window.copyAddress = copyAddress;
 
-    // Initialize
     initTheme();
     initSlider();
     setActiveTab('all');
     updateBadges();
-    renderNotifications();
-    setTimeout(() => addNotification('✨ مرحباً بك في مكتبة حكايه ✨', 'info'), 500);
-    setTimeout(() => addNotification('🔥 خصم 20% على جميع الشواحن لفترة محدودة!', 'discount'), 3000);
 </script>
 </body>
 </html>
