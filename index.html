@@ -78,13 +78,13 @@
             color: #B0B0B0;
         }
 
-        /* Contact Bar */
+        /* Contact Bar - Updated with Call Button */
         .contact-bar {
             background: #1A1A1A;
             padding: 10px 16px;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             border-bottom: 1px solid #333;
             flex-wrap: wrap;
         }
@@ -100,6 +100,8 @@
             color: white;
             font-size: 13px;
             transition: all 0.2s;
+            border: none;
+            cursor: pointer;
         }
 
         .contact-btn.whatsapp {
@@ -109,6 +111,11 @@
 
         .contact-btn.telegram {
             background: #0088cc;
+            color: white;
+        }
+
+        .contact-btn.call {
+            background: #E53935;
             color: white;
         }
 
@@ -494,11 +501,17 @@
             justify-content: center;
             gap: 20px;
             margin: 15px 0;
+            flex-wrap: wrap;
         }
 
         .social-icons a {
-            font-size: 28px;
+            font-size: 24px;
             text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .loading {
@@ -531,11 +544,15 @@
 <div class="contact-bar">
     <a href="https://wa.me/9647757777566" class="contact-btn whatsapp" target="_blank">
         <span>📱</span>
-        <span>واتساب: 07757777566</span>
+        <span>واتساب</span>
     </a>
     <a href="https://t.me/hikaya_b" class="contact-btn telegram" target="_blank">
         <span>✈️</span>
-        <span>تيليجرام: @hikaya_b</span>
+        <span>تيليجرام</span>
+    </a>
+    <a href="tel:07757777566" class="contact-btn call">
+        <span>📞</span>
+        <span>اتصال</span>
     </a>
 </div>
 
@@ -652,19 +669,20 @@
 
 <div class="footer">
     <div class="social-icons">
-        <a href="https://wa.me/9647757777566" target="_blank" style="color: #25D366;">📱 واتساب</a>
-        <a href="https://t.me/hikaya_b" target="_blank" style="color: #0088cc;">✈️ تيليجرام</a>
-        <a href="#" style="color: #FFD700;">📧 مكتبة حكايه</a>
+        <a href="https://wa.me/9647757777566" target="_blank" style="background: #25D366; color: white;">📱 واتساب</a>
+        <a href="https://t.me/hikaya_b" target="_blank" style="background: #0088cc; color: white;">✈️ تيليجرام</a>
+        <a href="tel:07757777566" style="background: #E53935; color: white;">📞 اتصال</a>
     </div>
     <p>✨ مكتبة حكايه - كل ما تحتاجه في مكان واحد ✨</p>
     <p>🇮🇶 خدمة العراق - أسعار بالدينار العراقي</p>
-    <p>📞 للطلب: <a href="https://wa.me/9647757777566">07757777566</a> | <a href="https://t.me/hikaya_b">@hikaya_b</a></p>
+    <p>📞 للطلب: <a href="tel:07757777566">07757777566</a> | <a href="https://wa.me/9647757777566">واتساب</a> | <a href="https://t.me/hikaya_b">تيليجرام</a></p>
     <p>🛡️ جميع المنتجات أصلية - توصيل سريع لجميع محافظات العراق</p>
 </div>
 
 <script>
     // ==================== CONFIGURATION ====================
     const WHATSAPP_NUMBER = "9647757777566";
+    const PHONE_NUMBER = "07757777566";
     const TELEGRAM_USERNAME = "hikaya_b";
     const CURRENCY = "د.ع";
     
@@ -1035,8 +1053,9 @@
                     <p style="margin-top: 8px; font-size: 13px;">${compatible}</p>
                     <p style="margin-top: 12px; font-size: 11px; color: #888;">💡 نفس حجم الشاشة = واقي واحد مناسب لجميع الموديلات</p>
                     <hr style="margin: 10px 0; border-color: #333;">
-                    <p style="font-size: 11px;">📞 للطلب: <strong style="color: #FFD700;">07757777566</strong> واتساب</p>
-                    <p style="font-size: 11px;">✈️ تيليجرام: <strong style="color: #FFD700;">@hikaya_b</strong></p>
+                    <p style="font-size: 11px;">📞 <a href="tel:07757777566" style="color: #FFD700; text-decoration: none;">اتصال: 07757777566</a></p>
+                    <p style="font-size: 11px;">📱 <a href="https://wa.me/9647757777566" style="color: #25D366; text-decoration: none;">واتساب: 07757777566</a></p>
+                    <p style="font-size: 11px;">✈️ <a href="https://t.me/hikaya_b" style="color: #0088cc; text-decoration: none;">تيليجرام: @hikaya_b</a></p>
                 </div>
                 <button id="closeModal" style="background: #FFD700; border: none; padding: 12px; border-radius: 30px; width: 100%; font-weight: bold; cursor: pointer;">إغلاق</button>
             </div>
