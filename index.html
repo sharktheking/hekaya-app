@@ -378,11 +378,57 @@
 </div>
 
 <script>
-    // Configuration - CHANGE THESE TO YOUR GITHUB REPO
-    const GITHUB_USERNAME = 'YOUR_USERNAME';
+    // ✅ FIXED: Changed to your actual GitHub username
+    const GITHUB_USERNAME = 'sharktheking';
     const REPO_NAME = 'hekaya-app';
     const DATA_URL = `https://${GITHUB_USERNAME}.github.io/${REPO_NAME}/data/brands.json`;
     const CONFIG_URL = `https://${GITHUB_USERNAME}.github.io/${REPO_NAME}/config.json`;
+    
+    // Embedded fallback data (works offline)
+    const FALLBACK_DATA = {
+        "📱 سامسونج Samsung": {
+            "logo": "📱",
+            "color": "#FFD700",
+            "series": {
+                "Galaxy S24 Series": {
+                    "models": ["S24", "S24+", "S24 Ultra"],
+                    "compatible": ["سامسونج فقط"]
+                },
+                "Galaxy A55 Series": {
+                    "models": ["A15", "A25", "A35", "A55"],
+                    "compatible": ["شاومي ريدمي نوت 13"]
+                }
+            }
+        },
+        "🍎 أيفون Apple": {
+            "logo": "🍎",
+            "color": "#A2AAAD",
+            "series": {
+                "iPhone 16 Series": {
+                    "models": ["iPhone 16", "iPhone 16 Pro", "iPhone 16 Pro Max"],
+                    "compatible": ["أبل فقط"]
+                },
+                "iPhone 15 Series": {
+                    "models": ["iPhone 15", "iPhone 15 Pro", "iPhone 15 Pro Max"],
+                    "compatible": ["أبل فقط"]
+                }
+            }
+        },
+        "📲 شاومي Xiaomi": {
+            "logo": "📲",
+            "color": "#FF6B00",
+            "series": {
+                "Redmi Note 13 Series": {
+                    "models": ["Note 13", "Note 13 Pro", "Note 13 Pro+"],
+                    "compatible": ["شاومي فقط"]
+                },
+                "Poco F6 Series": {
+                    "models": ["Poco F6", "Poco F6 Pro"],
+                    "compatible": ["ريلمي جي تي"]
+                }
+            }
+        }
+    };
     
     let brandsData = {};
     let appConfig = {};
@@ -393,7 +439,6 @@
             const response = await fetch(CONFIG_URL + '?t=' + Date.now());
             if (response.ok) {
                 appConfig = await response.json();
-                // Update app logo if available
                 if (appConfig.appLogo) {
                     const logoImg = document.getElementById('appLogo');
                     logoImg.src = appConfig.appLogo;
@@ -418,25 +463,37 @@
             }
             brandsData = await response.json();
             
-            updateOnlineStatus(true, 'متصل');
+            updateOnlineStatus(true, 'متصل ✅');
             renderBrands();
             updateStats();
+            cacheData();
             
         } catch (error) {
             console.error('Error loading brands:', error);
-            updateOnlineStatus(false, 'غير متصل - بيانات محلية');
+            updateOnlineStatus(false, 'غير متصل - بيانات مخزنة 📱');
             
-            // Try local cache
+            // Try local cache first
             const cached = localStorage.getItem('hekaya_brands_cache');
             if (cached) {
-                brandsData = JSON.parse(cached);
-                renderBrands();
-                updateStats();
-                showToast('⚠️ عرض بيانات مخزنة مؤقتاً');
+                try {
+                    brandsData = JSON.parse(cached);
+                    renderBrands();
+                    updateStats();
+                    showToast('⚠️ عرض بيانات مخزنة مؤقتاً');
+                } catch(e) {
+                    useFallbackData();
+                }
             } else {
-                document.getElementById('brandsContainer').innerHTML = '<div class="loading">❌ فشل التحميل. تأكد من اتصالك بالإنترنت</div>';
+                useFallbackData();
             }
         }
+    }
+    
+    function useFallbackData() {
+        brandsData = FALLBACK_DATA;
+        renderBrands();
+        updateStats();
+        showToast('⚠️ بيانات تجريبية - اتصال الإنترنت مطلوب للتحديث');
     }
     
     // Cache data locally
@@ -487,21 +544,25 @@
         let totalBrands = Object.keys(brandsData).length;
         let totalModels = 0;
         for (let brand in brandsData) {
-            for (let series in brandsData[brand].series) {
-                totalModels += brandsData[brand].series[series].models.length;
+            if (brandsData[brand].series) {
+                for (let series in brandsData[brand].series) {
+                    totalModels += brandsData[brand].series[series].models.length;
+                }
             }
         }
         document.getElementById('brandsCount').innerHTML = `🏷️ ${totalBrands} علامة`;
         document.getElementById('modelsCount').innerHTML = `📱 ${totalModels}+ موديل`;
-        
-        // Save to cache
-        cacheData();
     }
     
     // Render brands
     const container = document.getElementById('brandsContainer');
     
     function renderBrands(filterText = '') {
+        if (!brandsData || Object.keys(brandsData).length === 0) {
+            container.innerHTML = '<div class="loading">⏳ جاري التحميل...</div>';
+            return;
+        }
+        
         container.innerHTML = '';
         const filterLower = filterText.toLowerCase();
         let hasResults = false;
@@ -511,7 +572,7 @@
             let filteredSeries = {};
             
             if (filterLower) {
-                for (let [seriesName, seriesData] of Object.entries(brandData.series)) {
+                for (let [seriesName, seriesData] of Object.entries(brandData.series || {})) {
                     const matchingModels = seriesData.models.filter(m => m.toLowerCase().includes(filterLower));
                     if (matchingModels.length > 0) {
                         brandMatches = true;
@@ -520,10 +581,10 @@
                 }
             } else {
                 brandMatches = true;
-                filteredSeries = brandData.series;
+                filteredSeries = brandData.series || {};
             }
             
-            if (!brandMatches) continue;
+            if (!brandMatches || Object.keys(filteredSeries).length === 0) continue;
             hasResults = true;
             
             const brandCard = document.createElement('div');
@@ -532,10 +593,9 @@
             const brandHeader = document.createElement('div');
             brandHeader.className = 'brand-header';
             
-            // Use image logo if available, otherwise emoji
             const iconHtml = brandData.logoUrl ? 
                 `<img class="brand-icon" src="${brandData.logoUrl}" alt="${brandName}">` :
-                `<div class="brand-icon-emoji" style="color: ${brandData.color}">${brandData.logo}</div>`;
+                `<div class="brand-icon-emoji" style="color: ${brandData.color}">${brandData.logo || '📱'}</div>`;
             
             brandHeader.innerHTML = `
                 ${iconHtml}
@@ -557,7 +617,7 @@
                 seriesHeader.className = 'series-header';
                 seriesHeader.innerHTML = `
                     <div class="series-name">📐 ${seriesName}</div>
-                    <div class="series-compat">🤝 ${seriesData.compatible[0]}</div>
+                    <div class="series-compat">🤝 ${seriesData.compatible ? seriesData.compatible[0] : 'نفس الماركة'}</div>
                     <div class="series-arrow">▼</div>
                 `;
                 
@@ -568,7 +628,7 @@
                     const modelBtn = document.createElement('button');
                     modelBtn.className = 'model-btn';
                     modelBtn.textContent = model;
-                    modelBtn.onclick = () => showModelInfo(model, seriesData.compatible);
+                    modelBtn.onclick = () => showModelInfo(model, seriesData.compatible || ['نفس الماركة']);
                     modelsGrid.appendChild(modelBtn);
                 });
                 
