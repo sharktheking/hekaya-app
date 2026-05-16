@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم مكتبة حكايه</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0A0A0A;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #1A1A1A;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+        .card h2 {
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: #252525;
+            border: 1px solid #333;
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+        }
+        button {
+            background: #FFD700;
+            color: #0A0A0A;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #DAA520;
+        }
+        .preview {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #252525;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .preview img {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+        }
+        .success {
+            background: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+        .error {
+            background: #FF4444;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+        .instructions {
+            background: #252525;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        code {
+            background: #0A0A0A;
+            padding: 2px 6px;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 style="color: #FFD700; text-align: center; margin-bottom: 20px;">📚 لوحة تحكم مكتبة حكايه</h1>
+    
+    <div class="instructions">
+        <h3>📖 تعليمات التحديث:</h3>
+        <ol style="margin-right: 20px; margin-top: 10px;">
+            <li>قم بتعديل البيانات في الحقول أدناه</li>
+            <li>اضغط "نسخ JSON" لنسخ البيانات</li>
+            <li>اذهب إلى GitHub → ملف <code>data/brands.json</code></li>
+            <li>اضغط Edit (✏️) والصق البيانات الجديدة</li>
+            <li>اضغط Commit Changes</li>
+            <li>التطبيق سيتم تحديثه تلقائياً خلال 2-5 دقائق</li>
+        </ol>
+    </div>
+    
+    <div class="card">
+        <h2>🏷️ إعدادات التطبيق</h2>
+        <label>رابط شعار التطبيق:</label>
+        <input type="text" id="appLogoUrl" placeholder="https://example.com/logo.png">
+        <label>رابط شعار العلامات الافتراضي:</label>
+        <input type="text" id="defaultLogo" placeholder="https://example.com/default.png">
+        <button onclick="updateConfig()">💾 حفظ الإعدادات</button>
+        <div id="configSuccess" class="success">✅ تم حفظ الإعدادات! قم بنسخ JSON أدناه</div>
+        <div id="configJson" style="display: none;"></div>
+    </div>
+    
+    <div class="card">
+        <h2>📱 إضافة علامة تجارية جديدة</h2>
+        <input type="text" id="newBrandName" placeholder="اسم العلامة (مثال: OnePlus)">
+        <input type="text" id="newBrandLogo" placeholder="رمز العلامة (مثال: ❤️)">
+        <input type="text" id="newBrandColor" placeholder="لون العلامة (مثال: #E53935)">
+        <input type="text" id="newBrandLogoUrl" placeholder="رابط شعار العلامة (اختياري)">
+        <button onclick="addBrand()">➕ إضافة علامة جديدة</button>
+    </div>
+    
+    <div class="card">
+        <h2>✏️ تعديل البيانات (JSON)</h2>
+        <textarea id="jsonEditor" rows="20" style="font-family: monospace; font-size: 12px;"></textarea>
+        <button onclick="copyJson()">📋 نسخ JSON</button>
+        <button onclick="validateJson()">✓ التحقق من صحة JSON</button>
+        <div id="jsonSuccess" class="success">✅ JSON صحيح! تم النسخ إلى الحافظة</div>
+        <div id="jsonError" class="error">❌ JSON غير صحيح: <span id="errorMsg"></span></div>
+    </div>
+    
+    <div class="card">
+        <h2>📊 إحصائيات</h2>
+        <p id="stats"></p>
+    </div>
+</div>
+
+<script>
+    // Default data structure
+    const defaultData = {
+        "🍎 Apple iPhone": {
+            "logo": "🍎",
+            "logoUrl": "https://cdn-icons-png.flaticon.com/512/888/888879.png",
+            "color": "#A2AAAD",
+            "series": {}
+        },
+        "📱 Samsung": {
+            "logo": "📱",
+            "logoUrl": "https://cdn-icons-png.flaticon.com/512/3726/3726685.png",
+            "color": "#FFD700",
+            "series": {}
+        }
+    };
+    
+    // Load current data from localStorage or default
+    let currentData = {};
+    
+    function loadData() {
+        const saved = localStorage.getItem('hekaya_admin_data');
+        if (saved) {
+            currentData = JSON.parse(saved);
+        } else {
+            currentData = defaultData;
+        }
+        document.getElementById('jsonEditor').value = JSON.stringify(currentData, null, 2);
+        updateStats();
+    }
+    
+    function updateStats() {
+        let totalBrands = Object.keys(currentData).length;
+        let totalModels = 0;
+        for (let brand in currentData) {
+            if (currentData[brand].series) {
+                for (let series in currentData[brand].series) {
+                    totalModels += currentData[brand].series[series].models.length;
+                }
+            }
+        }
+        document.getElementById('stats').innerHTML = `عدد العلامات: ${totalBrands} | عدد الموديلات: ${totalModels}+`;
+    }
+    
+    function copyJson() {
+        const json = document.getElementById('jsonEditor').value;
+        try {
+            JSON.parse(json);
+            navigator.clipboard.writeText(json);
+            document.getElementById('jsonSuccess').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('jsonSuccess').style.display = 'none';
+            }, 3000);
+            
+            // Save to localStorage
+            currentData = JSON.parse(json);
+            localStorage.setItem('hekaya_admin_data', json);
+            updateStats();
+        } catch (e) {
+            document.getElementById('errorMsg').textContent = e.message;
+            document.getElementById('jsonError').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('jsonError').style.display = 'none';
+            }, 3000);
+        }
+    }
+    
+    function validateJson() {
+        const json = document.getElementById('jsonEditor').value;
+        try {
+            JSON.parse(json);
+            alert('✅ JSON صحيح!');
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    }
+    
+    function updateConfig() {
+        const config = {
+            appLogo: document.getElementById('appLogoUrl').value,
+            defaultBrandLogo: document.getElementById('defaultLogo').value,
+            lastUpdate: new Date().toISOString().split('T')[0]
+        };
+        const configJson = JSON.stringify(config, null, 2);
+        navigator.clipboard.writeText(configJson);
+        document.getElementById('configSuccess').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('configSuccess').style.display = 'none';
+        }, 3000);
+    }
+    
+    function addBrand() {
+        const name = document.getElementById('newBrandName').value;
+        const logo = document.getElementById('newBrandLogo').value;
+        const color = document.getElementById('newBrandColor').value;
+        const logoUrl = document.getElementById('newBrandLogoUrl').value;
+        
+        if (!name || !logo || !color) {
+            alert('❌ الرجاء ملء جميع الحقول');
+            return;
+        }
+        
+        currentData[name] = {
+            logo: logo,
+            logoUrl: logoUrl || '',
+            color: color,
+            series: {}
+        };
+        
+        const json = JSON.stringify(currentData, null, 2);
+        document.getElementById('jsonEditor').value = json;
+        localStorage.setItem('hekaya_admin_data', json);
+        updateStats();
+        
+        // Clear inputs
+        document.getElementById('newBrandName').value = '';
+        document.getElementById('newBrandLogo').value = '';
+        document.getElementById('newBrandColor').value = '';
+        document.getElementById('newBrandLogoUrl').value = '';
+        
+        alert('✅ تمت إضافة العلامة! انسخ JSON وارفعها إلى GitHub');
+    }
+    
+    loadData();
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "appName": "مكتبة حكايه",
+  "appLogo": "https://cdn-icons-png.flaticon.com/512/10627/10627123.png",
+  "appVersion": "2.0.0",
+  "lastUpdate": "2024-01-15",
+  "updateUrl": "https://api.github.com/repos/YOUR_USERNAME/hekaya-app/contents/data/brands.json",
+  "contactEmail": "support@hekaya.com",
+  "website": "https://hekaya.com",
+  "colors": {
+    "primary": "#FFD700",
+    "background": "#0A0A0A",
+    "card": "#1A1A1A"
+  }
+}
