@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <meta name="theme-color" content="#0A0A0A">
-    <meta name="description" content="مكتبة حكايه - دليل واقيات الشاشة ومتجر الإلكترونيات - العراق">
-    <title>مكتبة حكايه - دليل واقيات الشاشة والإلكترونيات</title>
-    <link rel="manifest" href="manifest.json">
+    <title>مكتبة حكايه - قرطاسية واكسسوارات</title>
     <style>
         * {
             margin: 0;
@@ -15,30 +13,22 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Default Dark Theme Variables */
+        /* --- المتغيرات (قابلة للتعديل عبر الكمبيوتر) --- */
         :root {
             --bg-color: #0A0A0A;
             --card-color: #1A1A1A;
-            --header-bg: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
             --text-color: #FFFFFF;
             --text-dim: #B0B0B0;
-            --border-color: #333;
-            --input-bg: #1A1A1A;
             --gold: #FFD700;
             --gold-dark: #DAA520;
-            --success: #4CAF50;
-            --error: #E53935;
+            --transition-default: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
-        /* Light Theme Variables */
         body.light-theme {
             --bg-color: #F5F5F5;
             --card-color: #FFFFFF;
-            --header-bg: linear-gradient(135deg, #FFFFFF 0%, #F0F0F0 100%);
             --text-color: #1A1A1A;
             --text-dim: #666666;
-            --border-color: #E0E0E0;
-            --input-bg: #F5F5F5;
             --gold: #DAA520;
             --gold-dark: #B8860B;
         }
@@ -47,803 +37,281 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--bg-color);
             color: var(--text-color);
-            padding-bottom: 20px;
-            transition: all 0.3s ease;
+            transition: var(--transition-default);
+            overflow-x: hidden;
         }
 
-        /* Header */
-        .header {
-            background: var(--header-bg);
-            padding: 15px 16px;
-            text-align: center;
-            border-bottom: 3px solid var(--gold);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        /* --- تأثيرات الحركة العامة --- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .app-logo {
-            width: 45px;
-            height: 45px;
+        /* --- شريط التمرير العلوي (Slider) --- */
+        .hero-slider {
             background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            border-radius: 50%;
+            margin: 10px 12px;
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .slider-container {
             display: flex;
-            align-items: center;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            padding: 25px 20px;
+            text-align: center;
+            color: #0A0A0A;
+        }
+        .slide-icon { font-size: 48px; margin-bottom: 8px; }
+        .slide-title { font-size: 20px; font-weight: bold; margin-bottom: 5px; }
+        .slide-desc { font-size: 13px; opacity: 0.9; }
+        .slider-dots {
+            display: flex;
             justify-content: center;
-            font-size: 28px;
-        }
-
-        .app-title h1 {
-            font-size: 22px;
-            color: var(--gold);
-            margin-bottom: 2px;
-        }
-
-        .app-title p {
-            font-size: 10px;
-            color: var(--text-dim);
-        }
-
-        /* Theme Toggle Button */
-        .theme-toggle {
-            background: var(--card-color);
-            border: 1px solid var(--border-color);
-            border-radius: 30px;
-            padding: 8px 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:active {
-            transform: scale(0.95);
-        }
-
-        .theme-icon {
-            font-size: 20px;
-        }
-
-        .theme-text {
-            font-size: 12px;
-            color: var(--text-color);
-        }
-
-        /* Contact Bar */
-        .contact-bar {
-            background: var(--card-color);
-            padding: 10px 16px;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            border-bottom: 1px solid var(--border-color);
-            flex-wrap: wrap;
-        }
-
-        .contact-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: #252525;
-            padding: 8px 14px;
-            border-radius: 30px;
-            text-decoration: none;
-            color: white;
-            font-size: 12px;
-            transition: all 0.2s;
-        }
-
-        .contact-btn.whatsapp {
-            background: #25D366;
-        }
-
-        .contact-btn.telegram {
-            background: #0088cc;
-        }
-
-        .contact-btn.call {
-            background: #E53935;
-        }
-
-        .contact-btn:active {
-            transform: scale(0.96);
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            background: var(--card-color);
-            padding: 8px 12px;
-            gap: 6px;
-            position: sticky;
-            top: 110px;
-            z-index: 99;
-            flex-wrap: wrap;
-            justify-content: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .tab-btn {
-            flex: 1;
-            min-width: 70px;
-            padding: 8px 6px;
-            background: var(--bg-color);
-            border: none;
-            color: var(--text-dim);
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .tab-btn.active {
-            background: var(--gold);
-            color: var(--bg-color);
-        }
-
-        /* Tab Content */
-        .tab-content {
-            display: none;
-            padding: 15px 12px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Stats Bar */
-        .stats-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 12px;
-            background: var(--card-color);
-            margin: 10px 0;
-            border-radius: 25px;
-            font-size: 11px;
-        }
-
-        .stat {
-            background: var(--bg-color);
-            padding: 6px 12px;
-            border-radius: 20px;
-            color: var(--gold);
-        }
-
-        /* Search Bar */
-        .search-container {
-            margin-bottom: 15px;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: var(--input-bg);
-            border-radius: 30px;
-            padding: 8px 16px;
-            border: 1px solid var(--border-color);
-        }
-
-        .search-box:focus-within {
-            border-color: var(--gold);
-        }
-
-        .search-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: var(--text-color);
-            font-size: 14px;
-            outline: none;
-            font-family: inherit;
-            padding: 6px;
-        }
-
-        .search-input::placeholder {
-            color: var(--text-dim);
-        }
-
-        .clear-btn {
-            background: var(--border-color);
-            border: none;
-            color: var(--text-color);
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 12px;
-            display: none;
-        }
-
-        /* Brand Cards */
-        .brands-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .brand-card {
-            background: var(--card-color);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .brand-header {
-            display: flex;
-            align-items: center;
-            padding: 14px;
-            cursor: pointer;
-            background: var(--card-color);
-        }
-
-        .brand-header:active {
-            background: var(--border-color);
-        }
-
-        .brand-logo {
-            font-size: 38px;
-            width: 50px;
-            text-align: center;
-        }
-
-        .brand-info {
-            flex: 1;
-        }
-
-        .brand-name {
-            font-size: 17px;
-            font-weight: bold;
-        }
-
-        .brand-count {
-            font-size: 10px;
-            color: var(--text-dim);
-            margin-top: 3px;
-        }
-
-        .brand-arrow {
-            font-size: 20px;
-            color: var(--gold);
-            transition: transform 0.3s;
-        }
-
-        .brand-arrow.open {
-            transform: rotate(180deg);
-        }
-
-        .brand-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            background: var(--bg-color);
-        }
-
-        .brand-content.open {
-            max-height: 3000px;
-        }
-
-        /* Series Card */
-        .series-card {
-            background: var(--card-color);
-            margin: 8px 12px 12px 12px;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .series-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 12px;
-            cursor: pointer;
-            background: var(--card-color);
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-
-        .series-name {
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--gold);
-        }
-
-        .series-compat {
-            font-size: 9px;
-            color: var(--success);
-            flex: 1;
-            text-align: center;
-        }
-
-        .series-arrow {
-            font-size: 14px;
-            color: var(--gold);
-            transition: transform 0.3s;
-        }
-
-        .series-arrow.open {
-            transform: rotate(180deg);
-        }
-
-        .models-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
             padding: 12px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s;
+            position: relative;
+            bottom: 0;
         }
-
-        .models-grid.open {
-            max-height: 2000px;
-        }
-
-        .model-btn {
-            background: var(--input-bg);
-            border: none;
-            color: var(--text-color);
-            padding: 8px 4px;
-            border-radius: 10px;
-            font-size: 11px;
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 50%;
             cursor: pointer;
-            text-align: center;
-            transition: all 0.2s;
-            border: 1px solid var(--border-color);
+            transition: 0.2s;
         }
+        .dot.active { background: #0A0A0A; width: 20px; border-radius: 10px; }
 
-        .model-btn:active {
-            background: var(--gold);
-            color: var(--bg-color);
-            transform: scale(0.96);
-        }
-
-        /* Shop Cards */
-        .shop-category {
-            margin-bottom: 20px;
-        }
-
-        .category-title {
-            font-size: 18px;
-            color: var(--gold);
-            margin-bottom: 12px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid var(--gold);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .product-card {
+        /* --- باقي التنسيقات (بطاقات، منتجات، أزرار) --- */
+        .store-info-card, .brand-card, .product-card, .service-card {
             background: var(--card-color);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            border: 1px solid rgba(255,215,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-
-        .product-card:active {
-            transform: scale(0.97);
+        .store-info-card:active, .brand-card:active, .product-card:active, .service-card:active {
+            transform: scale(0.98);
         }
-
-        .product-icon {
-            font-size: 40px;
-            text-align: center;
-            padding: 15px;
-            background: var(--input-bg);
-        }
-
-        .product-info {
-            padding: 10px;
-            text-align: center;
-        }
-
-        .product-name {
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-
-        .product-price {
-            color: var(--gold);
-            font-size: 15px;
-            font-weight: bold;
-            margin: 6px 0;
-        }
-
-        .product-old-price {
-            color: var(--text-dim);
-            font-size: 11px;
-            text-decoration: line-through;
-            margin-left: 6px;
-        }
-
-        .product-desc {
-            font-size: 9px;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-        }
-
-        .buy-btn {
-            background: var(--gold);
-            color: var(--bg-color);
-            border: none;
-            padding: 6px 12px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            font-size: 11px;
-        }
-
-        .buy-btn:active {
-            background: var(--gold-dark);
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 15px;
-            font-size: 10px;
-            color: var(--text-dim);
-            border-top: 1px solid var(--border-color);
-            margin-top: 15px;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 10px 0;
-            flex-wrap: wrap;
-        }
-
-        .social-icons a {
-            font-size: 20px;
-            text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 25px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12px;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 30px;
-            color: var(--gold);
-        }
+        /* باقي التنسيقات مشابهة للإصدار السابق ولكن مع تأثيرات محسنة */
+        .header { background: var(--card-color); padding: 12px 16px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+        .contact-bar { display: flex; gap: 12px; justify-content: center; padding: 10px; background: var(--card-color); border-bottom: 1px solid var(--border-color); }
+        .contact-btn { padding: 8px 16px; border-radius: 40px; background: #252525; text-decoration: none; color: white; font-size: 12px; transition: 0.2s; }
+        .contact-btn:active { transform: scale(0.94); }
+        .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; padding: 16px; }
+        .service-card { text-align: center; padding: 12px 5px; border-radius: 20px; background: var(--card-color); }
+        .service-icon { font-size: 28px; display: block; margin-bottom: 6px; }
+        .address-box { padding: 16px; text-align: center; border-top: 1px solid var(--border-color); }
+        .location-btn { background: var(--gold); color: #0A0A0A; border: none; padding: 10px; border-radius: 40px; width: 100%; font-weight: bold; margin-top: 12px; cursor: pointer; transition: 0.2s; }
+        .location-btn:active { transform: scale(0.97); }
+        .tabs { display: flex; gap: 8px; padding: 12px; background: var(--card-color); position: sticky; top: 70px; z-index: 99; flex-wrap: wrap; }
+        .tab-btn { flex: 1; padding: 8px; background: var(--bg-color); border: none; border-radius: 40px; color: var(--text-dim); font-weight: bold; transition: 0.2s; }
+        .tab-btn.active { background: var(--gold); color: #0A0A0A; }
+        .products-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 12px; }
+        .product-card { padding: 12px; text-align: center; }
+        .product-icon { font-size: 40px; margin-bottom: 6px; }
+        .product-price { color: var(--gold); font-weight: bold; margin: 6px 0; }
+        .buy-btn { background: var(--gold); border: none; padding: 8px; border-radius: 40px; width: 100%; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .buy-btn:active { transform: scale(0.96); }
+        .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text-dim); border-top: 1px solid var(--border-color); margin-top: 20px; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <div class="header-content">
-        <div class="logo-area">
-            <div class="app-logo">📚</div>
-            <div class="app-title">
-                <h1>مكتبة حكايه</h1>
-                <p>دليل واقيات الشاشة | متجر الإلكترونيات</p>
-            </div>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="background: var(--gold); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px;">📚</div>
+            <div><h1 style="color: var(--gold); font-size: 20px;">مكتبة حكايه</h1><p style="font-size: 10px; color: var(--text-dim);">قرطاسية | اكسسوارات | هدايا</p></div>
         </div>
-        <div class="theme-toggle" id="themeToggle">
-            <span class="theme-icon" id="themeIcon">🌙</span>
-            <span class="theme-text" id="themeText">ليلي</span>
-        </div>
+        <div class="theme-toggle" id="themeToggle" style="background: var(--card-color); padding: 6px 12px; border-radius: 30px; cursor: pointer;">🌙 ليلي</div>
     </div>
 </div>
 
 <div class="contact-bar">
-    <a href="https://wa.me/9647757777566" class="contact-btn whatsapp" target="_blank">
-        <span>📱</span>
-        <span>واتساب</span>
-    </a>
-    <a href="https://t.me/hikaya_b" class="contact-btn telegram" target="_blank">
-        <span>✈️</span>
-        <span>تيليجرام</span>
-    </a>
-    <a href="tel:07757777566" class="contact-btn call">
-        <span>📞</span>
-        <span>اتصال</span>
-    </a>
+    <a href="https://wa.me/9647757777566" class="contact-btn" style="background:#25D366;">📱 واتساب</a>
+    <a href="https://t.me/hikaya_b" class="contact-btn" style="background:#0088cc;">✈️ تيليجرام</a>
+    <a href="tel:07757777566" class="contact-btn" style="background:#E53935;">📞 اتصال</a>
+</div>
+
+<!-- Hero Slider (شريط متحرك) -->
+<div class="hero-slider">
+    <div class="slider-container" id="sliderContainer">
+        <div class="slide"><div class="slide-icon">📖✨</div><div class="slide-title">مرحباً بكم في مكتبة حكايه</div><div class="slide-desc">أكبر تشكيلة من القرطاسية والاكسسوارات في كوت</div></div>
+        <div class="slide"><div class="slide-icon">🎁🎈</div><div class="slide-title">هدايا واستنساخ</div><div class="slide-desc">خدمة الاستنساخ والتصوير والبحوث بأسعار مناسبة</div></div>
+        <div class="slide"><div class="slide-icon">📍🚗</div><div class="slide-title">موقعنا سهل الوصول</div><div class="slide-desc">كوت - حي الحكيم الاولى - قرب سيطرة العمارة القديمة</div></div>
+    </div>
+    <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+<!-- SERVICES (قابلة للتعديل عبر الكمبيوتر) -->
+<div class="services-grid" id="servicesContainer"></div>
+
+<!-- معلومات المتجر والعنوان (بيانات قابلة للتعديل) -->
+<div class="store-info-card" style="margin: 12px; padding: 12px;">
+    <div style="text-align: center;"><h3 style="color: var(--gold);">📍 موقع مكتبة حكاية</h3><p id="storeAddressText" style="margin: 8px 0;"></p><button class="location-btn" id="openMapBtn">🗺️ فتح الموقع على خرائط Google</button></div>
+    <div style="display: flex; justify-content: space-between; margin-top: 16px;" id="workingHoursContainer"></div>
 </div>
 
 <div class="tabs">
     <button class="tab-btn active" data-tab="phones">📱 واقيات الشاشة</button>
-    <button class="tab-btn" data-tab="chargers">🔌 شواحن وكوابل</button>
-    <button class="tab-btn" data-tab="accessories">🎧 اكسسوارات</button>
-    <button class="tab-btn" data-tab="notebooks">💻 لابتوب</button>
-    <button class="tab-btn" data-tab="offers">🎁 عروض خاصة</button>
+    <button class="tab-btn" data-tab="products">🛒 منتجاتنا</button>
+    <button class="tab-btn" data-tab="info">ℹ️ معلومات</button>
 </div>
 
-<!-- Phones Tab -->
-<div id="phones-tab" class="tab-content active">
-    <div class="stats-bar" id="statsBar">
-        <div class="stat" id="brandsCount">🏷️ 0 علامة</div>
-        <div class="stat" id="modelsCount">📱 0 موديل</div>
-    </div>
-    <div class="search-container">
-        <div class="search-box">
-            <input type="text" class="search-input" id="searchInput" placeholder="🔍 ابحث عن موديل هاتف...">
-            <button class="clear-btn" id="clearBtn">✖</button>
-        </div>
-    </div>
-    <div class="brands-container" id="brandsContainer">
-        <div class="loading">⏳ جاري التحميل...</div>
-    </div>
-</div>
+<div id="phones-tab" class="tab-content" style="display: block; padding: 12px;"><div id="brandsContainer">جاري التحميل...</div></div>
+<div id="products-tab" class="tab-content" style="display: none; padding: 12px;"><div class="products-grid" id="productsGrid"></div></div>
+<div id="info-tab" class="tab-content" style="display: none; padding: 12px;"><div class="store-info-card" style="padding: 16px;"><h3 style="color: var(--gold);">📋 معلومات إضافية</h3><p id="extraInfoText"></p><p>📞 للاستفسار: <a href="tel:07757777566" style="color:var(--gold);">07757777566</a></p></div></div>
 
-<!-- Chargers Tab -->
-<div id="chargers-tab" class="tab-content">
-    <div class="shop-category">
-        <div class="category-title"><span>🔌</span><span>شواحن سريعة</span></div>
-        <div class="products-grid" id="chargersGrid"></div>
-    </div>
-    <div class="shop-category">
-        <div class="category-title"><span>🔋</span><span>كوابل USB</span></div>
-        <div class="products-grid" id="cablesGrid"></div>
-    </div>
-    <div class="shop-category">
-        <div class="category-title"><span>⚡</span><span>باور بانك</span></div>
-        <div class="products-grid" id="powerbanksGrid"></div>
-    </div>
-</div>
-
-<!-- Accessories Tab -->
-<div id="accessories-tab" class="tab-content">
-    <div class="shop-category">
-        <div class="category-title"><span>🎧</span><span>سماعات</span></div>
-        <div class="products-grid" id="headphonesGrid"></div>
-    </div>
-    <div class="shop-category">
-        <div class="category-title"><span>📱</span><span>جرابات وحافظات</span></div>
-        <div class="products-grid" id="casesGrid"></div>
-    </div>
-    <div class="shop-category">
-        <div class="category-title"><span>🖥️</span><span>حوامل وملحقات</span></div>
-        <div class="products-grid" id="mountsGrid"></div>
-    </div>
-</div>
-
-<!-- Notebooks Tab -->
-<div id="notebooks-tab" class="tab-content">
-    <div class="shop-category">
-        <div class="category-title"><span>💻</span><span>لاب توب</span></div>
-        <div class="products-grid" id="laptopsGrid"></div>
-    </div>
-    <div class="shop-category">
-        <div class="category-title"><span>🖱️</span><span>اكسسوارات لابتوب</span></div>
-        <div class="products-grid" id="laptopAccGrid"></div>
-    </div>
-</div>
-
-<!-- Offers Tab -->
-<div id="offers-tab" class="tab-content">
-    <div class="shop-category">
-        <div class="category-title"><span>🎁</span><span>عروض خاصة</span></div>
-        <div class="products-grid" id="offersGrid"></div>
-    </div>
-    <div class="shop-category">
-        <div class="category-title"><span>🔥</span><span>تخفيضات حرارية</span></div>
-        <div class="products-grid" id="discountsGrid"></div>
-    </div>
-</div>
-
-<div class="footer">
-    <div class="social-icons">
-        <a href="https://wa.me/9647757777566" target="_blank" style="background: #25D366; color: white;">📱 واتساب</a>
-        <a href="https://t.me/hikaya_b" target="_blank" style="background: #0088cc; color: white;">✈️ تيليجرام</a>
-        <a href="tel:07757777566" style="background: #E53935; color: white;">📞 اتصال</a>
-    </div>
-    <p>✨ مكتبة حكايه - كل ما تحتاجه في مكان واحد ✨</p>
-    <p>🇮🇶 خدمة العراق - أسعار بالدينار العراقي</p>
-    <p>📞 للطلب: <a href="tel:07757777566" style="color: var(--gold);">07757777566</a> | <a href="https://t.me/hikaya_b" style="color: var(--gold);">@hikaya_b</a></p>
-</div>
+<div class="footer"><p>✨ مكتبة حكايه - كل ما تحتاجه في مكان واحد ✨<br>📍 كوت - حي الحكيم الاولى - قرب سيطرة العمارة القديمة</p></div>
 
 <script>
-    // ==================== THEME TOGGLE ====================
-    function initTheme() {
-        const savedTheme = localStorage.getItem('hekaya_theme');
-        if (savedTheme === 'light') {
-            document.body.classList.add('light-theme');
-            document.getElementById('themeIcon').innerHTML = '☀️';
-            document.getElementById('themeText').innerHTML = 'نهاري';
-        } else {
-            document.body.classList.remove('light-theme');
-            document.getElementById('themeIcon').innerHTML = '🌙';
-            document.getElementById('themeText').innerHTML = 'ليلي';
-        }
-    }
-
-    function toggleTheme() {
-        if (document.body.classList.contains('light-theme')) {
-            document.body.classList.remove('light-theme');
-            localStorage.setItem('hekaya_theme', 'dark');
-            document.getElementById('themeIcon').innerHTML = '🌙';
-            document.getElementById('themeText').innerHTML = 'ليلي';
-        } else {
-            document.body.classList.add('light-theme');
-            localStorage.setItem('hekaya_theme', 'light');
-            document.getElementById('themeIcon').innerHTML = '☀️';
-            document.getElementById('themeText').innerHTML = 'نهاري';
-        }
-    }
-
-    // ==================== DATA ====================
-    const BRANDS = {
-        "سامسونج Samsung": { logo: "🔵", color: "#FFD700", series: { "6.5 بوصة - A Series": { models: ["A12", "A22", "A32", "A52", "A72", "A13", "A23", "A33", "A53", "A73", "A14", "A24", "A34", "A54", "A15", "A25", "A35", "A55"], compatible: "✅ متوافق مع شاومي ريدمي نوت" } } },
-        "شاومي Xiaomi": { logo: "🔴", color: "#FF6B00", series: { "6.5 بوصة - Redmi Note": { models: ["Redmi Note 10", "Redmi Note 11", "Redmi Note 12", "Redmi 10", "Redmi 10C"], compatible: "✅ متوافق مع سامسونج A series" } } },
-        "أيفون Apple": { logo: "🍎", color: "#A2AAAD", series: { "6.1 بوصة": { models: ["iPhone 12", "iPhone 13", "iPhone 14", "iPhone 15"], compatible: "⚠️ أبل فقط" } } },
-        "إنفينيكس Infinix": { logo: "🔥", color: "#00CED1", series: { "6.6 بوصة - Hot Series": { models: ["Hot 10", "Hot 11", "Hot 12", "Hot 20", "Hot 30"], compatible: "✅ متوافق مع تكنو سبارك" } } },
-        "تكنو Tecno": { logo: "🎯", color: "#32CD32", series: { "6.6 بوصة - Spark Series": { models: ["Spark 7", "Spark 8", "Spark 9", "Spark 10"], compatible: "✅ متوافق مع إنفينيكس هوت" } } }
+    // ======================= البيانات القابلة للتعديل عبر الكمبيوتر (PC Version) =======================
+    const STORE_DATA = {
+        address: "كوت - حي الحكيم الاولى - قرب سيطرة العمارة القديمة",
+        mapLink: "https://maps.app.goo.gl/FeFawvomK2qhTJxdA",
+        workingHours: { "السبت - الخميس": "9ص - 9م", "الجمعة": "4م - 9م" },
+        extraInfo: "نقدم خدمة الاستنساخ والتصوير والبحوث وطباعة الخطوط وتوزيع الرواتب. توصيل سريع داخل كوت."
     };
-
-    // Products Data
-    const PRODUCTS = {
-        chargers: [{ name: "شاحن سريع 33W", price: "25000", icon: "🔌", desc: "شحن سريع" }],
-        cables: [{ name: "كابل USB-C 2م", price: "8000", icon: "🔌", desc: "نسيج" }],
-        powerbanks: [{ name: "باور بانك 10000mAh", price: "35000", icon: "🔋", desc: "شحن سريع" }],
-        headphones: [{ name: "سماعة TWS", price: "25000", icon: "🎧", desc: "بلوتوث" }],
-        cases: [{ name: "جراب سيليكون", price: "8000", icon: "📱", desc: "لجميع الموديلات" }],
-        mounts: [{ name: "حامل سيارة", price: "15000", icon: "🚗", desc: "تثبيت سهل" }],
-        laptops: [{ name: "لاب توب مستعمل", price: "450000", icon: "💻", desc: "Core i5" }],
-        laptopAcc: [{ name: "ماوس لاسلكي", price: "15000", icon: "🖱️", desc: "هادئ" }],
-        offers: [{ name: "عرض الشاحن + الكابل", price: "28000", icon: "🎁", desc: "شاحن + كابل", original: "33000" }],
-        discounts: [{ name: "تخفيض 30%", price: "25000", icon: "🔥", desc: "سماعة بلوتوث", original: "35000" }]
+    const SERVICES_LIST = [
+        { icon: "📖", name: "قرطاسية" }, { icon: "🎧", name: "اكسسوارات" }, { icon: "📱", name: "موبايلات" },
+        { icon: "🎮", name: "العاب" }, { icon: "🎁", name: "هدايا" }, { icon: "🖨️", name: "استنساخ" },
+        { icon: "🔬", name: "بحوث" }, { icon: "📸", name: "تصوير" }, { icon: "✏️", name: "خطوط" },
+        { icon: "💰", name: "صرف رواتب" }, { icon: "🚚", name: "توصيل" }, { icon: "💳", name: "دفع إلكتروني" }
+    ];
+    const PRODUCTS_LIST = [
+        { name: "شاحن 33W", price: "25000", icon: "🔌", desc: "شحن سريع" },
+        { name: "سماعة TWS", price: "25000", icon: "🎧", desc: "بطارية 24س" },
+        { name: "جراب سيليكون", price: "8000", icon: "📱", desc: "جميع الموديلات" },
+        { name: "حامل سيارة", price: "15000", icon: "🚗", desc: "تثبيت سهل" }
+    ];
+    const PHONE_BRANDS = {
+        "سامسونج": { logo: "🔵", color: "#FFD700", models: ["A12","A22","A32","A52","A72","A13","A23","A33","A53","A73"] },
+        "شاومي": { logo: "🔴", color: "#FF6B00", models: ["Redmi Note 10","Redmi Note 11","Redmi Note 12"] },
+        "أيفون": { logo: "🍎", color: "#A2AAAD", models: ["iPhone 12","13","14","15","16"] },
+        "إنفينيكس": { logo: "🔥", color: "#00CED1", models: ["Hot 10","Hot 11","Hot 12","Hot 20","Hot 30"] }
     };
+    // =====================================================================
 
-    // Render functions
+    // --- دوال مساعدة ---
+    function renderServices() {
+        const container = document.getElementById('servicesContainer');
+        if(!container) return;
+        container.innerHTML = SERVICES_LIST.map(s => `<div class="service-card"><span class="service-icon">${s.icon}</span><div class="service-name">${s.name}</div></div>`).join('');
+    }
+    function renderProducts() {
+        const container = document.getElementById('productsGrid');
+        if(!container) return;
+        container.innerHTML = PRODUCTS_LIST.map(p => `
+            <div class="product-card" onclick="orderProduct('${p.name}', '${p.price}')">
+                <div class="product-icon">${p.icon}</div>
+                <div class="product-name">${p.name}</div>
+                <div class="product-price">${p.price} د.ع</div>
+                <div class="product-desc" style="font-size: 11px;">${p.desc}</div>
+                <button class="buy-btn">اطلب</button>
+            </div>
+        `).join('');
+    }
     function renderPhones() {
         const container = document.getElementById('brandsContainer');
-        container.innerHTML = '';
-        let totalModels = 0;
-        
-        for (let [brandName, brandData] of Object.entries(BRANDS)) {
-            let brandModels = 0;
-            for (let series of Object.values(brandData.series)) brandModels += series.models.length;
-            totalModels += brandModels;
-            
-            const brandCard = document.createElement('div');
-            brandCard.className = 'brand-card';
-            brandCard.innerHTML = `
-                <div class="brand-header">
-                    <div class="brand-logo" style="color:${brandData.color}">${brandData.logo}</div>
-                    <div class="brand-info"><div class="brand-name" style="color:${brandData.color}">${brandName}</div><div class="brand-count">${brandModels} موديل</div></div>
-                    <div class="brand-arrow">▼</div>
+        if(!container) return;
+        container.innerHTML = Object.entries(PHONE_BRANDS).map(([brand, data]) => `
+            <div class="brand-card" style="margin-bottom: 12px; padding: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="font-size: 36px;">${data.logo}</div>
+                    <div><div style="font-weight: bold; color:${data.color}">${brand}</div><div style="font-size: 11px;">${data.models.length} موديل</div></div>
                 </div>
-                <div class="brand-content" id="content-${brandName.replace(/[^a-zA-Z]/g, '')}"></div>
-            `;
-            container.appendChild(brandCard);
-            
-            const contentDiv = brandCard.querySelector('.brand-content');
-            for (let [seriesName, seriesData] of Object.entries(brandData.series)) {
-                const modelsHtml = seriesData.models.map(m => `<button class="model-btn" onclick="orderPhone('${m}')">${m}</button>`).join('');
-                contentDiv.innerHTML += `
-                    <div class="series-card">
-                        <div class="series-header"><div class="series-name">${seriesName}</div><div class="series-compat">${seriesData.compatible}</div><div class="series-arrow">▼</div></div>
-                        <div class="models-grid">${modelsHtml}</div>
-                    </div>
-                `;
-            }
-            
-            brandCard.querySelector('.brand-header').onclick = () => {
-                const arrow = brandCard.querySelector('.brand-arrow');
-                const content = brandCard.querySelector('.brand-content');
-                if (content.classList.contains('open')) {
-                    content.classList.remove('open');
-                    arrow.classList.remove('open');
-                } else {
-                    content.classList.add('open');
-                    arrow.classList.add('open');
-                }
-            };
-            
-            contentDiv.querySelectorAll('.series-header').forEach(header => {
-                header.onclick = (e) => {
-                    e.stopPropagation();
-                    const arrow = header.querySelector('.series-arrow');
-                    const grid = header.nextElementSibling;
-                    if (grid.classList.contains('open')) {
-                        grid.classList.remove('open');
-                        arrow.classList.remove('open');
-                    } else {
-                        grid.classList.add('open');
-                        arrow.classList.add('open');
-                    }
-                };
-            });
+                <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+                    ${data.models.map(m => `<button class="model-btn" style="background: var(--input-bg); border: none; padding: 6px 12px; border-radius: 20px;" onclick="orderProduct('واقي شاشة ${brand} ${m}', '0')">${m}</button>`).join('')}
+                </div>
+            </div>
+        `).join('');
+    }
+    function updateUIWithStoreData() {
+        document.getElementById('storeAddressText').innerText = STORE_DATA.address;
+        document.getElementById('extraInfoText').innerText = STORE_DATA.extraInfo;
+        const hoursDiv = document.getElementById('workingHoursContainer');
+        if(hoursDiv) hoursDiv.innerHTML = Object.entries(STORE_DATA.workingHours).map(([day, time]) => `<div><strong>${day}</strong><br>${time}</div>`).join('');
+        const mapBtn = document.getElementById('openMapBtn');
+        if(mapBtn) mapBtn.onclick = () => window.open(STORE_DATA.mapLink, '_blank');
+    }
+    window.orderProduct = (name, price) => {
+        window.open(`https://wa.me/9647757777566?text=${encodeURIComponent(`السلام عليكم، أرغب في شراء ${name} بسعر ${price} دينار عراقي`)}`, '_blank');
+    };
+    // --- Slider ---
+    let currentSlide = 0;
+    function initSlider() {
+        const container = document.getElementById('sliderContainer');
+        const dotsContainer = document.getElementById('sliderDots');
+        if(!container || !dotsContainer) return;
+        const slides = document.querySelectorAll('.slide');
+        const dots = [];
+        for(let i=0; i<slides.length; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+            dots.push(dot);
         }
-        document.getElementById('brandsCount').innerHTML = `🏷️ ${Object.keys(BRANDS).length} علامة`;
-        document.getElementById('modelsCount').innerHTML = `📱 ${totalModels}+ موديل`;
-    }
-
-    function renderProducts() {
-        for (let [cat, products] of Object.entries(PRODUCTS)) {
-            const container = document.getElementById(`${cat}Grid`);
-            if (container) {
-                container.innerHTML = products.map(p => `
-                    <div class="product-card" onclick="orderProduct('${p.name}', '${p.price}')">
-                        <div class="product-icon">${p.icon}</div>
-                        <div class="product-info">
-                            <div class="product-name">${p.name}</div>
-                            <div class="product-price">${p.original ? `<span class="product-old-price">${p.original} د.ع</span>` : ''}${p.price} د.ع</div>
-                            <div class="product-desc">${p.desc}</div>
-                            <button class="buy-btn">📞 اطلب</button>
-                        </div>
-                    </div>
-                `).join('');
-            }
+        function goToSlide(index) {
+            currentSlide = (index + slides.length) % slides.length;
+            container.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
         }
+        setInterval(() => goToSlide(currentSlide+1), 4000);
+        goToSlide(0);
     }
-
-    function orderProduct(name, price) {
-        window.open(`https://wa.me/9647757777566?text=${encodeURIComponent(`السلام عليكم، أريد طلب ${name} بسعر ${price} دينار عراقي`)}`, '_blank');
+    // --- theme & tabs ---
+    function initTheme() {
+        const isLight = localStorage.getItem('theme') === 'light';
+        if(isLight) document.body.classList.add('light-theme');
+        updateThemeButton();
     }
-
-    function orderPhone(model) {
-        window.open(`https://wa.me/9647757777566?text=${encodeURIComponent(`السلام عليكم، أريد استفسار عن واقي شاشة لجهاز ${model}`)}`, '_blank');
+    function toggleTheme() {
+        document.body.classList.toggle('light-theme');
+        localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        updateThemeButton();
     }
-
-    // Search
-    const searchInput = document.getElementById('searchInput');
-    const clearBtn = document.getElementById('clearBtn');
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const val = e.target.value;
-            clearBtn.style.display = val ? 'block' : 'none';
-            document.querySelectorAll('.brand-card').forEach(card => {
-                card.style.display = card.textContent.toLowerCase().includes(val.toLowerCase()) ? '' : 'none';
+    function updateThemeButton() {
+        const btn = document.getElementById('themeToggle');
+        if(document.body.classList.contains('light-theme')) btn.innerHTML = '☀️ نهاري';
+        else btn.innerHTML = '🌙 ليلي';
+    }
+    function initTabs() {
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+                document.getElementById(`${btn.dataset.tab}-tab`).style.display = 'block';
             });
         });
-        clearBtn.onclick = () => { searchInput.value = ''; clearBtn.style.display = 'none'; document.querySelectorAll('.brand-card').forEach(c => c.style.display = ''); };
     }
-
-    // Tabs
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.onclick = () => {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`${btn.dataset.tab}-tab`).classList.add('active');
-        };
-    });
-
-    // Theme
-    document.getElementById('themeToggle').onclick = toggleTheme;
-    initTheme();
-    renderPhones();
-    renderProducts();
-    window.orderProduct = orderProduct;
-    window.orderPhone = orderPhone;
+    // --- مراقب التمرير لإظهار العناصر بتأثير (Intersection Observer) ---
+    function initScrollAnimation() {
+        const elements = document.querySelectorAll('.service-card, .brand-card, .product-card, .store-info-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('visible');
+                else entry.target.classList.remove('visible');
+            });
+        }, { threshold: 0.1 });
+        elements.forEach(el => { el.classList.add('fade-up'); observer.observe(el); });
+    }
+    // --- التشغيل ---
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    renderServices(); renderProducts(); renderPhones(); updateUIWithStoreData();
+    initTabs(); initSlider(); initTheme();
+    setTimeout(() => { initScrollAnimation(); window.dispatchEvent(new Event('resize')); }, 200);
 </script>
 </body>
 </html>
