@@ -1,1 +1,75 @@
-
+{
+  "🍎 Apple iPhone": {
+    "logo": "🍎",
+    "logoUrl": "https://cdn-icons-png.flaticon.com/512/888/888879.png",
+    "color": "#A2AAAD",
+    "series": {
+      "iPhone 16 Series (6.1-6.9\")": {
+        "models": ["iPhone 16", "iPhone 16 Plus", "iPhone 16 Pro", "iPhone 16 Pro Max"],
+        "compatible": ["Apple only - each model needs specific protector"]
+      },
+      "iPhone 15 Series (6.1-6.7\")": {
+        "models": ["iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max"],
+        "compatible": ["Apple only - Dynamic Island differences"]
+      },
+      "iPhone 14 Series (6.1-6.7\")": {
+        "models": ["iPhone 14", "iPhone 14 Plus", "iPhone 14 Pro", "iPhone 14 Pro Max"],
+        "compatible": ["Apple only - different camera cutouts"]
+      },
+      "iPhone 13 Series (6.1-6.7\")": {
+        "models": ["iPhone 13", "iPhone 13 Mini", "iPhone 13 Pro", "iPhone 13 Pro Max"],
+        "compatible": ["Apple only - smaller notch"]
+      }
+    }
+  },
+  "📱 Samsung": {
+    "logo": "📱",
+    "logoUrl": "https://cdn-icons-png.flaticon.com/512/3726/3726685.png",
+    "color": "#FFD700",
+    "series": {
+      "Galaxy S24 Series (6.2-6.8\")": {
+        "models": ["S24", "S24+", "S24 Ultra", "S24 FE"],
+        "compatible": ["Samsung only - new AI features"]
+      },
+      "Galaxy A Series 2024 (6.5-6.7\")": {
+        "models": ["A15", "A25", "A35", "A55", "A05", "A05s"],
+        "compatible": ["Samsung only"]
+      },
+      "Galaxy A Series 2023 (6.5-6.6\")": {
+        "models": ["A14", "A24", "A34", "A54", "A04", "A04s"],
+        "compatible": ["Xiaomi Redmi Note 12 (some models)"]
+      },
+      "Galaxy A Series 2022 (6.5-6.6\")": {
+        "models": ["A13", "A23", "A33", "A53", "A73", "A03", "A03s"],
+        "compatible": ["Xiaomi Poco X3", "Realme 9 Pro"]
+      },
+      "Galaxy A Series 2021 (6.4-6.5\")": {
+        "models": ["A12", "A22", "A32", "A42", "A52", "A72", "A02s", "M32", "M51"],
+        "compatible": ["Xiaomi Redmi Note 10", "Realme 8"]
+      }
+    }
+  },
+  "📲 Xiaomi": {
+    "logo": "📲",
+    "logoUrl": "https://cdn-icons-png.flaticon.com/512/226/226772.png",
+    "color": "#FF6B00",
+    "series": {
+      "Xiaomi 14 Series (6.36-6.73\")": {
+        "models": ["Xiaomi 14", "Xiaomi 14 Pro", "Xiaomi 14 Ultra", "Xiaomi 13T", "Xiaomi 13T Pro"],
+        "compatible": ["Xiaomi only"]
+      },
+      "Redmi Note 13 Series (6.67\")": {
+        "models": ["Redmi Note 13", "Redmi Note 13 Pro", "Redmi Note 13 Pro+", "Redmi 13", "Redmi 13C"],
+        "compatible": ["Xiaomi only"]
+      },
+      "Redmi Note 12 Series (6.67\")": {
+        "models": ["Redmi Note 12", "Redmi Note 12 Pro", "Redmi Note 12 Pro+", "Redmi 12", "Redmi 12C"],
+        "compatible": ["Samsung A14/A34 (similar size)"]
+      },
+      "Poco F Series (6.67\")": {
+        "models": ["Poco F3", "Poco F4", "Poco F5", "Poco F5 Pro", "Poco F6"],
+        "compatible": ["Realme GT series"]
+      }
+    }
+  }
+}
