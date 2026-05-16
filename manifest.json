@@ -1,0 +1,17 @@
+{
+  "name": "مكتبة حكايه",
+  "short_name": "حكايه",
+  "description": "دليل واقيات الشاشة المتوافقة",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#FFD700",
+  "background_color": "#0A0A0A",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/10627/10627123.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
