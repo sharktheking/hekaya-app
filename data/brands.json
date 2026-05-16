@@ -1,74 +1,351 @@
 {
-  "🍎 Apple iPhone": {
-    "logo": "🍎",
-    "logoUrl": "https://cdn-icons-png.flaticon.com/512/888/888879.png",
-    "color": "#A2AAAD",
-    "series": {
-      "iPhone 16 Series (6.1-6.9\")": {
-        "models": ["iPhone 16", "iPhone 16 Plus", "iPhone 16 Pro", "iPhone 16 Pro Max"],
-        "compatible": ["Apple only - each model needs specific protector"]
-      },
-      "iPhone 15 Series (6.1-6.7\")": {
-        "models": ["iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max"],
-        "compatible": ["Apple only - Dynamic Island differences"]
-      },
-      "iPhone 14 Series (6.1-6.7\")": {
-        "models": ["iPhone 14", "iPhone 14 Plus", "iPhone 14 Pro", "iPhone 14 Pro Max"],
-        "compatible": ["Apple only - different camera cutouts"]
-      },
-      "iPhone 13 Series (6.1-6.7\")": {
-        "models": ["iPhone 13", "iPhone 13 Mini", "iPhone 13 Pro", "iPhone 13 Pro Max"],
-        "compatible": ["Apple only - smaller notch"]
-      }
-    }
-  },
-  "📱 Samsung": {
-    "logo": "📱",
-    "logoUrl": "https://cdn-icons-png.flaticon.com/512/3726/3726685.png",
+  "6.1 Inch Screen Group - Small Flagships": {
+    "logo": "📏",
     "color": "#FFD700",
     "series": {
-      "Galaxy S24 Series (6.2-6.8\")": {
-        "models": ["S24", "S24+", "S24 Ultra", "S24 FE"],
-        "compatible": ["Samsung only - new AI features"]
+      "Samsung Galaxy S Series": {
+        "models": ["S10", "S10e", "S20", "S21", "S22", "S23", "S24", "Pixel 4", "Pixel 5", "Pixel 6a", "Pixel 7a", "Pixel 8a", "Xperia 5 II", "Xperia 5 III", "Xperia 5 IV"],
+        "compatible": ["All 6.1\" phones - CHECK camera position first"]
       },
-      "Galaxy A Series 2024 (6.5-6.7\")": {
-        "models": ["A15", "A25", "A35", "A55", "A05", "A05s"],
-        "compatible": ["Samsung only"]
-      },
-      "Galaxy A Series 2023 (6.5-6.6\")": {
-        "models": ["A14", "A24", "A34", "A54", "A04", "A04s"],
-        "compatible": ["Xiaomi Redmi Note 12 (some models)"]
-      },
-      "Galaxy A Series 2022 (6.5-6.6\")": {
-        "models": ["A13", "A23", "A33", "A53", "A73", "A03", "A03s"],
-        "compatible": ["Xiaomi Poco X3", "Realme 9 Pro"]
-      },
-      "Galaxy A Series 2021 (6.4-6.5\")": {
-        "models": ["A12", "A22", "A32", "A42", "A52", "A72", "A02s", "M32", "M51"],
-        "compatible": ["Xiaomi Redmi Note 10", "Realme 8"]
+      "iPhone (6.1\")": {
+        "models": ["iPhone 12", "iPhone 12 Pro", "iPhone 13", "iPhone 13 Pro", "iPhone 14", "iPhone 14 Pro", "iPhone 15", "iPhone 15 Pro", "iPhone 16", "iPhone 16 Pro"],
+        "compatible": ["Apple only - different notch/Dynamic Island"]
       }
     }
   },
-  "📲 Xiaomi": {
-    "logo": "📲",
-    "logoUrl": "https://cdn-icons-png.flaticon.com/512/226/226772.png",
-    "color": "#FF6B00",
+  "6.2 Inch Screen Group": {
+    "logo": "📏",
+    "color": "#FFD700",
     "series": {
-      "Xiaomi 14 Series (6.36-6.73\")": {
-        "models": ["Xiaomi 14", "Xiaomi 14 Pro", "Xiaomi 14 Ultra", "Xiaomi 13T", "Xiaomi 13T Pro"],
-        "compatible": ["Xiaomi only"]
+      "Samsung Galaxy": {
+        "models": ["A10", "A10s", "A20", "A20s", "A30", "A30s", "A40", "A50", "A50s", "A70", "A70s", "S10", "S10+", "S20", "S20+", "S21+", "S22+", "S23+", "S24+"],
+        "compatible": ["All Samsung 6.2\" phones - same screen size"]
       },
-      "Redmi Note 13 Series (6.67\")": {
-        "models": ["Redmi Note 13", "Redmi Note 13 Pro", "Redmi Note 13 Pro+", "Redmi 13", "Redmi 13C"],
-        "compatible": ["Xiaomi only"]
+      "Compatible Models": {
+        "models": ["Xiaomi Mi 9", "Xiaomi Mi 9T", "Realme 5 Pro", "Realme 6", "Realme 7", "Oppo F9", "Oppo F11", "Vivo V15", "Vivo V17"],
+        "compatible": ["Same 6.2\" size - verify camera cutout position"]
+      }
+    }
+  },
+  "6.3 Inch Screen Group": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "Google Pixel": {
+        "models": ["Pixel 3", "Pixel 4", "Pixel 5", "Pixel 6", "Pixel 7", "Pixel 8", "Pixel 9"],
+        "compatible": ["Google only - different camera bar"]
       },
-      "Redmi Note 12 Series (6.67\")": {
-        "models": ["Redmi Note 12", "Redmi Note 12 Pro", "Redmi Note 12 Pro+", "Redmi 12", "Redmi 12C"],
-        "compatible": ["Samsung A14/A34 (similar size)"]
+      "Xiaomi & Others": {
+        "models": ["Xiaomi Mi 8", "Xiaomi Mi 8 Pro", "Redmi Note 7", "Redmi Note 8", "Honor 8X", "Honor 9X", "Nokia 7.1", "Nokia 7.2", "Moto G7", "Moto G7 Power"],
+        "compatible": ["All 6.3\" LCD screens - generally compatible"]
+      }
+    }
+  },
+  "6.4 Inch Screen Group": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "Samsung Galaxy A Series": {
+        "models": ["A11", "A21s", "A31", "A41", "A51", "A51 5G", "A71", "A71 5G", "A52s", "A72s", "M21", "M31", "M21s", "M31s"],
+        "compatible": ["All Samsung 6.4\" AMOLED - same screen"]
       },
-      "Poco F Series (6.67\")": {
-        "models": ["Poco F3", "Poco F4", "Poco F5", "Poco F5 Pro", "Poco F6"],
-        "compatible": ["Realme GT series"]
+      "Xiaomi/Realme Compatible": {
+        "models": ["Redmi Note 9 Pro", "Redmi Note 10", "Redmi Note 10 Pro", "Realme 7 Pro", "Realme 8 Pro", "Realme 9 Pro", "Oppo A54", "Oppo A74", "OnePlus Nord CE", "Nord CE 2", "Nord CE 3", "Vivo V20", "Vivo V21", "Vivo V23"],
+        "compatible": ["Compatible with Samsung 6.4\" - same FHD+ AMOLED"]
+      }
+    }
+  },
+  "6.5 Inch Screen Group - Most Common": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "Samsung Galaxy A Series": {
+        "models": ["A12", "A22", "A22 5G", "A32", "A32 5G", "A42", "A52", "A52 5G", "A72", "A72 5G", "A02s", "A03s", "M32", "M42", "M51", "M52", "M53"],
+        "compatible": ["All 6.5\" Samsung - universal size"]
+      },
+      "Xiaomi Redmi Note Series": {
+        "models": ["Redmi Note 8 Pro", "Redmi Note 9", "Redmi Note 9S", "Redmi Note 9T", "Redmi 9", "Redmi 9A", "Redmi 9C", "Redmi 9T", "Redmi 10", "Redmi 10A", "Redmi 10C", "Redmi 10 5G"],
+        "compatible": ["Compatible with Samsung 6.5\" - works well"]
+      },
+      "Infinix Hot Series": {
+        "models": ["Hot 8", "Hot 9", "Hot 9 Play", "Hot 10", "Hot 10i", "Hot 10S", "Hot 10 Play", "Hot 10T", "Hot 11", "Hot 11S", "Hot 11 Play", "Hot 12", "Hot 12i", "Hot 20", "Hot 20i", "Hot 20S", "Hot 20 Play", "Hot 30", "Hot 30i", "Hot 30 Play", "Hot 40", "Hot 40i", "Hot 50"],
+        "compatible": ["Fully compatible with each other - same screen"]
+      },
+      "Tecno Spark Series": {
+        "models": ["Spark 4", "Spark 5", "Spark 5 Pro", "Spark 6", "Spark 7", "Spark 7 Pro", "Spark 7 Plus", "Spark 8", "Spark 8C", "Spark 9", "Spark 9T", "Spark 10", "Spark 10 Pro", "Spark 20", "Spark 20 Pro"],
+        "compatible": ["Compatible with Infinix Hot Series"]
+      },
+      "Realme Number Series": {
+        "models": ["Realme 5", "Realme 5i", "Realme 5s", "Realme 6i", "Realme 7i", "Realme 8i", "Realme 9i", "Realme 10s", "Realme Narzo 30", "Narzo 30 Pro", "Narzo 50", "Narzo 50 Pro", "Narzo 60", "Narzo 60x"],
+        "compatible": ["6.5\" Realme - compatible with Xiaomi and Samsung"]
+      },
+      "Oppo A Series": {
+        "models": ["A12", "A12e", "A15", "A16", "A16e", "A16k", "A17", "A17k", "A31", "A32", "A33", "A33s", "A36", "A37", "A38", "A52", "A53", "A53s", "A54", "A54 5G", "A55", "A56", "A57", "A57s", "A58", "A59", "A71", "A72", "A73", "A73s", "A74", "A74 5G", "A76", "A77", "A77s", "A78", "A78 5G", "A79", "A79 5G", "A91", "A92", "A93", "A94", "A95", "A96", "A97", "A98", "A99"],
+        "compatible": ["Oppo 6.5\" - compatible with Realme"]
+      },
+      "Vivo Y Series": {
+        "models": ["Y1s", "Y3", "Y5s", "Y6", "Y6s", "Y7s", "Y8t", "Y9s", "Y11", "Y11s", "Y12", "Y12s", "Y12i", "Y15", "Y15s", "Y16", "Y17", "Y17s", "Y18", "Y19", "Y20", "Y20i", "Y20s", "Y20G", "Y20T", "Y21", "Y21e", "Y21G", "Y21s", "Y21T", "Y22", "Y22s", "Y23", "Y24", "Y25", "Y26", "Y27", "Y27s", "Y28", "Y29", "Y30", "Y30 5G", "Y31", "Y31s", "Y32", "Y33", "Y33s", "Y33t", "Y35", "Y35+", "Y36", "Y53s", "Y55", "Y55s", "Y56", "Y73", "Y73s", "Y75", "Y75s", "Y76", "Y76s", "Y77", "Y78", "Y81", "Y91", "Y93", "Y95", "Y97"],
+        "compatible": ["Vivo 6.5\" - budget series"]
+      },
+      "Nokia G Series": {
+        "models": ["G10", "G11", "G11 Plus", "G20", "G21", "G22", "G42", "G50", "G60", "G60 5G", "G100"],
+        "compatible": ["Compatible with Moto G series"]
+      },
+      "Motorola Moto G Series": {
+        "models": ["G8", "G8 Plus", "G8 Power", "G9", "G9 Plus", "G9 Power", "G10", "G10 Power", "G20", "G30", "G31", "G32", "G41", "G42", "G51", "G52", "G53", "G54", "G62", "G71", "G72", "G73", "G82", "G84", "G100"],
+        "compatible": ["Compatible with Nokia G series"]
+      },
+      "Motorola Moto E Series": {
+        "models": ["E6", "E6 Plus", "E7", "E7 Plus", "E13", "E14", "E20", "E22", "E30", "E32", "E40"],
+        "compatible": ["Budget Moto phones - same screen"]
+      },
+      "Nokia C Series": {
+        "models": ["C01", "C01 Plus", "C1", "C2", "C2 Tava", "C3", "C5 Endi", "C10", "C12", "C20", "C20 Plus", "C21", "C21 Plus", "C22", "C30", "C31", "C32"],
+        "compatible": ["Nokia budget - 6.5\" LCD"]
+      },
+      "Itel Phones": {
+        "models": ["A16", "A16 Plus", "A23", "A25", "A26", "A32", "A32F", "A32 Mini", "A33", "A33 Plus", "A34", "A35", "A36", "A37", "A37 Pro", "A38", "A48", "A48 Plus", "A49", "A50", "A50 Pro", "A56", "A56 Pro", "A58", "A58 Pro", "A60", "A60 Pro", "A62", "A62 Pro", "A63", "A63 Pro", "P11", "P11 Plus", "P12", "P12 Plus", "P13", "P13 Plus", "P14", "P14 Plus", "P15", "P15 Plus", "P16", "P16 Plus", "P17", "P17 Plus", "P18", "P18 Pro", "P19", "P19 Pro", "P20", "P20 Plus", "P21", "P21 Plus", "P22", "P22 Plus", "P23", "P23 Plus", "P31", "P31 Plus", "P32", "P32 Plus", "P33", "P33 Plus", "P35", "P35 Plus", "P36", "P36 Plus", "P37", "P37 Plus", "P38", "P38 Plus", "P40", "P40 Plus"],
+        "compatible": ["All Itel 6.5\" phones - identical screen sizes"]
+      },
+      "TCL Phones": {
+        "models": ["TCL 10L", "TCL 10 5G", "TCL 10 Pro", "TCL 20 SE", "TCL 20 5G", "TCL 20 Pro 5G", "TCL 30 SE", "TCL 30 5G", "TCL 30 Pro", "TCL 40 SE", "TCL 40 X", "TCL 40 XL"],
+        "compatible": ["TCL 6.5\" - compatible with Nokia/Moto"]
+      }
+    }
+  },
+  "6.6 Inch Screen Group": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "Samsung Galaxy A/M Series": {
+        "models": ["A13", "A13 5G", "A23", "A23 5G", "A33", "A33 5G", "A53", "A53 5G", "A73", "A73 5G", "A14", "A14 5G", "A24", "A24 4G", "A34", "A34 5G", "A54", "A54 5G", "M33", "M33 5G", "M53", "M53 5G", "M34", "M34 5G"],
+        "compatible": ["All Samsung 6.6\" - newer models"]
+      },
+      "Xiaomi Redmi Note Series": {
+        "models": ["Redmi Note 11", "Redmi Note 11 Pro", "Redmi Note 11 Pro+", "Redmi Note 11S", "Redmi Note 11T", "Redmi Note 12", "Redmi Note 12 Pro", "Redmi Note 12 Pro+", "Redmi Note 12 Turbo", "Redmi 11", "Redmi 11 Prime", "Redmi 11T", "Redmi 11T Pro", "Redmi 12", "Redmi 12C", "Poco M4", "Poco M4 Pro", "Poco M5", "Poco M5s", "Poco X4 Pro", "Poco X5", "Poco X5 Pro"],
+        "compatible": ["Compatible with Samsung 6.6\" - similar size"]
+      },
+      "Realme GT Series": {
+        "models": ["Realme GT", "Realme GT Neo", "Realme GT Neo 2", "Realme GT Neo 3", "Realme GT 2", "Realme GT 2 Pro", "Realme GT 3", "Realme GT 5", "Realme GT Neo 5", "Realme GT Master"],
+        "compatible": ["GT series - same screen dimensions"]
+      },
+      "OnePlus Nord Series": {
+        "models": ["Nord", "Nord 2", "Nord 2T", "Nord 3", "Nord CE", "Nord CE 2", "Nord CE 2 Lite", "Nord CE 3", "Nord CE 3 Lite", "Nord N10", "Nord N20", "Nord N30"],
+        "compatible": ["Compatible with Realme GT series"]
+      },
+      "Oppo Reno Series": {
+        "models": ["Reno 6", "Reno 6 Pro", "Reno 7", "Reno 7 Pro", "Reno 8", "Reno 8 Pro", "Reno 8T", "Reno 8Z", "Reno 9", "Reno 9 Pro", "Reno 10", "Reno 10 Pro", "Reno 10 Pro+", "Reno 11", "Reno 11 Pro", "Reno 11F"],
+        "compatible": ["Oppo Reno - compatible with OnePlus Nord"]
+      },
+      "Vivo V Series": {
+        "models": ["V15", "V15 Pro", "V17", "V17 Pro", "V19", "V20", "V20 Pro", "V21", "V21e", "V21s", "V23", "V23 Pro", "V23e", "V25", "V25 Pro", "V25e", "V27", "V27 Pro", "V27e", "V29", "V29 Pro", "V29e"],
+        "compatible": ["Vivo V series - premium mid-range"]
+      },
+      "Honor X Series": {
+        "models": ["X5", "X5 Plus", "X6", "X6a", "X7", "X7a", "X7b", "X8", "X8a", "X8b", "X9", "X9a", "X9b", "X9c", "X10", "X10 Max", "X20", "X30", "X40", "X40 GT", "X50", "X50 GT", "X7 Pro", "X8 Pro", "X9 Pro"],
+        "compatible": ["Honor X series - compatible with Huawei Nova"]
+      }
+    }
+  },
+  "6.67 Inch Screen Group - Gaming Phones": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "Poco Gaming Series": {
+        "models": ["Poco F1", "Poco F2 Pro", "Poco F3", "Poco F4", "Poco F5", "Poco F5 Pro", "Poco F6", "Poco X2", "Poco X3", "Poco X3 Pro", "Poco X3 GT", "Poco X4 GT", "Poco X5", "Poco X5 GT", "Poco X6", "Poco X6 Pro"],
+        "compatible": ["All Poco gaming phones - identical 6.67\" size"]
+      },
+      "Xiaomi Redmi K Series": {
+        "models": ["Redmi K20", "Redmi K20 Pro", "Redmi K30", "Redmi K30 Pro", "Redmi K30 Ultra", "Redmi K40", "Redmi K40 Pro", "Redmi K40 Gaming", "Redmi K50", "Redmi K50 Pro", "Redmi K50 Gaming", "Redmi K50 Ultra", "Redmi K60", "Redmi K60 Pro", "Redmi K60 Ultra", "Redmi K70", "Redmi K70 Pro", "Xiaomi 11X", "Xiaomi 11X Pro", "Xiaomi 11T", "Xiaomi 11T Pro", "Xiaomi 12T", "Xiaomi 12T Pro", "Xiaomi 13T", "Xiaomi 13T Pro"],
+        "compatible": ["Same as Poco - all 6.67\" gaming screens"]
+      },
+      "Realme GT Series": {
+        "models": ["Realme GT 2", "Realme GT 2 Pro", "Realme GT 3", "Realme GT 5", "Realme GT Neo 2", "Realme GT Neo 3", "Realme GT Neo 5", "Realme GT Master"],
+        "compatible": ["Compatible with Poco F series"]
+      },
+      "OnePlus Number Series": {
+        "models": ["OnePlus 7 Pro", "OnePlus 7T Pro", "OnePlus 8", "OnePlus 8 Pro", "OnePlus 8T", "OnePlus 9", "OnePlus 9 Pro", "OnePlus 9R", "OnePlus 10 Pro", "OnePlus 10R", "OnePlus 10T", "OnePlus 11", "OnePlus 11R", "OnePlus 12", "OnePlus 12R"],
+        "compatible": ["OnePlus flagship - compatible with Realme GT"]
+      },
+      "Oppo Find Series": {
+        "models": ["Find X2", "Find X2 Pro", "Find X3", "Find X3 Pro", "Find X3 Neo", "Find X5", "Find X5 Pro", "Find X5 Lite", "Find X6", "Find X6 Pro", "Find X7", "Find X7 Ultra"],
+        "compatible": ["Oppo Find - same as OnePlus"]
+      }
+    }
+  },
+  "6.7 Inch Screen Group - Modern Standard": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "Samsung Galaxy S Plus Series": {
+        "models": ["S20+", "S20 FE", "S21+", "S21 FE", "S22+", "S23+", "S24+", "A15", "A25", "A35", "A55"],
+        "compatible": ["All Samsung 6.7\" - newer models"]
+      },
+      "iPhone Pro Max Series": {
+        "models": ["iPhone 11 Pro Max", "iPhone 12 Pro Max", "iPhone 13 Pro Max", "iPhone 14 Pro Max", "iPhone 15 Pro Max", "iPhone 16 Pro Max"],
+        "compatible": ["Apple only - different notch/Dynamic Island"]
+      },
+      "Google Pixel Pro Series": {
+        "models": ["Pixel 6 Pro", "Pixel 7 Pro", "Pixel 8 Pro", "Pixel 9 Pro", "Pixel 9 Pro XL"],
+        "compatible": ["Google only - camera bar design"]
+      },
+      "Honor Magic Series": {
+        "models": ["Magic 3", "Magic 3 Pro", "Magic 4", "Magic 4 Pro", "Magic 5", "Magic 5 Pro", "Magic 6", "Magic 6 Pro", "Magic V", "Magic Vs", "Magic V2"],
+        "compatible": ["Honor flagship - compatible with Huawei Mate"]
+      },
+      "Huawei Mate Series": {
+        "models": ["Mate 30", "Mate 30 Pro", "Mate 40", "Mate 40 Pro", "Mate 50", "Mate 50 Pro", "Mate 60", "Mate 60 Pro"],
+        "compatible": ["Compatible with Honor Magic series"]
+      },
+      "Huawei P Series": {
+        "models": ["P30 Pro", "P40 Pro", "P40 Pro+", "P50 Pro", "P60 Pro"],
+        "compatible": ["Huawei P series - similar to Mate"]
+      }
+    }
+  },
+  "6.8 Inch Screen Group - Ultra Large": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "Samsung Ultra Series": {
+        "models": ["S20 Ultra", "S21 Ultra", "S22 Ultra", "S23 Ultra", "S24 Ultra", "Note 10+", "Note 20 Ultra"],
+        "compatible": ["All Samsung 6.8\" - Ultra models"]
+      },
+      "Xiaomi Note Series Large": {
+        "models": ["Redmi Note 10 Pro Max", "Redmi Note 11 Pro Max", "Redmi Note 12 Pro+", "Redmi Note 13 Pro+", "Xiaomi Mi Max 3", "Xiaomi Mi 10T Pro", "Xiaomi Mi 11 Ultra", "Xiaomi Mi 11X Pro", "Xiaomi 12 Pro", "Xiaomi 12S Ultra", "Xiaomi 13 Pro", "Xiaomi 13 Ultra", "Xiaomi 14 Pro", "Xiaomi 14 Ultra"],
+        "compatible": ["Xiaomi large screen - compatible with each other"]
+      },
+      "Infinix Note Series": {
+        "models": ["Note 8", "Note 8i", "Note 10", "Note 10 Pro", "Note 11", "Note 11i", "Note 11 Pro", "Note 11S", "Note 12", "Note 12i", "Note 12 Pro", "Note 12 VIP", "Note 20", "Note 20 Pro", "Note 30", "Note 30i", "Note 30 Pro", "Note 40", "Note 40i", "Note 40 Pro", "Note 50", "Zero 8", "Zero 20", "Zero 30", "Zero 40", "Zero Ultra"],
+        "compatible": ["All Infinix Note and Zero - same 6.8\" screen"]
+      },
+      "Tecno Phantom Series": {
+        "models": ["Phantom X", "Phantom X2", "Phantom X2 Pro", "Phantom V Fold", "Phantom V Flip"],
+        "compatible": ["Compatible with Infinix Zero series"]
+      },
+      "Asus ROG Phone Series": {
+        "models": ["ROG Phone 2", "ROG Phone 3", "ROG Phone 5", "ROG Phone 5s", "ROG Phone 6", "ROG Phone 6 Pro", "ROG Phone 6D", "ROG Phone 7", "ROG Phone 7 Ultimate", "ROG Phone 8", "ROG Phone 8 Pro", "ROG Phone 8D"],
+        "compatible": ["All ROG gaming phones - 6.8\" AMOLED"]
+      },
+      "Lenovo Legion Series": {
+        "models": ["Legion Phone Duel", "Legion Phone Duel 2", "Legion Y90", "Legion Y90 Pro"],
+        "compatible": ["Gaming phones - compatible with ROG"]
+      }
+    }
+  },
+  "6.78 Inch Screen Group": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "Infinix Zero Series": {
+        "models": ["Zero 8", "Zero 20", "Zero 30", "Zero 30 5G", "Zero 40", "Zero 40 5G", "Zero Ultra"],
+        "compatible": ["All Infinix Zero - 6.78\" AMOLED"]
+      },
+      "Tecno Phantom X2": {
+        "models": ["Phantom X2", "Phantom X2 Pro", "Camon 20 Pro", "Camon 30 Premier"],
+        "compatible": ["Compatible with Infinix Zero"]
+      }
+    }
+  },
+  "6.78 Inch Screen Group - Foldables": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "Samsung Fold Series": {
+        "models": ["Z Fold 2", "Z Fold 3", "Z Fold 4", "Z Fold 5", "Z Fold 6"],
+        "compatible": ["Special screen protectors - different from regular phones"]
+      },
+      "Google Pixel Fold": {
+        "models": ["Pixel Fold", "Pixel 9 Pro Fold"],
+        "compatible": ["Google foldable - different dimensions"]
+      },
+      "OnePlus Open": {
+        "models": ["OnePlus Open"],
+        "compatible": ["OnePlus foldable - similar to Pixel Fold"]
+      },
+      "Honor Magic V": {
+        "models": ["Magic V", "Magic Vs", "Magic V2"],
+        "compatible": ["Honor foldable"]
+      }
+    }
+  },
+  "7.0+ Inch Screen Group - Tablets": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "Samsung Galaxy Tab": {
+        "models": ["Tab A7", "Tab A8", "Tab A9", "Tab A9+", "Tab S6 Lite", "Tab S7", "Tab S7 FE", "Tab S8", "Tab S8+", "Tab S8 Ultra", "Tab S9", "Tab S9+", "Tab S9 Ultra"],
+        "compatible": ["Tablets - need larger screen protectors"]
+      },
+      "iPad Series": {
+        "models": ["iPad 9", "iPad 10", "iPad Air 4", "iPad Air 5", "iPad Pro 11\"", "iPad Pro 12.9\"", "iPad Mini 6"],
+        "compatible": ["Apple tablets - different sizes"]
+      },
+      "Xiaomi Pad Series": {
+        "models": ["Pad 5", "Pad 5 Pro", "Pad 6", "Pad 6 Pro", "Pad 6S Pro"],
+        "compatible": ["Xiaomi tablets"]
+      },
+      "Huawei MatePad": {
+        "models": ["MatePad 10.4", "MatePad 11", "MatePad Pro", "MatePad T10"],
+        "compatible": ["Huawei tablets"]
+      }
+    }
+  },
+  "Small Screen - 5.0 to 5.5 Inch (Old Models)": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "Samsung Galaxy J Series": {
+        "models": ["J1", "J2", "J2 Core", "J2 Pro", "J3", "J3 Pro", "J4", "J4+", "J5", "J5 Pro", "J6", "J6+", "J7", "J7 Core", "J7 Prime", "J7 Pro", "J7 Max", "J7 Nxt", "J7 Duo", "J8"],
+        "compatible": ["Old Samsung J series - 5.0-5.5\" screens"]
+      },
+      "Old iPhones (4.7\")": {
+        "models": ["iPhone 6", "iPhone 6s", "iPhone 7", "iPhone 8", "iPhone SE 1st gen", "iPhone SE 2nd gen", "iPhone SE 3rd gen"],
+        "compatible": ["Apple only - home button models"]
+      },
+      "Old Xiaomi": {
+        "models": ["Redmi 4", "Redmi 4A", "Redmi 5", "Redmi 5A", "Redmi 6", "Redmi 6A", "Mi 5", "Mi 5s", "Mi 6", "Mi A1", "Mi A2"],
+        "compatible": ["Old Xiaomi - 5.0-5.5\" screens"]
+      },
+      "Old Samsung Galaxy S": {
+        "models": ["S3", "S4", "S5", "S6", "S6 Edge", "S7", "S7 Edge", "S8", "S8+", "S9", "S9+", "Note 3", "Note 4", "Note 5", "Note 7"],
+        "compatible": ["Old flagships - different sizes"]
+      },
+      "Old Huawei": {
+        "models": ["P8", "P8 Lite", "P9", "P9 Lite", "P10", "P10 Lite", "Mate 8", "Mate 9", "Mate 9 Pro", "Mate 10", "Mate 10 Lite", "Y5", "Y5p", "Y6", "Y6p", "Y7", "Y7p"],
+        "compatible": ["Old Huawei - 5.0-5.5\" screens"]
+      },
+      "Old LG Phones": {
+        "models": ["G2", "G3", "G4", "G5", "G6", "G7 ThinQ", "V10", "V20", "V30", "V30+", "V40 ThinQ", "V50 ThinQ", "K4", "K5", "K7", "K8", "K10", "K11", "K12", "K20", "K22", "K30", "K31", "K35", "K40", "K41S", "K42", "K50", "K51", "K51S", "K52", "K61", "K62", "K71"],
+        "compatible": ["All LG phones - discontinued but many still in use"]
+      },
+      "Old Sony Xperia": {
+        "models": ["Xperia Z", "Xperia Z1", "Xperia Z2", "Xperia Z3", "Xperia Z4", "Xperia Z5", "Xperia X", "Xperia XZ", "Xperia XZ1", "Xperia XZ2", "Xperia XZ3", "Xperia L1", "Xperia L2", "Xperia L3", "Xperia L4", "Xperia 1", "Xperia 1 II", "Xperia 1 III", "Xperia 1 IV", "Xperia 5", "Xperia 5 II", "Xperia 5 III", "Xperia 5 IV", "Xperia 10", "Xperia 10 II", "Xperia 10 III", "Xperia 10 IV", "Xperia 10 V"],
+        "compatible": ["Sony 21:9 aspect ratio - unique screen size"]
+      },
+      "Old Nokia (Windows Phone)": {
+        "models": ["Lumia 520", "Lumia 530", "Lumia 620", "Lumia 630", "Lumia 635", "Lumia 640", "Lumia 650", "Lumia 720", "Lumia 730", "Lumia 735", "Lumia 830", "Lumia 920", "Lumia 925", "Lumia 930", "Lumia 950", "Lumia 950 XL", "Nokia 2", "Nokia 3", "Nokia 3.1", "Nokia 3.2", "Nokia 4.2", "Nokia 5", "Nokia 5.1", "Nokia 5.1 Plus", "Nokia 5.3", "Nokia 5.4", "Nokia 6", "Nokia 6.1", "Nokia 6.1 Plus", "Nokia 6.2", "Nokia 7", "Nokia 7.1", "Nokia 7.2", "Nokia 7 Plus", "Nokia 8", "Nokia 8.1", "Nokia 8.3 5G", "Nokia 8 Sirocco"],
+        "compatible": ["Old Nokia - various screen sizes, check individually"]
+      }
+    }
+  },
+  "BlackBerry (Old Models)": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "BlackBerry Key Series": {
+        "models": ["KeyOne", "Key2", "Key2 LE", "Priv", "Passport", "Classic", "Q10", "Z10", "Z30", "Leap", "Dtek50", "Dtek60", "Motion", "Evolve", "Evolve X"],
+        "compatible": ["BlackBerry only - physical keyboards, unique screen sizes"]
+      }
+    }
+  },
+  "HTC (Old Models)": {
+    "logo": "📏",
+    "color": "#FFD700",
+    "series": {
+      "HTC One Series": {
+        "models": ["One M7", "One M8", "One M9", "One M9+", "One A9", "One E9", "One E9+", "One X9", "One S9", "10", "U Ultra", "U11", "U11+", "U11 Life", "U12+", "U12 Life", "Desire 10", "Desire 12", "Desire 12+", "Desire 12s", "Desire 19+", "Desire 19s", "Desire 20 Pro", "Desire 20+", "Desire 21 Pro", "Desire 22 Pro", "Wildfire X", "Wildfire E", "Wildfire E2", "Wildfire E3"],
+        "compatible": ["HTC - unique aspect ratios, check individually"]
       }
     }
   }
