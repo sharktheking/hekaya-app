@@ -58,7 +58,6 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 10px;
-            backdrop-filter: blur(10px);
         }
 
         .logo-area {
@@ -87,7 +86,6 @@
         .app-title h1 {
             font-size: 20px;
             color: var(--gold);
-            letter-spacing: 1px;
         }
 
         .app-title p {
@@ -139,10 +137,7 @@
             cursor: pointer;
             font-size: 16px;
             border: 1px solid var(--border-color);
-            transition: all 0.2s;
         }
-
-        .theme-toggle:active { transform: scale(0.95); }
 
         /* Hero Slider */
         .hero-slider {
@@ -197,9 +192,38 @@
             border-radius: 10px;
         }
 
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            white-space: nowrap;
+        }
+
+        .category-btn {
+            padding: 8px 16px;
+            background: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            color: var(--text-dim);
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .category-btn.active {
+            background: var(--gold);
+            color: #0A0A0A;
+            border-color: var(--gold);
+        }
+
         /* Search Bar */
         .search-container {
-            padding: 12px;
+            padding: 0 12px 12px 12px;
         }
 
         .search-box {
@@ -209,12 +233,6 @@
             border-radius: 30px;
             padding: 10px 16px;
             border: 1px solid var(--border-color);
-            transition: all 0.3s;
-        }
-
-        .search-box:focus-within {
-            border-color: var(--gold);
-            box-shadow: 0 0 10px rgba(255,215,0,0.2);
         }
 
         .search-input {
@@ -257,14 +275,8 @@
         .product-card:active { transform: scale(0.98); }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .discount-badge {
@@ -277,12 +289,6 @@
             font-weight: bold;
             padding: 3px 8px;
             border-radius: 20px;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
         }
 
         .product-icon { font-size: 48px; text-align: center; display: block; margin-bottom: 8px; }
@@ -325,7 +331,6 @@
             padding: 8px 12px;
             border-top: 1px solid var(--border-color);
             z-index: 100;
-            backdrop-filter: blur(10px);
         }
 
         .nav-item {
@@ -344,13 +349,12 @@
             color: #0A0A0A;
         }
 
-        /* About Us / Contact Section */
+        /* About Section */
         .about-section {
             background: var(--card-color);
             margin: 12px;
             border-radius: 24px;
             overflow: hidden;
-            animation: fadeInUp 0.5s ease;
         }
 
         .about-header {
@@ -361,7 +365,6 @@
         }
 
         .about-header h2 { font-size: 22px; margin-bottom: 5px; }
-        .about-header p { font-size: 12px; opacity: 0.9; }
 
         .about-content { padding: 20px; }
 
@@ -376,7 +379,6 @@
         .info-icon { font-size: 28px; width: 50px; text-align: center; }
         .info-text { flex: 1; }
         .info-text strong { color: var(--gold); display: block; margin-bottom: 3px; }
-        .info-text span { font-size: 13px; color: var(--text-dim); }
 
         .social-grid {
             display: grid;
@@ -391,13 +393,12 @@
             padding: 15px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
             border: 1px solid var(--border-color);
         }
 
         .social-card:active { transform: scale(0.97); }
-        .social-card .social-icon { font-size: 32px; display: block; margin-bottom: 8px; }
-        .social-card .social-name { font-size: 12px; font-weight: bold; color: var(--gold); }
+        .social-icon { font-size: 32px; display: block; margin-bottom: 8px; }
+        .social-name { font-size: 12px; font-weight: bold; color: var(--gold); }
 
         .location-btn {
             background: var(--gradient);
@@ -409,17 +410,14 @@
             font-weight: bold;
             margin-top: 15px;
             cursor: pointer;
-            font-size: 14px;
         }
 
-        /* Empty State */
         .empty-state {
             text-align: center;
             padding: 40px;
             color: var(--text-dim);
         }
 
-        /* Notification */
         .notification {
             position: fixed;
             top: 80px;
@@ -463,14 +461,8 @@
         </div>
     </div>
     <div class="header-icons">
-        <div class="icon-btn" id="favoritesIconBtn">
-            ❤️
-            <span class="badge" id="favoritesBadge" style="display:none;">0</span>
-        </div>
-        <div class="icon-btn" id="cartIconBtn">
-            🛒
-            <span class="badge" id="cartBadge" style="display:none;">0</span>
-        </div>
+        <div class="icon-btn" id="favoritesIconBtn">❤️<span class="badge" id="favoritesBadge" style="display:none;">0</span></div>
+        <div class="icon-btn" id="cartIconBtn">🛒<span class="badge" id="cartBadge" style="display:none;">0</span></div>
         <div class="theme-toggle" id="themeToggle">🌙</div>
     </div>
 </div>
@@ -478,23 +470,22 @@
 <!-- Hero Slider -->
 <div class="hero-slider">
     <div class="slider-container" id="sliderContainer">
-        <div class="slide">
-            <div class="slide-icon">🎉✨</div>
-            <div class="slide-title">خصم يصل إلى 30%</div>
-            <div class="slide-desc">على جميع الشواحن السريعة</div>
-        </div>
-        <div class="slide">
-            <div class="slide-icon">🚚💨</div>
-            <div class="slide-title">توصيل مجاني</div>
-            <div class="slide-desc">للطلبات فوق 50,000 دينار</div>
-        </div>
-        <div class="slide">
-            <div class="slide-icon">🎁🎈</div>
-            <div class="slide-title">هدايا مع كل طلب</div>
-            <div class="slide-desc">استنساخ - تصوير - بحوث</div>
-        </div>
+        <div class="slide"><div class="slide-icon">🎉✨</div><div class="slide-title">خصم يصل إلى 30%</div><div class="slide-desc">على جميع الشواحن السريعة</div></div>
+        <div class="slide"><div class="slide-icon">🚚💨</div><div class="slide-title">توصيل مجاني</div><div class="slide-desc">للطلبات فوق 50,000 دينار</div></div>
+        <div class="slide"><div class="slide-icon">🎁🎈</div><div class="slide-title">هدايا مع كل طلب</div><div class="slide-desc">استنساخ - تصوير - بحوث</div></div>
     </div>
     <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+<!-- Category Tabs -->
+<div class="category-tabs" id="categoryTabs">
+    <button class="category-btn active" data-cat="all">🌟 الكل</button>
+    <button class="category-btn" data-cat="charger">🔌 شواحن</button>
+    <button class="category-btn" data-cat="audio">🎧 سماعات</button>
+    <button class="category-btn" data-cat="case">📱 جرابات</button>
+    <button class="category-btn" data-cat="cable">🔋 كوابل</button>
+    <button class="category-btn" data-cat="powerbank">⚡ باور بانك</button>
+    <button class="category-btn" data-cat="mount">🚗 حوامل</button>
 </div>
 
 <div class="search-container">
@@ -519,25 +510,37 @@
 </div>
 
 <script>
-    // ======================= DATA =======================
-    let products = [
-        { id: 1, name: "شاحن سريع 33W", price: 25000, oldPrice: 35000, icon: "⚡", category: "charger" },
-        { id: 2, name: "شاحن سيارة 45W", price: 20000, oldPrice: null, icon: "🚗", category: "charger" },
-        { id: 3, name: "شاحن لاسلكي 15W", price: 30000, oldPrice: 45000, icon: "📡", category: "charger" },
-        { id: 4, name: "سماعة بلوتوث TWS", price: 25000, oldPrice: null, icon: "🎧", category: "audio" },
-        { id: 5, name: "سماعة رأس لاسلكية", price: 50000, oldPrice: 75000, icon: "🎧", category: "audio" },
-        { id: 6, name: "جراب سيليكون شفاف", price: 8000, oldPrice: null, icon: "📱", category: "case" },
-        { id: 7, name: "جراب حماية قوي", price: 20000, oldPrice: 30000, icon: "🛡️", category: "case" },
-        { id: 8, name: "حامل سيارة مغناطيسي", price: 15000, oldPrice: null, icon: "🚗", category: "mount" },
-        { id: 9, name: "كابل USB-C 2م", price: 8000, oldPrice: null, icon: "🔌", category: "cable" },
-        { id: 10, name: "كابل Lightning 1.5م", price: 10000, oldPrice: 15000, icon: "🍎", category: "cable" },
-        { id: 11, name: "باور بانك 10000mAh", price: 35000, oldPrice: null, icon: "🔋", category: "powerbank" },
-        { id: 12, name: "باور بانك 20000mAh", price: 55000, oldPrice: 80000, icon: "🔋", category: "powerbank" }
+    // ======================= PRODUCTS DATA WITH GROUPS =======================
+    const products = [
+        // شواحن
+        { id: 1, name: "شاحن سريع 33W", price: 25000, oldPrice: 35000, icon: "⚡", category: "charger", group: "شواحن" },
+        { id: 2, name: "شاحن سيارة 45W", price: 20000, oldPrice: null, icon: "🚗", category: "charger", group: "شواحن" },
+        { id: 3, name: "شاحن لاسلكي 15W", price: 30000, oldPrice: 45000, icon: "📡", category: "charger", group: "شواحن" },
+        { id: 4, name: "شاحن 65W لابتوب", price: 50000, oldPrice: null, icon: "💻", category: "charger", group: "شواحن" },
+        // سماعات
+        { id: 5, name: "سماعة بلوتوث TWS", price: 25000, oldPrice: null, icon: "🎧", category: "audio", group: "سماعات" },
+        { id: 6, name: "سماعة رأس لاسلكية", price: 50000, oldPrice: 75000, icon: "🎧", category: "audio", group: "سماعات" },
+        { id: 7, name: "سماعة سلكية", price: 15000, oldPrice: null, icon: "🎧", category: "audio", group: "سماعات" },
+        // جرابات
+        { id: 8, name: "جراب سيليكون شفاف", price: 8000, oldPrice: null, icon: "📱", category: "case", group: "جرابات" },
+        { id: 9, name: "جراب حماية قوي", price: 20000, oldPrice: 30000, icon: "🛡️", category: "case", group: "جرابات" },
+        { id: 10, name: "جراب بطارية مدمج", price: 28000, oldPrice: null, icon: "🔋", category: "case", group: "جرابات" },
+        // كوابل
+        { id: 11, name: "كابل USB-C 2م", price: 8000, oldPrice: null, icon: "🔌", category: "cable", group: "كوابل" },
+        { id: 12, name: "كابل Lightning 1.5م", price: 10000, oldPrice: 15000, icon: "🍎", category: "cable", group: "كوابل" },
+        { id: 13, name: "كابل USB 3.0", price: 5000, oldPrice: null, icon: "🔌", category: "cable", group: "كوابل" },
+        // باور بانك
+        { id: 14, name: "باور بانك 10000mAh", price: 35000, oldPrice: null, icon: "🔋", category: "powerbank", group: "باور بانك" },
+        { id: 15, name: "باور بانك 20000mAh", price: 55000, oldPrice: 80000, icon: "🔋", category: "powerbank", group: "باور بانك" },
+        // حوامل
+        { id: 16, name: "حامل سيارة مغناطيسي", price: 15000, oldPrice: null, icon: "🚗", category: "mount", group: "حوامل" },
+        { id: 17, name: "حامل منضدي", price: 10000, oldPrice: null, icon: "🖥️", category: "mount", group: "حوامل" }
     ];
 
     let cart = JSON.parse(localStorage.getItem('hekaya_cart')) || [];
     let favorites = JSON.parse(localStorage.getItem('hekaya_favorites')) || [];
     let currentTab = 'all';
+    let currentCategory = 'all';
     let searchQuery = '';
 
     // ======================= SLIDER =======================
@@ -559,9 +562,7 @@
     function goToSlide(index) {
         currentSlide = (index + slides.length) % slides.length;
         document.querySelector('.slider-container').style.transform = `translateX(-${currentSlide * 100}%)`;
-        document.querySelectorAll('.dot').forEach((d, i) => {
-            d.classList.toggle('active', i === currentSlide);
-        });
+        document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
     }
 
     // ======================= CORE FUNCTIONS =======================
@@ -574,16 +575,10 @@
     function updateBadges() {
         const cartBadge = document.getElementById('cartBadge');
         const favBadge = document.getElementById('favoritesBadge');
-        
-        if(cart.length > 0) {
-            cartBadge.style.display = 'flex';
-            cartBadge.innerText = cart.length;
-        } else cartBadge.style.display = 'none';
-        
-        if(favorites.length > 0) {
-            favBadge.style.display = 'flex';
-            favBadge.innerText = favorites.length;
-        } else favBadge.style.display = 'none';
+        if(cart.length > 0) { cartBadge.style.display = 'flex'; cartBadge.innerText = cart.length; }
+        else cartBadge.style.display = 'none';
+        if(favorites.length > 0) { favBadge.style.display = 'flex'; favBadge.innerText = favorites.length; }
+        else favBadge.style.display = 'none';
     }
 
     function isInCart(id) { return cart.some(item => item.id === id); }
@@ -624,6 +619,9 @@
 
     function getFilteredProducts() {
         let filtered = [...products];
+        if (currentCategory !== 'all') {
+            filtered = filtered.filter(p => p.category === currentCategory);
+        }
         if (searchQuery) {
             filtered = filtered.filter(p => p.name.includes(searchQuery));
         }
@@ -651,7 +649,7 @@
             const hasDiscount = product.oldPrice && product.oldPrice > product.price;
             
             return `
-                <div class="product-card" style="animation-delay: ${product.id * 0.05}s">
+                <div class="product-card">
                     ${hasDiscount ? `<div class="discount-badge">🔥 خصم ${Math.round((1 - product.price/product.oldPrice)*100)}%</div>` : ''}
                     <div class="product-icon">${product.icon}</div>
                     <div class="product-name">${product.name}</div>
@@ -660,19 +658,25 @@
                         ${product.price.toLocaleString()} د.ع
                     </div>
                     <div class="product-actions">
-                        <div class="action-btn ${inFav ? 'fav-active' : ''}" onclick="toggleFavorite(${product.id})">
-                            ${inFav ? '❤️ مفضلة' : '🤍 مفضلة'}
-                        </div>
+                        <div class="action-btn ${inFav ? 'fav-active' : ''}" onclick="toggleFavorite(${product.id})">${inFav ? '❤️ مفضلة' : '🤍 مفضلة'}</div>
                         ${currentTab === 'cart' 
                             ? `<div class="action-btn" style="background:var(--error); color:white;" onclick="removeFromCart(${product.id})">🗑️ حذف</div>`
-                            : `<div class="action-btn ${inCart ? 'cart-active' : ''}" onclick="${inCart ? `removeFromCart(${product.id})` : `addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})`}">
-                                ${inCart ? '✅ في السلة' : '🛒 أضف للسلة'}
-                            </div>`
+                            : `<div class="action-btn ${inCart ? 'cart-active' : ''}" onclick="${inCart ? `removeFromCart(${product.id})` : `addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})`}">${inCart ? '✅ في السلة' : '🛒 أضف للسلة'}</div>`
                         }
                     </div>
                 </div>
             `;
         }).join('');
+    }
+
+    // ======================= CATEGORY FILTER =======================
+    function setCategory(category) {
+        currentCategory = category;
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            if(btn.dataset.cat === category) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+        if(currentTab !== 'about') renderProducts();
     }
 
     // ======================= ABOUT SECTION =======================
@@ -687,73 +691,37 @@
                 <div class="about-content">
                     <div class="info-row">
                         <div class="info-icon">📍</div>
-                        <div class="info-text">
-                            <strong>العنوان</strong>
-                            <span>كوت - حي الحكيم الاولى - قرب سيطرة العمارة القديمة</span>
-                        </div>
+                        <div class="info-text"><strong>العنوان</strong><span>كوت - حي الحكيم الاولى - قرب سيطرة العمارة القديمة</span></div>
                     </div>
                     <div class="info-row">
                         <div class="info-icon">📞</div>
-                        <div class="info-text">
-                            <strong>اتصال</strong>
-                            <span>07757777566</span>
-                        </div>
+                        <div class="info-text"><strong>اتصال</strong><span>07757777566</span></div>
                     </div>
                     <div class="info-row">
                         <div class="info-icon">💬</div>
-                        <div class="info-text">
-                            <strong>واتساب</strong>
-                            <span>07757777566</span>
-                        </div>
+                        <div class="info-text"><strong>واتساب</strong><span>07757777566</span></div>
                     </div>
                     <div class="info-row">
                         <div class="info-icon">✈️</div>
-                        <div class="info-text">
-                            <strong>تيليجرام</strong>
-                            <span>@hikaya_b</span>
-                        </div>
+                        <div class="info-text"><strong>تيليجرام</strong><span>@hikaya_b</span></div>
                     </div>
                     
-                    <h3 style="color: var(--gold); margin: 20px 0 10px; text-align: center;">📱 تابعونا على وسائل التواصل</h3>
+                    <h3 style="color: var(--gold); margin: 20px 0 10px; text-align: center;">📱 تابعونا</h3>
                     <div class="social-grid">
-                        <div class="social-card" onclick="window.open('https://wa.me/9647757777566', '_blank')">
-                            <div class="social-icon">📱</div>
-                            <div class="social-name">واتساب</div>
-                        </div>
-                        <div class="social-card" onclick="window.open('https://t.me/hikaya_b', '_blank')">
-                            <div class="social-icon">✈️</div>
-                            <div class="social-name">تيليجرام</div>
-                        </div>
-                        <div class="social-card" onclick="window.open('https://instagram.com/hikaya', '_blank')">
-                            <div class="social-icon">📸</div>
-                            <div class="social-name">انستقرام</div>
-                        </div>
-                        <div class="social-card" onclick="window.open('https://facebook.com/hikaya', '_blank')">
-                            <div class="social-icon">👤</div>
-                            <div class="social-name">فيسبوك</div>
-                        </div>
-                        <div class="social-card" onclick="window.open('https://tiktok.com/@hikaya', '_blank')">
-                            <div class="social-icon">🎵</div>
-                            <div class="social-name">تيك توك</div>
-                        </div>
-                        <div class="social-card" onclick="window.open('https://maps.app.goo.gl/FeFawvomK2qhTJxdA', '_blank')">
-                            <div class="social-icon">🗺️</div>
-                            <div class="social-name">الموقع</div>
-                        </div>
+                        <div class="social-card" onclick="window.open('https://wa.me/9647757777566', '_blank')"><div class="social-icon">📱</div><div class="social-name">واتساب</div></div>
+                        <div class="social-card" onclick="window.open('https://t.me/hikaya_b', '_blank')"><div class="social-icon">✈️</div><div class="social-name">تيليجرام</div></div>
+                        <div class="social-card" onclick="window.open('https://instagram.com/hikaya', '_blank')"><div class="social-icon">📸</div><div class="social-name">انستقرام</div></div>
+                        <div class="social-card" onclick="window.open('https://facebook.com/hikaya', '_blank')"><div class="social-icon">👤</div><div class="social-name">فيسبوك</div></div>
+                        <div class="social-card" onclick="window.open('https://tiktok.com/@hikaya', '_blank')"><div class="social-icon">🎵</div><div class="social-name">تيك توك</div></div>
+                        <div class="social-card" onclick="window.open('https://maps.app.goo.gl/FeFawvomK2qhTJxdA', '_blank')"><div class="social-icon">🗺️</div><div class="social-name">الموقع</div></div>
                     </div>
                     
-                    <div class="info-row" style="border-bottom: none; margin-top: 15px;">
+                    <div class="info-row" style="border-bottom: none;">
                         <div class="info-icon">🕐</div>
-                        <div class="info-text">
-                            <strong>أوقات العمل</strong>
-                            <span>السبت - الخميس: 9ص - 9م</span>
-                            <span>الجمعة: 4م - 9م</span>
-                        </div>
+                        <div class="info-text"><strong>أوقات العمل</strong><span>السبت - الخميس: 9ص - 9م<br>الجمعة: 4م - 9م</span></div>
                     </div>
                     
-                    <button class="location-btn" onclick="window.open('https://maps.app.goo.gl/FeFawvomK2qhTJxdA', '_blank')">
-                        🗺️ فتح الموقع على خرائط Google
-                    </button>
+                    <button class="location-btn" onclick="window.open('https://maps.app.goo.gl/FeFawvomK2qhTJxdA', '_blank')">🗺️ فتح الموقع على الخريطة</button>
                 </div>
             </div>
         `;
@@ -767,11 +735,8 @@
             else item.classList.remove('active');
         });
         
-        if(tab === 'about') {
-            renderAboutSection();
-        } else {
-            renderProducts();
-        }
+        if(tab === 'about') renderAboutSection();
+        else renderProducts();
     }
 
     // ======================= SEARCH =======================
@@ -795,7 +760,6 @@
     function showNotification(message, isDiscount = false) {
         const existing = document.querySelector('.notification');
         if(existing) existing.remove();
-        
         const notif = document.createElement('div');
         notif.className = 'notification' + (isDiscount ? ' discount' : '');
         notif.innerText = message;
@@ -826,6 +790,10 @@
         item.addEventListener('click', () => setActiveTab(item.dataset.tab));
     });
     
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', () => setCategory(btn.dataset.cat));
+    });
+    
     document.getElementById('favoritesIconBtn').addEventListener('click', () => setActiveTab('favorites'));
     document.getElementById('cartIconBtn').addEventListener('click', () => setActiveTab('cart'));
     
@@ -838,13 +806,8 @@
     setActiveTab('all');
     updateBadges();
     
-    // Welcome notification
-    setTimeout(() => {
-        showNotification('✨ مرحباً بك في مكتبة حكايه ✨', false);
-    }, 500);
-    setTimeout(() => {
-        showNotification('🔥 خصم 20% على جميع الشواحن لفترة محدودة!', true);
-    }, 3000);
+    setTimeout(() => showNotification('✨ مرحباً بك في مكتبة حكايه ✨'), 500);
+    setTimeout(() => showNotification('🔥 خصم 20% على جميع الشواحن لفترة محدودة!', true), 3000);
 </script>
 </body>
 </html>
