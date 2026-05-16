@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <meta name="theme-color" content="#0A0A0A">
-    <title>مكتبة حكايه - دليل واقيات الشاشة</title>
-    <link rel="manifest" href="manifest.json">
+    <title>مكتبة حكايه - شامل</title>
     <style>
         * {
             margin: 0;
@@ -21,6 +20,7 @@
             padding-bottom: 20px;
         }
 
+        /* Header */
         .header {
             background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
             padding: 20px 16px;
@@ -40,24 +40,54 @@
             gap: 10px;
         }
 
-        .app-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            background: #111;
+            padding: 8px 12px;
+            gap: 8px;
+            position: sticky;
+            top: 100px;
+            z-index: 99;
+            flex-wrap: wrap;
         }
 
-        .last-updated {
-            font-size: 10px;
+        .tab-btn {
+            flex: 1;
+            padding: 12px 8px;
+            background: #1A1A1A;
+            border: none;
             color: #888;
-            margin-top: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
         }
 
+        .tab-btn.active {
+            background: #FFD700;
+            color: #0A0A0A;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 15px 12px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Stats Bar */
         .stats-bar {
             display: flex;
             justify-content: space-between;
             padding: 12px 16px;
             background: #111111;
-            margin: 10px 12px;
+            margin: 10px 0;
             border-radius: 25px;
             font-size: 12px;
         }
@@ -69,8 +99,9 @@
             color: #FFD700;
         }
 
+        /* Search Bar */
         .search-container {
-            padding: 0 12px 15px 12px;
+            margin-bottom: 15px;
         }
 
         .search-box {
@@ -80,17 +111,10 @@
             border-radius: 30px;
             padding: 8px 16px;
             border: 1px solid #333;
-            transition: all 0.3s ease;
         }
 
         .search-box:focus-within {
             border-color: #FFD700;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
-        }
-
-        .search-icon {
-            font-size: 20px;
-            margin-left: 10px;
         }
 
         .search-input {
@@ -101,6 +125,7 @@
             font-size: 16px;
             outline: none;
             font-family: inherit;
+            padding: 8px;
         }
 
         .search-input::placeholder {
@@ -116,28 +141,10 @@
             border-radius: 50%;
             cursor: pointer;
             font-size: 14px;
-            display: none;
-            align-items: center;
-            justify-content: center;
         }
 
-        .refresh-btn {
-            background: #333;
-            border: none;
-            color: #FFD700;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            margin-right: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+        /* Brand Cards */
         .brands-container {
-            padding: 0 12px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -147,7 +154,6 @@
             background: #1A1A1A;
             border-radius: 20px;
             overflow: hidden;
-            transition: all 0.3s ease;
         }
 
         .brand-header {
@@ -155,7 +161,7 @@
             align-items: center;
             padding: 16px;
             cursor: pointer;
-            transition: background 0.2s;
+            background: #1A1A1A;
         }
 
         .brand-header:active {
@@ -163,16 +169,8 @@
         }
 
         .brand-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
-            object-fit: cover;
-            margin-left: 12px;
-        }
-
-        .brand-icon-emoji {
             font-size: 40px;
-            width: 50px;
+            width: 55px;
             text-align: center;
         }
 
@@ -185,8 +183,8 @@
             font-weight: bold;
         }
 
-        .brand-compat {
-            font-size: 10px;
+        .brand-count {
+            font-size: 11px;
             color: #888;
             margin-top: 4px;
         }
@@ -194,7 +192,7 @@
         .brand-arrow {
             font-size: 22px;
             color: #FFD700;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s;
         }
 
         .brand-arrow.open {
@@ -210,9 +208,9 @@
 
         .brand-content.open {
             max-height: 3000px;
-            transition: max-height 0.6s ease-in;
         }
 
+        /* Series Card */
         .series-card {
             background: #141414;
             margin: 8px 12px 12px 12px;
@@ -228,7 +226,6 @@
             cursor: pointer;
             background: #1A1A1A;
             flex-wrap: wrap;
-            gap: 5px;
         }
 
         .series-name {
@@ -238,8 +235,8 @@
         }
 
         .series-compat {
-            font-size: 9px;
-            color: #888;
+            font-size: 10px;
+            color: #4CAF50;
             flex: 1;
             text-align: center;
         }
@@ -250,6 +247,10 @@
             transition: transform 0.3s;
         }
 
+        .series-arrow.open {
+            transform: rotate(180deg);
+        }
+
         .models-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -257,7 +258,7 @@
             padding: 12px;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            transition: max-height 0.3s;
         }
 
         .models-grid.open {
@@ -272,16 +273,95 @@
             border-radius: 10px;
             font-size: 11px;
             cursor: pointer;
-            transition: all 0.2s;
             text-align: center;
         }
 
         .model-btn:active {
             background: #FFD700;
             color: #0A0A0A;
-            transform: scale(0.97);
         }
 
+        /* Shop Cards */
+        .shop-category {
+            margin-bottom: 25px;
+        }
+
+        .category-title {
+            font-size: 20px;
+            color: #FFD700;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #FFD700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .product-card {
+            background: #1A1A1A;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .product-card:active {
+            transform: scale(0.98);
+        }
+
+        .product-icon {
+            font-size: 50px;
+            text-align: center;
+            padding: 20px;
+            background: #252525;
+        }
+
+        .product-info {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            color: #FFD700;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .product-desc {
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .buy-btn {
+            background: #FFD700;
+            color: #0A0A0A;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        .buy-btn:active {
+            background: #DAA520;
+        }
+
+        /* Footer */
         .footer {
             text-align: center;
             padding: 20px;
@@ -297,44 +377,9 @@
             color: #FFD700;
         }
 
-        .no-results {
-            text-align: center;
-            padding: 40px;
-            color: #888;
-        }
-
-        .online-status {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #1A1A1A;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            z-index: 200;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #4CAF50;
-        }
-
-        .status-dot.offline {
-            background: #FF4444;
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
-        }
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
@@ -342,75 +387,154 @@
 
 <div class="header">
     <h1>
-        <img id="appLogo" class="app-logo" src="https://via.placeholder.com/40/FFD700/0A0A0A?text=ح" alt="logo">
+        <span>📚</span>
         <span>مكتبة حكايه</span>
     </h1>
-    <p>دليل واقيات الشاشة المتوافقة - محدث باستمرار</p>
-    <div class="last-updated" id="lastUpdated">جاري التحميل...</div>
+    <p>دليل واقيات الشاشة - متجر الإلكترونيات</p>
 </div>
 
-<div class="stats-bar" id="statsBar">
-    <div class="stat" id="brandsCount">🏷️ 0 علامة</div>
-    <div class="stat" id="modelsCount">📱 0 موديل</div>
+<div class="tabs">
+    <button class="tab-btn active" data-tab="phones">📱 واقيات الشاشة</button>
+    <button class="tab-btn" data-tab="chargers">🔌 شواحن وكوابل</button>
+    <button class="tab-btn" data-tab="accessories">🎧 اكسسوارات</button>
+    <button class="tab-btn" data-tab="notebooks">💻 نوت بوك ولابتوب</button>
+    <button class="tab-btn" data-tab="offers">🎁 عروض خاصة</button>
 </div>
 
-<div class="search-container">
-    <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن موديل...">
-        <button class="refresh-btn" id="refreshBtn">⟳</button>
-        <button class="clear-btn" id="clearBtn">✖</button>
+<!-- Phones Tab -->
+<div id="phones-tab" class="tab-content active">
+    <div class="stats-bar" id="statsBar">
+        <div class="stat" id="brandsCount">🏷️ 0 علامة</div>
+        <div class="stat" id="modelsCount">📱 0 موديل</div>
+    </div>
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن موديل...">
+            <button class="clear-btn" id="clearBtn">✖</button>
+        </div>
+    </div>
+    <div class="brands-container" id="brandsContainer">
+        <div class="loading">⏳ جاري التحميل...</div>
     </div>
 </div>
 
-<div class="brands-container" id="brandsContainer">
-    <div class="loading">⏳ جاري التحميل...</div>
+<!-- Chargers Tab -->
+<div id="chargers-tab" class="tab-content">
+    <div class="shop-category">
+        <div class="category-title">
+            <span>🔌</span>
+            <span>شواحن سريعة - Fast Chargers</span>
+        </div>
+        <div class="products-grid" id="chargersGrid"></div>
+    </div>
+    <div class="shop-category">
+        <div class="category-title">
+            <span>🔋</span>
+            <span>كوابل USB - Cables</span>
+        </div>
+        <div class="products-grid" id="cablesGrid"></div>
+    </div>
+    <div class="shop-category">
+        <div class="category-title">
+            <span>🔄</span>
+            <span>باور بانك - Power Banks</span>
+        </div>
+        <div class="products-grid" id="powerbanksGrid"></div>
+    </div>
+</div>
+
+<!-- Accessories Tab -->
+<div id="accessories-tab" class="tab-content">
+    <div class="shop-category">
+        <div class="category-title">
+            <span>🎧</span>
+            <span>سماعات - Headphones</span>
+        </div>
+        <div class="products-grid" id="headphonesGrid"></div>
+    </div>
+    <div class="shop-category">
+        <div class="category-title">
+            <span>📱</span>
+            <span>جرابات وحافظات - Cases</span>
+        </div>
+        <div class="products-grid" id="casesGrid"></div>
+    </div>
+    <div class="shop-category">
+        <div class="category-title">
+            <span>🖥️</span>
+            <span>حوامل وملحقات - Stands & Mounts</span>
+        </div>
+        <div class="products-grid" id="mountsGrid"></div>
+    </div>
+</div>
+
+<!-- Notebooks Tab -->
+<div id="notebooks-tab" class="tab-content">
+    <div class="shop-category">
+        <div class="category-title">
+            <span>💻</span>
+            <span>لاب توب - Laptops</span>
+        </div>
+        <div class="products-grid" id="laptopsGrid"></div>
+    </div>
+    <div class="shop-category">
+        <div class="category-title">
+            <span>🖱️</span>
+            <span>اكسسوارات لابتوب - Laptop Accessories</span>
+        </div>
+        <div class="products-grid" id="laptopAccGrid"></div>
+    </div>
+</div>
+
+<!-- Offers Tab -->
+<div id="offers-tab" class="tab-content">
+    <div class="shop-category">
+        <div class="category-title">
+            <span>🎁</span>
+            <span>عروض خاصة - Special Offers</span>
+        </div>
+        <div class="products-grid" id="offersGrid"></div>
+    </div>
+    <div class="shop-category">
+        <div class="category-title">
+            <span>🔥</span>
+            <span>تخفيضات - Discounts</span>
+        </div>
+        <div class="products-grid" id="discountsGrid"></div>
+    </div>
 </div>
 
 <div class="footer">
-    <p>✨ اضغط على أي علامة لعرض الموديلات المتوافقة ✨</p>
-    <p style="margin-top: 8px;">✅ نفس حجم الشاشة = واقي واحد يناسب جميع الموديلات في نفس المجموعة</p>
-</div>
-
-<div class="online-status" id="onlineStatus">
-    <div class="status-dot" id="statusDot"></div>
-    <span id="statusText">جاري الاتصال...</span>
+    <p>✨ مكتبة حكايه - كل ما تحتاجه في مكان واحد ✨</p>
+    <p>📞 للطلب واتساب: 0555555555</p>
 </div>
 
 <script>
-    // ✅ FIXED: Changed to your actual GitHub username
-    const GITHUB_USERNAME = 'sharktheking';
-    const REPO_NAME = 'hekaya-app';
-    const DATA_URL = `https://${GITHUB_USERNAME}.github.io/${REPO_NAME}/data/brands.json`;
-    const CONFIG_URL = `https://${GITHUB_USERNAME}.github.io/${REPO_NAME}/config.json`;
-    
-    // Embedded fallback data (works offline)
-    const FALLBACK_DATA = {
+    // Phone Brands Data - Organized by Screen Size Compatibility
+    const PHONE_BRANDS = {
         "📱 سامسونج Samsung": {
             "logo": "📱",
             "color": "#FFD700",
             "series": {
-                "Galaxy S24 Series": {
-                    "models": ["S24", "S24+", "S24 Ultra"],
-                    "compatible": ["سامسونج فقط"]
+                "⭐ 6.1 بوصة - S Series": {
+                    "models": ["S10", "S20", "S21", "S22", "S23", "S24", "S10e", "S10+", "S20+", "S21+", "S22+", "S23+", "S24+"],
+                    "compatible": ["All 6.1-6.2\" Samsung phones - same protector"]
                 },
-                "Galaxy A55 Series": {
-                    "models": ["A15", "A25", "A35", "A55"],
-                    "compatible": ["شاومي ريدمي نوت 13"]
-                }
-            }
-        },
-        "🍎 أيفون Apple": {
-            "logo": "🍎",
-            "color": "#A2AAAD",
-            "series": {
-                "iPhone 16 Series": {
-                    "models": ["iPhone 16", "iPhone 16 Pro", "iPhone 16 Pro Max"],
-                    "compatible": ["أبل فقط"]
+                "⭐ 6.5 بوصة - A Series (الأكثر شيوعاً)": {
+                    "models": ["A12", "A22", "A32", "A42", "A52", "A72", "A02s", "A03s", "M32", "M51", "A13", "A23", "A33", "A53", "A73", "A14", "A24", "A34", "A54", "A15", "A25", "A35", "A55"],
+                    "compatible": ["✅ Compatible with: Xiaomi Redmi Note 10/11/12, Realme 8/9/10, Infinix Hot 10/11/12, Tecno Spark 7/8/9, Oppo A54/A74, Vivo Y20/Y30"]
                 },
-                "iPhone 15 Series": {
-                    "models": ["iPhone 15", "iPhone 15 Pro", "iPhone 15 Pro Max"],
-                    "compatible": ["أبل فقط"]
+                "⭐ 6.4 بوصة - A/M Series": {
+                    "models": ["A11", "A21s", "A31", "A41", "A51", "A71", "M21", "M31", "A51 5G", "A71 5G"],
+                    "compatible": ["Compatible with: Xiaomi Redmi Note 9 Pro, Realme 7 Pro, Oppo A54"]
+                },
+                "⭐ 6.8 بوصة - Ultra/Note Series": {
+                    "models": ["S20 Ultra", "S21 Ultra", "S22 Ultra", "S23 Ultra", "S24 Ultra", "Note 10+", "Note 20 Ultra"],
+                    "compatible": ["Ultra series - large screen protectors"]
+                },
+                "⭐ 6.6 بوصة - A/M Modern": {
+                    "models": ["A13 5G", "A23 5G", "A33 5G", "A53 5G", "A73 5G", "M33", "M53"],
+                    "compatible": ["Compatible with: Redmi Note 11 Pro, Realme GT"]
                 }
             }
         },
@@ -418,190 +542,274 @@
             "logo": "📲",
             "color": "#FF6B00",
             "series": {
-                "Redmi Note 13 Series": {
-                    "models": ["Note 13", "Note 13 Pro", "Note 13 Pro+"],
-                    "compatible": ["شاومي فقط"]
+                "🔥 6.5 بوصة - Redmi Note 10 Series": {
+                    "models": ["Redmi Note 10", "Redmi Note 10 Pro", "Redmi Note 10S", "Redmi 10", "Redmi 10A", "Redmi 10C", "Redmi 9", "Redmi 9A", "Redmi 9C"],
+                    "compatible": ["✅ Compatible with: Samsung A12/A22/A32, Realme 8/9, Infinix Hot 10/11"]
                 },
-                "Poco F6 Series": {
-                    "models": ["Poco F6", "Poco F6 Pro"],
-                    "compatible": ["ريلمي جي تي"]
+                "🔥 6.67 بوصة - Redmi Note 11/12/Poco": {
+                    "models": ["Redmi Note 11", "Redmi Note 11 Pro", "Redmi Note 12", "Redmi Note 12 Pro", "Poco F3", "Poco F4", "Poco F5", "Poco X3", "Poco X4", "Poco X5", "Redmi K40", "Redmi K50", "Redmi K60"],
+                    "compatible": ["✅ Compatible with: Realme GT, OnePlus Nord, Oppo Reno"]
+                },
+                "🔥 6.36 بوصة - Xiaomi Flagship": {
+                    "models": ["Xiaomi 12", "Xiaomi 12 Pro", "Xiaomi 13", "Xiaomi 13 Pro", "Xiaomi 14", "Xiaomi 14 Pro"],
+                    "compatible": ["Xiaomi flagship series - same screen size"]
+                },
+                "🔥 6.8 بوصة - Max Series": {
+                    "models": ["Mi Max 3", "Xiaomi 11T", "Xiaomi 11T Pro", "Redmi Note 13 Pro+", "Xiaomi 14 Ultra"],
+                    "compatible": ["Large screen Xiaomi phones"]
+                }
+            }
+        },
+        "🍎 أيفون Apple": {
+            "logo": "🍎",
+            "color": "#A2AAAD",
+            "series": {
+                "📱 6.1 بوصة - iPhone 12-16": {
+                    "models": ["iPhone 12", "iPhone 12 Pro", "iPhone 13", "iPhone 13 Pro", "iPhone 14", "iPhone 14 Pro", "iPhone 15", "iPhone 15 Pro", "iPhone 16", "iPhone 16 Pro"],
+                    "compatible": ["⚠️ Apple only - each model has different notch/Dynamic Island"]
+                },
+                "📱 6.7 بوصة - iPhone Pro Max": {
+                    "models": ["iPhone 12 Pro Max", "iPhone 13 Pro Max", "iPhone 14 Pro Max", "iPhone 15 Pro Max", "iPhone 16 Pro Max"],
+                    "compatible": ["Apple only - Pro Max series"]
+                },
+                "📱 5.4 بوصة - iPhone Mini": {
+                    "models": ["iPhone 12 Mini", "iPhone 13 Mini"],
+                    "compatible": ["Apple only - Mini series"]
+                },
+                "📱 4.7 بوصة - iPhone SE": {
+                    "models": ["iPhone SE 2020", "iPhone SE 2022", "iPhone 6s", "iPhone 7", "iPhone 8"],
+                    "compatible": ["Apple only - home button models"]
+                }
+            }
+        },
+        "⭐ أونور Honor": {
+            "logo": "⭐",
+            "color": "#00BFFF",
+            "series": {
+                "✨ 6.5-6.7 بوصة - X/Number Series": {
+                    "models": ["X7", "X7a", "X8", "X8a", "X9", "X9a", "50", "60", "70", "80", "90", "Magic 4", "Magic 5", "Magic 6"],
+                    "compatible": ["✅ Compatible with: Huawei Nova series, Xiaomi Redmi Note"]
+                },
+                "✨ 6.8 بوصة - Magic/View Series": {
+                    "models": ["Magic 4 Pro", "Magic 5 Pro", "Magic V", "View 30", "View 40", "V30", "V40"],
+                    "compatible": ["Honor large screen series"]
+                }
+            }
+        },
+        "🔥 إنفينيكس Infinix": {
+            "logo": "🔥",
+            "color": "#00CED1",
+            "series": {
+                "🎯 6.6 بوصة - Hot Series (الأكثر مبيعاً)": {
+                    "models": ["Hot 8", "Hot 9", "Hot 9 Play", "Hot 10", "Hot 10i", "Hot 10S", "Hot 10 Play", "Hot 11", "Hot 11S", "Hot 12", "Hot 12i", "Hot 20", "Hot 30", "Hot 40", "Hot 50"],
+                    "compatible": ["✅ Fully compatible with: Tecno Spark Series, Itel, Samsung A12"]
+                },
+                "🎯 6.8 بوصة - Note Series": {
+                    "models": ["Note 8", "Note 10", "Note 11", "Note 12", "Note 20", "Note 30", "Note 40"],
+                    "compatible": ["✅ Compatible with: Tecno Phantom X"]
+                },
+                "🎯 6.5 بوصة - Smart Series": {
+                    "models": ["Smart 4", "Smart 5", "Smart 6", "Smart 7", "Smart 8", "Smart 9"],
+                    "compatible": ["Budget Infinix - same screen"]
+                }
+            }
+        },
+        "🎯 تكنو Tecno": {
+            "logo": "🎯",
+            "color": "#32CD32",
+            "series": {
+                "⚡ 6.6 بوصة - Spark Series": {
+                    "models": ["Spark 4", "Spark 5", "Spark 6", "Spark 7", "Spark 7 Plus", "Spark 8", "Spark 9", "Spark 10", "Spark 20"],
+                    "compatible": ["✅ Fully compatible with: Infinix Hot Series, Itel"]
+                },
+                "⚡ 6.7 بوصة - Camon Series": {
+                    "models": ["Camon 18", "Camon 18 Premier", "Camon 19", "Camon 19 Pro", "Camon 20", "Camon 20 Pro", "Camon 30"],
+                    "compatible": ["Tecno only - camera focus series"]
+                },
+                "⚡ 6.8 بوصة - Phantom Series": {
+                    "models": ["Phantom X", "Phantom X2", "Phantom V Fold"],
+                    "compatible": ["✅ Compatible with: Infinix Zero Series"]
+                }
+            }
+        },
+        "💛 ريلمي Realme": {
+            "logo": "💛",
+            "color": "#FFD700",
+            "series": {
+                "⚡ 6.4 بوصة - Number Series": {
+                    "models": ["Realme 7", "Realme 7 Pro", "Realme 8", "Realme 8 Pro", "Realme 9", "Realme 9 Pro", "Realme 10", "Realme 10 Pro"],
+                    "compatible": ["✅ Compatible with: Oppo A74, OnePlus Nord CE, Xiaomi Redmi Note 10"]
+                },
+                "⚡ 6.55 بوصة - GT Series": {
+                    "models": ["Realme GT", "Realme GT Neo", "Realme GT 2", "Realme GT 2 Pro", "Realme GT 3"],
+                    "compatible": ["✅ Compatible with: OnePlus 9/10, Oppo Find X3"]
+                },
+                "⚡ 6.7 بوصة - Narzo Series": {
+                    "models": ["Narzo 30", "Narzo 50", "Narzo 60", "Narzo 70"],
+                    "compatible": ["Realme gaming series"]
+                }
+            }
+        },
+        "🌐 هواوي Huawei": {
+            "logo": "🌐",
+            "color": "#DC143C",
+            "series": {
+                "📷 6.1-6.8 بوصة - P Series": {
+                    "models": ["P30", "P30 Pro", "P40", "P40 Pro", "P50", "P50 Pro", "P60", "P60 Pro"],
+                    "compatible": ["✅ Compatible with: Honor Magic Series"]
+                },
+                "💼 6.5-6.9 بوصة - Mate Series": {
+                    "models": ["Mate 20", "Mate 20 Pro", "Mate 30", "Mate 30 Pro", "Mate 40", "Mate 40 Pro", "Mate 50", "Mate 50 Pro", "Mate 60"],
+                    "compatible": ["✅ Compatible with: Honor Magic Series"]
+                },
+                "📸 6.3-6.7 بوصة - Nova Series": {
+                    "models": ["Nova 5T", "Nova 6", "Nova 7i", "Nova 8i", "Nova 9", "Nova 10", "Nova 11", "Nova 12"],
+                    "compatible": ["✅ Compatible with: Honor X Series"]
+                }
+            }
+        },
+        "💚 أوبو Oppo": {
+            "logo": "💚",
+            "color": "#1EBE5F",
+            "series": {
+                "📱 6.4 بوصة - A Series": {
+                    "models": ["A54", "A74", "A95", "A96", "A16", "A17", "A78", "A79"],
+                    "compatible": ["✅ Compatible with: Realme 8 Pro, OnePlus Nord CE"]
+                },
+                "📱 6.55 بوصة - Reno Series": {
+                    "models": ["Reno 6", "Reno 7", "Reno 8", "Reno 8 Pro", "Reno 9", "Reno 10", "Reno 11"],
+                    "compatible": ["✅ Compatible with: OnePlus 9, Realme GT"]
+                },
+                "📱 6.7 بوصة - Find Series": {
+                    "models": ["Find X3", "Find X3 Pro", "Find X5", "Find X5 Pro", "Find X7"],
+                    "compatible": ["✅ Compatible with: OnePlus 10 Pro, Realme GT 2 Pro"]
+                }
+            }
+        },
+        "🎵 فيفو Vivo": {
+            "logo": "🎵",
+            "color": "#9B59B6",
+            "series": {
+                "📱 6.38-6.51 بوصة - Y Series": {
+                    "models": ["Y20", "Y20s", "Y30", "Y31", "Y33", "Y35", "Y53s", "Y73", "Y75"],
+                    "compatible": ["Vivo only - budget series"]
+                },
+                "📱 6.44-6.56 بوصة - V Series": {
+                    "models": ["V15", "V17", "V19", "V20", "V21", "V23", "V25", "V27", "V29"],
+                    "compatible": ["Vivo only - camera focus"]
+                },
+                "📱 6.5-6.78 بوصة - X Series": {
+                    "models": ["X50", "X60", "X70", "X80", "X90", "X100"],
+                    "compatible": ["Vivo flagship series"]
+                }
+            }
+        },
+        "❤️ ون بلس OnePlus": {
+            "logo": "❤️",
+            "color": "#E53935",
+            "series": {
+                "⚡ 6.4 بوصة - Nord Series": {
+                    "models": ["Nord", "Nord CE", "Nord 2", "Nord 2T", "Nord 3", "Nord CE 3"],
+                    "compatible": ["✅ Compatible with: Oppo A74, Realme 8 Pro"]
+                },
+                "⚡ 6.55 بوصة - Number Series": {
+                    "models": ["OnePlus 8", "OnePlus 8 Pro", "OnePlus 9", "OnePlus 9 Pro", "OnePlus 10 Pro", "OnePlus 11", "OnePlus 12"],
+                    "compatible": ["✅ Compatible with: Oppo Find X series, Realme GT series"]
                 }
             }
         }
     };
-    
-    let brandsData = {};
-    let appConfig = {};
-    
-    // Load configuration first
-    async function loadConfig() {
-        try {
-            const response = await fetch(CONFIG_URL + '?t=' + Date.now());
-            if (response.ok) {
-                appConfig = await response.json();
-                if (appConfig.appLogo) {
-                    const logoImg = document.getElementById('appLogo');
-                    logoImg.src = appConfig.appLogo;
-                }
-                if (appConfig.lastUpdate) {
-                    document.getElementById('lastUpdated').innerHTML = `📅 آخر تحديث: ${appConfig.lastUpdate}`;
-                }
-            }
-        } catch (e) {
-            console.log('Config load error:', e);
-        }
-    }
-    
-    // Load brands data from GitHub
-    async function loadBrands() {
-        try {
-            updateOnlineStatus(true, 'جاري التحميل...');
-            
-            const response = await fetch(DATA_URL + '?t=' + Date.now());
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            brandsData = await response.json();
-            
-            updateOnlineStatus(true, 'متصل ✅');
-            renderBrands();
-            updateStats();
-            cacheData();
-            
-        } catch (error) {
-            console.error('Error loading brands:', error);
-            updateOnlineStatus(false, 'غير متصل - بيانات مخزنة 📱');
-            
-            // Try local cache first
-            const cached = localStorage.getItem('hekaya_brands_cache');
-            if (cached) {
-                try {
-                    brandsData = JSON.parse(cached);
-                    renderBrands();
-                    updateStats();
-                    showToast('⚠️ عرض بيانات مخزنة مؤقتاً');
-                } catch(e) {
-                    useFallbackData();
-                }
-            } else {
-                useFallbackData();
-            }
-        }
-    }
-    
-    function useFallbackData() {
-        brandsData = FALLBACK_DATA;
-        renderBrands();
-        updateStats();
-        showToast('⚠️ بيانات تجريبية - اتصال الإنترنت مطلوب للتحديث');
-    }
-    
-    // Cache data locally
-    function cacheData() {
-        if (brandsData && Object.keys(brandsData).length > 0) {
-            localStorage.setItem('hekaya_brands_cache', JSON.stringify(brandsData));
-            localStorage.setItem('hekaya_cache_time', Date.now().toString());
-        }
-    }
-    
-    // Update online status indicator
-    function updateOnlineStatus(isOnline, message) {
-        const dot = document.getElementById('statusDot');
-        const text = document.getElementById('statusText');
-        
-        if (isOnline) {
-            dot.className = 'status-dot';
-            text.textContent = message;
-        } else {
-            dot.className = 'status-dot offline';
-            text.textContent = message;
-        }
-    }
-    
-    // Show toast message
-    function showToast(message) {
-        const toast = document.createElement('div');
-        toast.style.cssText = `
-            position: fixed;
-            bottom: 80px;
-            left: 20px;
-            right: 20px;
-            background: #333;
-            color: #FFD700;
-            padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-            z-index: 1000;
-            animation: fadeIn 0.3s ease;
-        `;
-        toast.textContent = message;
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
-    }
-    
-    // Update statistics
-    function updateStats() {
-        let totalBrands = Object.keys(brandsData).length;
-        let totalModels = 0;
-        for (let brand in brandsData) {
-            if (brandsData[brand].series) {
-                for (let series in brandsData[brand].series) {
-                    totalModels += brandsData[brand].series[series].models.length;
-                }
-            }
-        }
-        document.getElementById('brandsCount').innerHTML = `🏷️ ${totalBrands} علامة`;
-        document.getElementById('modelsCount').innerHTML = `📱 ${totalModels}+ موديل`;
-    }
-    
-    // Render brands
-    const container = document.getElementById('brandsContainer');
-    
-    function renderBrands(filterText = '') {
-        if (!brandsData || Object.keys(brandsData).length === 0) {
-            container.innerHTML = '<div class="loading">⏳ جاري التحميل...</div>';
-            return;
-        }
-        
+
+    // Shop Products Data
+    const SHOP_DATA = {
+        chargers: [
+            { name: "شاحن سريع 33W GaN", price: "45", icon: "🔌", desc: "شحن سريع من نوع C", category: "chargers" },
+            { name: "شاحن سيارة 45W", price: "35", icon: "🚗", desc: "شحن سريع للسيارة", category: "chargers" },
+            { name: "شاحن لاسلكي 15W", price: "55", icon: "📡", desc: "شحن لاسلكي سريع", category: "chargers" },
+            { name: "شاحن 65W لابتوب", price: "89", icon: "💻", desc: "شاحن لابتوب USB-C", category: "chargers" }
+        ],
+        cables: [
+            { name: "كابل USB-C 2 متر", price: "15", icon: "🔌", desc: "نسيج - شحن سريع", category: "cables" },
+            { name: "كابل Lightning 1.5م", price: "18", icon: "🍎", desc: "لأجهزة أيفون", category: "cables" },
+            { name: "كابل USB 3.0 1م", price: "10", icon: "📱", desc: "نقل بيانات سريع", category: "cables" },
+            { name: "كابل Type-C 3 متر", price: "20", icon: "🔌", desc: "طويل - قوي", category: "cables" }
+        ],
+        powerbanks: [
+            { name: "باور بانك 10000mAh", price: "65", icon: "🔋", desc: "شحن سريع 18W", category: "powerbanks" },
+            { name: "باور بانك 20000mAh", price: "95", icon: "🔋", desc: "شحن سريع 22.5W", category: "powerbanks" },
+            { name: "باور بانك 50000mAh", price: "149", icon: "⚡", desc: "ضخم - للرحلات", category: "powerbanks" },
+            { name: "باور بانك لاسلكي", price: "79", icon: "📡", desc: "مع شحن لاسلكي", category: "powerbanks" }
+        ],
+        headphones: [
+            { name: "سماعة بلوتوث TWS", price: "45", icon: "🎧", desc: "صوت نقي - بطارية 24 ساعة", category: "headphones" },
+            { name: "سماعة رأس لاسلكية", price: "89", icon: "🎧", desc: "عازل للضوضاء", category: "headphones" },
+            { name: "سماعة سلكية", price: "25", icon: "🎧", desc: "جودة صوت عالية", category: "headphones" },
+            { name: "AirPods شحن لاسلكي", price: "129", icon: "🍎", desc: "جودة أصلية", category: "headphones" }
+        ],
+        cases: [
+            { name: "جراب سيليكون شفاف", price: "15", icon: "📱", desc: "لجميع الموديلات", category: "cases" },
+            { name: "جراب حماية قوي", price: "35", icon: "🛡️", desc: "مقاوم للصدمات", category: "cases" },
+            { name: "جراب شاحن مدمج", price: "49", icon: "🔋", desc: "بطارية مدمجة", category: "cases" },
+            { name: "جراب كارت ذهبي", price: "25", icon: "✨", desc: "تصميم فاخر", category: "cases" }
+        ],
+        mounts: [
+            { name: "حامل سيارة", price: "29", icon: "🚗", desc: "تثبيت بالمكيف", category: "mounts" },
+            { name: "حامل منضدية", price: "19", icon: "🖥️", desc: "قابل للتعديل", category: "mounts" },
+            { name: "حامل دراجة", price: "39", icon: "🚲", desc: "مقاوم للماء", category: "mounts" },
+            { name: "حامل مغناطيسي", price: "22", icon: "🧲", desc: "تثبيت سريع", category: "mounts" }
+        ],
+        laptops: [
+            { name: "لاب توب مستعمل ممتاز", price: "2500", icon: "💻", desc: "i5/8GB/256GB SSD", category: "laptops" },
+            { name: "شاحن لابتوب أصلي", price: "89", icon: "🔌", desc: "لجميع الماركات", category: "laptops" },
+            { name: "حقيبة لابتوب 15.6", price: "45", icon: "🎒", desc: "مقاومة للماء", category: "laptops" },
+            { name: "حماية شاشة لابتوب", price: "35", icon: "🛡️", desc: "مقاسات مختلفة", category: "laptops" }
+        ],
+        laptopAcc: [
+            { name: "ماوس لاسلكي", price: "29", icon: "🖱️", desc: "هادئ - دقيق", category: "laptopAcc" },
+            { name: "لوحة مفاتيح", price: "55", icon: "⌨️", desc: "بلوتوث - قابلة للطي", category: "laptopAcc" },
+            { name: "مبرد لابتوب", price: "39", icon: "❄️", desc: "مروحة 3 سرعات", category: "laptopAcc" },
+            { name: "USB Hub 4 منافذ", price: "25", icon: "🔌", desc: "USB 3.0 سريع", category: "laptopAcc" }
+        ],
+        offers: [
+            { name: "عرض الشاحن + الكابل", price: "49", icon: "🎁", desc: "شاحن 33W + كابل 2م", original: "65", category: "offers" },
+            { name: "عرض السماعة + جراب", price: "59", icon: "🎧", desc: "سماعة TWS + جراب شفاف", original: "80", category: "offers" },
+            { name: "باور بانك + كابل", price: "89", icon: "🔋", desc: "20000mAh + كابل Type-C", original: "115", category: "offers" },
+            { name: "حامل سيارة + شاحن", price: "55", icon: "🚗", desc: "حامل + شاحن سيارة 45W", original: "75", category: "offers" }
+        ],
+        discounts: [
+            { name: "تخفيض 30% سماعات", price: "49", icon: "🎧", desc: "سماعة بلوتوث TWS", original: "70", category: "discounts" },
+            { name: "تخفيض 25% شواحن", price: "34", icon: "🔌", desc: "شاحن سريع 33W", original: "45", category: "discounts" },
+            { name: "تخفيض 20% جرابات", price: "12", icon: "📱", desc: "جراب سيليكون", original: "15", category: "discounts" },
+            { name: "تخفيض 40% كوابل", price: "9", icon: "🔌", desc: "كابل USB-C", original: "15", category: "discounts" }
+        ]
+    };
+
+    // Render Phone Brands
+    function renderPhones() {
+        const container = document.getElementById('brandsContainer');
         container.innerHTML = '';
-        const filterLower = filterText.toLowerCase();
-        let hasResults = false;
         
-        for (let [brandName, brandData] of Object.entries(brandsData)) {
-            let brandMatches = false;
-            let filteredSeries = {};
-            
-            if (filterLower) {
-                for (let [seriesName, seriesData] of Object.entries(brandData.series || {})) {
-                    const matchingModels = seriesData.models.filter(m => m.toLowerCase().includes(filterLower));
-                    if (matchingModels.length > 0) {
-                        brandMatches = true;
-                        filteredSeries[seriesName] = { ...seriesData, models: matchingModels };
-                    }
-                }
-            } else {
-                brandMatches = true;
-                filteredSeries = brandData.series || {};
+        let totalBrands = 0;
+        let totalModels = 0;
+        
+        for (let [brandName, brandData] of Object.entries(PHONE_BRANDS)) {
+            totalBrands++;
+            let brandModelCount = 0;
+            for (let series of Object.values(brandData.series)) {
+                brandModelCount += series.models.length;
+                totalModels += series.models.length;
             }
-            
-            if (!brandMatches || Object.keys(filteredSeries).length === 0) continue;
-            hasResults = true;
             
             const brandCard = document.createElement('div');
             brandCard.className = 'brand-card';
             
             const brandHeader = document.createElement('div');
             brandHeader.className = 'brand-header';
-            
-            const iconHtml = brandData.logoUrl ? 
-                `<img class="brand-icon" src="${brandData.logoUrl}" alt="${brandName}">` :
-                `<div class="brand-icon-emoji" style="color: ${brandData.color}">${brandData.logo || '📱'}</div>`;
-            
             brandHeader.innerHTML = `
-                ${iconHtml}
+                <div class="brand-icon" style="color: ${brandData.color}">${brandData.logo}</div>
                 <div class="brand-info">
                     <div class="brand-name" style="color: ${brandData.color}">${brandName}</div>
-                    <div class="brand-compat">${Object.keys(filteredSeries).length} مجموعة | اضغط للعرض</div>
+                    <div class="brand-count">${brandModelCount} موديل | اضغط للعرض</div>
                 </div>
                 <div class="brand-arrow">▼</div>
             `;
@@ -609,15 +817,15 @@
             const brandContent = document.createElement('div');
             brandContent.className = 'brand-content';
             
-            for (let [seriesName, seriesData] of Object.entries(filteredSeries)) {
+            for (let [seriesName, seriesData] of Object.entries(brandData.series)) {
                 const seriesCard = document.createElement('div');
                 seriesCard.className = 'series-card';
                 
                 const seriesHeader = document.createElement('div');
                 seriesHeader.className = 'series-header';
                 seriesHeader.innerHTML = `
-                    <div class="series-name">📐 ${seriesName}</div>
-                    <div class="series-compat">🤝 ${seriesData.compatible ? seriesData.compatible[0] : 'نفس الماركة'}</div>
+                    <div class="series-name">${seriesName}</div>
+                    <div class="series-compat">${seriesData.compatible}</div>
                     <div class="series-arrow">▼</div>
                 `;
                 
@@ -628,7 +836,7 @@
                     const modelBtn = document.createElement('button');
                     modelBtn.className = 'model-btn';
                     modelBtn.textContent = model;
-                    modelBtn.onclick = () => showModelInfo(model, seriesData.compatible || ['نفس الماركة']);
+                    modelBtn.onclick = () => showModelInfo(model, seriesData.compatible);
                     modelsGrid.appendChild(modelBtn);
                 });
                 
@@ -671,81 +879,141 @@
             };
         }
         
-        if (!hasResults && filterText) {
-            container.innerHTML = '<div class="no-results">🔍 لا توجد نتائج لـ "' + filterText + '"</div>';
-        }
+        document.getElementById('brandsCount').innerHTML = `🏷️ ${totalBrands} علامة`;
+        document.getElementById('modelsCount').innerHTML = `📱 ${totalModels}+ موديل`;
     }
     
-    // Show model info
     function showModelInfo(model, compatible) {
         const modal = document.createElement('div');
         modal.style.cssText = `
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.9); display: flex; align-items: center;
-            justify-content: center; z-index: 1000; animation: fadeIn 0.2s ease;
+            background: rgba(0,0,0,0.95); display: flex; align-items: center;
+            justify-content: center; z-index: 1000;
         `;
         
-        const modalContent = document.createElement('div');
-        modalContent.style.cssText = `
-            background: #1A1A1A; border-radius: 25px; padding: 20px;
-            width: 85%; max-width: 320px; text-align: center;
-            border: 2px solid #FFD700; animation: slideUp 0.3s ease;
-        `;
-        
-        modalContent.innerHTML = `
-            <div style="font-size: 48px; margin-bottom: 10px;">📱</div>
-            <h2 style="color: #FFD700; margin-bottom: 15px; font-size: 18px;">${model}</h2>
-            <div style="background: #252525; padding: 12px; border-radius: 15px; margin-bottom: 15px; text-align: right;">
-                <p style="margin-bottom: 8px;"><strong style="color: #FFD700;">✅ واقي الشاشة متوافق مع:</strong></p>
-                <ul style="list-style: none; padding-right: 0;">
-                    ${compatible.map(c => `<li style="margin: 6px 0;">• ${c}</li>`).join('')}
-                </ul>
-                <p style="margin-top: 10px; font-size: 11px; color: #888;">💡 نفس حجم الشاشة = واقي واحد يناسب جميع الموديلات في نفس المجموعة</p>
+        modal.innerHTML = `
+            <div style="background: #1A1A1A; border-radius: 25px; padding: 25px; width: 85%; max-width: 320px; border: 2px solid #FFD700;">
+                <div style="font-size: 48px; text-align: center;">📱</div>
+                <h2 style="color: #FFD700; text-align: center; margin: 15px 0;">${model}</h2>
+                <div style="background: #252525; padding: 15px; border-radius: 15px; margin: 15px 0;">
+                    <p><strong style="color: #FFD700;">✅ واقي الشاشة متوافق مع:</strong></p>
+                    <p style="margin-top: 8px; font-size: 13px;">${compatible}</p>
+                    <p style="margin-top: 12px; font-size: 11px; color: #888;">💡 نفس حجم الشاشة = واقي واحد مناسب</p>
+                </div>
+                <button id="closeModal" style="background: #FFD700; border: none; padding: 12px; border-radius: 30px; width: 100%; font-weight: bold; font-size: 16px;">إغلاق</button>
             </div>
-            <button id="closeModalBtn" style="background: #FFD700; border: none; padding: 10px 20px;
-                border-radius: 30px; font-size: 14px; font-weight: bold; color: #0A0A0A;
-                cursor: pointer; width: 100%;">إغلاق</button>
         `;
         
-        modal.appendChild(modalContent);
         document.body.appendChild(modal);
+        document.getElementById('closeModal').onclick = () => modal.remove();
+        modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+    }
+    
+    // Render Shop Products
+    function renderShopProducts(category, elementId) {
+        const container = document.getElementById(elementId);
+        if (!container) return;
         
-        const closeModal = () => modal.remove();
-        document.getElementById('closeModalBtn').onclick = closeModal;
-        modal.onclick = (e) => { if (e.target === modal) closeModal(); };
+        const products = SHOP_DATA[category] || [];
+        container.innerHTML = products.map(product => `
+            <div class="product-card" onclick="orderProduct('${product.name}', '${product.price}')">
+                <div class="product-icon">${product.icon}</div>
+                <div class="product-info">
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">${product.price} ج.م</div>
+                    <div class="product-desc">${product.desc}</div>
+                    <button class="buy-btn">📞 اطلب الآن</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    // Order function
+    function orderProduct(name, price) {
+        const phone = "0555555555";
+        const message = encodeURIComponent(`السلام عليكم، أريد طلب ${name} بسعر ${price} جنيه`);
+        window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
     }
     
     // Search functionality
     const searchInput = document.getElementById('searchInput');
     const clearBtn = document.getElementById('clearBtn');
-    const refreshBtn = document.getElementById('refreshBtn');
     
-    searchInput.addEventListener('input', (e) => {
-        const value = e.target.value;
-        if (value) {
-            clearBtn.style.display = 'flex';
-        } else {
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const value = e.target.value;
+            if (value) {
+                clearBtn.style.display = 'flex';
+                filterBrands(value);
+            } else {
+                clearBtn.style.display = 'none';
+                renderPhones();
+            }
+        });
+    }
+    
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
             clearBtn.style.display = 'none';
-        }
-        renderBrands(value);
-    });
+            renderPhones();
+            searchInput.focus();
+        });
+    }
     
-    clearBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        clearBtn.style.display = 'none';
-        renderBrands('');
-        searchInput.focus();
-    });
+    function filterBrands(searchText) {
+        const searchLower = searchText.toLowerCase();
+        const container = document.getElementById('brandsContainer');
+        const allCards = container.querySelectorAll('.brand-card');
+        
+        allCards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            if (text.includes(searchLower)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
     
-    refreshBtn.addEventListener('click', () => {
-        loadBrands();
-        loadConfig();
-        showToast('🔄 جاري تحديث البيانات...');
+    // Tab switching
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabId = tab.dataset.tab;
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+            
+            // Render shop sections when opened
+            if (tabId === 'chargers') {
+                renderShopProducts('chargers', 'chargersGrid');
+                renderShopProducts('cables', 'cablesGrid');
+                renderShopProducts('powerbanks', 'powerbanksGrid');
+            } else if (tabId === 'accessories') {
+                renderShopProducts('headphones', 'headphonesGrid');
+                renderShopProducts('cases', 'casesGrid');
+                renderShopProducts('mounts', 'mountsGrid');
+            } else if (tabId === 'notebooks') {
+                renderShopProducts('laptops', 'laptopsGrid');
+                renderShopProducts('laptopAcc', 'laptopAccGrid');
+            } else if (tabId === 'offers') {
+                renderShopProducts('offers', 'offersGrid');
+                renderShopProducts('discounts', 'discountsGrid');
+            }
+        });
     });
     
     // Initialize
-    loadConfig();
-    loadBrands();
+    renderPhones();
+    
+    // Make order function global
+    window.orderProduct = orderProduct;
 </script>
 </body>
 </html>
