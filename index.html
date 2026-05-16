@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>مكتبة حكايه | المتجر</title>
+    <meta name="theme-color" content="#0A0A0A">
+    <title>مكتبة حكايه - المتجر العصري</title>
     <style>
         * {
             margin: 0;
@@ -23,6 +24,7 @@
             --success: #4CAF50;
             --error: #E53935;
             --discount: #FF4444;
+            --gradient: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
         }
 
         body.light-theme {
@@ -56,103 +58,179 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 10px;
+            backdrop-filter: blur(10px);
         }
 
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .app-logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            width: 45px;
+            height: 45px;
+            background: var(--gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 20px;
+            font-size: 24px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .app-title h1 {
-            font-size: 18px;
+            font-size: 20px;
             color: var(--gold);
+            letter-spacing: 1px;
         }
 
         .app-title p {
-            font-size: 9px;
+            font-size: 10px;
             color: var(--text-dim);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:active { transform: scale(0.95); }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--gold);
+            color: #0A0A0A;
+            font-size: 10px;
+            font-weight: bold;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .theme-toggle {
             background: var(--bg-color);
-            padding: 6px 12px;
+            padding: 8px 12px;
             border-radius: 30px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 16px;
             border: 1px solid var(--border-color);
+            transition: all 0.2s;
         }
 
-        /* Contact Bar */
-        .contact-bar {
+        .theme-toggle:active { transform: scale(0.95); }
+
+        /* Hero Slider */
+        .hero-slider {
+            margin: 12px;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .slider-container {
             display: flex;
-            gap: 6px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            background: var(--gradient);
+            padding: 20px;
+            text-align: center;
+            color: #0A0A0A;
+        }
+
+        .slide-icon { font-size: 48px; margin-bottom: 10px; }
+        .slide-title { font-size: 18px; font-weight: bold; margin-bottom: 5px; }
+        .slide-desc { font-size: 12px; opacity: 0.9; }
+
+        .slider-dots {
+            display: flex;
             justify-content: center;
-            padding: 8px;
-            background: var(--card-color);
-            border-bottom: 1px solid var(--border-color);
-            flex-wrap: wrap;
+            gap: 8px;
+            padding: 12px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.3);
         }
 
-        .contact-btn {
-            padding: 5px 10px;
-            border-radius: 25px;
-            text-decoration: none;
-            color: white;
-            font-size: 11px;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s;
         }
 
-        .contact-btn:active { transform: scale(0.95); }
-        .whatsapp { background: #25D366; }
-        .telegram { background: #0088cc; }
-        .call { background: #E53935; }
-        .instagram { background: #E4405F; }
-        .facebook { background: #1877F2; }
-        .tiktok { background: #000000; }
+        .dot.active {
+            background: white;
+            width: 24px;
+            border-radius: 10px;
+        }
 
-        /* Search */
+        /* Search Bar */
         .search-container {
-            padding: 10px 12px;
+            padding: 12px;
         }
+
         .search-box {
             display: flex;
             align-items: center;
             background: var(--card-color);
             border-radius: 30px;
-            padding: 8px 15px;
+            padding: 10px 16px;
             border: 1px solid var(--border-color);
+            transition: all 0.3s;
         }
+
+        .search-box:focus-within {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(255,215,0,0.2);
+        }
+
         .search-input {
             flex: 1;
             background: transparent;
             border: none;
             color: var(--text-color);
-            font-size: 13px;
+            font-size: 14px;
             outline: none;
         }
+
         .clear-btn {
             background: var(--border-color);
             border: none;
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             cursor: pointer;
             display: none;
@@ -165,67 +243,72 @@
             gap: 12px;
             padding: 12px;
         }
+
         .product-card {
             background: var(--card-color);
-            border-radius: 16px;
-            padding: 12px;
+            border-radius: 20px;
+            padding: 14px;
             border: 1px solid var(--border-color);
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease;
             position: relative;
         }
+
         .product-card:active { transform: scale(0.98); }
-        
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .discount-badge {
             position: absolute;
-            top: 8px;
-            left: 8px;
+            top: 10px;
+            left: 10px;
             background: var(--discount);
             color: white;
             font-size: 10px;
             font-weight: bold;
-            padding: 2px 6px;
+            padding: 3px 8px;
             border-radius: 20px;
+            animation: blink 1s infinite;
         }
-        
-        .product-icon {
-            font-size: 40px;
-            text-align: center;
-            display: block;
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
-        .product-name {
-            font-size: 13px;
-            font-weight: bold;
-            margin: 8px 0 4px;
-            text-align: center;
-        }
-        .product-price {
-            color: var(--gold);
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .old-price {
-            color: var(--text-dim);
-            font-size: 11px;
-            text-decoration: line-through;
-            margin-right: 5px;
-        }
+
+        .product-icon { font-size: 48px; text-align: center; display: block; margin-bottom: 8px; }
+        .product-name { font-size: 14px; font-weight: bold; text-align: center; margin: 8px 0 4px; color: var(--gold); }
+        .product-price { font-size: 15px; font-weight: bold; text-align: center; color: var(--gold); }
+        .old-price { color: var(--text-dim); font-size: 12px; text-decoration: line-through; margin-left: 5px; }
+
         .product-actions {
             display: flex;
             gap: 8px;
-            margin-top: 10px;
+            margin-top: 12px;
         }
+
         .action-btn {
             flex: 1;
             background: var(--bg-color);
             border: 1px solid var(--border-color);
             border-radius: 25px;
-            padding: 6px;
+            padding: 8px;
             font-size: 12px;
             cursor: pointer;
             text-align: center;
             transition: all 0.2s;
+            font-weight: bold;
         }
+
         .action-btn:active { transform: scale(0.95); }
         .fav-active { background: var(--error); color: white; border-color: var(--error); }
         .cart-active { background: var(--gold); color: #0A0A0A; border-color: var(--gold); }
@@ -242,20 +325,98 @@
             padding: 8px 12px;
             border-top: 1px solid var(--border-color);
             z-index: 100;
+            backdrop-filter: blur(10px);
         }
+
         .nav-item {
             flex: 1;
             text-align: center;
-            padding: 6px;
+            padding: 8px;
             cursor: pointer;
             border-radius: 30px;
-            transition: all 0.2s;
-            font-size: 12px;
+            transition: all 0.3s;
+            font-size: 13px;
+            font-weight: bold;
         }
+
         .nav-item.active {
             background: var(--gold);
             color: #0A0A0A;
+        }
+
+        /* About Us / Contact Section */
+        .about-section {
+            background: var(--card-color);
+            margin: 12px;
+            border-radius: 24px;
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .about-header {
+            background: var(--gradient);
+            padding: 20px;
+            text-align: center;
+            color: #0A0A0A;
+        }
+
+        .about-header h2 { font-size: 22px; margin-bottom: 5px; }
+        .about-header p { font-size: 12px; opacity: 0.9; }
+
+        .about-content { padding: 20px; }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-icon { font-size: 28px; width: 50px; text-align: center; }
+        .info-text { flex: 1; }
+        .info-text strong { color: var(--gold); display: block; margin-bottom: 3px; }
+        .info-text span { font-size: 13px; color: var(--text-dim); }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-card {
+            background: var(--bg-color);
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-card:active { transform: scale(0.97); }
+        .social-card .social-icon { font-size: 32px; display: block; margin-bottom: 8px; }
+        .social-card .social-name { font-size: 12px; font-weight: bold; color: var(--gold); }
+
+        .location-btn {
+            background: var(--gradient);
+            color: #0A0A0A;
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            width: 100%;
             font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-dim);
         }
 
         /* Notification */
@@ -266,32 +427,25 @@
             right: 10px;
             background: var(--success);
             color: white;
-            padding: 10px;
+            padding: 12px;
             border-radius: 30px;
             text-align: center;
             z-index: 200;
             animation: slideDown 0.3s ease;
-            font-size: 12px;
+            font-weight: bold;
         }
-        .notification.discount {
-            background: var(--discount);
-        }
+
+        .notification.discount { background: var(--discount); }
+
         @keyframes slideDown {
             from { transform: translateY(-100px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-dim);
-        }
-
         .footer {
             text-align: center;
             padding: 15px;
-            font-size: 10px;
+            font-size: 11px;
             color: var(--text-dim);
             border-top: 1px solid var(--border-color);
             margin-top: 10px;
@@ -302,27 +456,50 @@
 
 <div class="header">
     <div class="logo-area">
-        <div class="app-logo">ح</div>
+        <div class="app-logo">📚</div>
         <div class="app-title">
             <h1>مكتبة حكايه</h1>
-            <p>متجر الإلكترونيات</p>
+            <p>✨ متجر الإلكترونيات ✨</p>
         </div>
     </div>
-    <div class="theme-toggle" id="themeToggle">🌙</div>
+    <div class="header-icons">
+        <div class="icon-btn" id="favoritesIconBtn">
+            ❤️
+            <span class="badge" id="favoritesBadge" style="display:none;">0</span>
+        </div>
+        <div class="icon-btn" id="cartIconBtn">
+            🛒
+            <span class="badge" id="cartBadge" style="display:none;">0</span>
+        </div>
+        <div class="theme-toggle" id="themeToggle">🌙</div>
+    </div>
 </div>
 
-<div class="contact-bar">
-    <div class="contact-btn whatsapp" onclick="contactWhatsApp()">واتساب</div>
-    <div class="contact-btn telegram" onclick="contactTelegram()">تيليجرام</div>
-    <div class="contact-btn call" onclick="contactCall()">اتصال</div>
-    <div class="contact-btn instagram" onclick="contactInstagram()">انستقرام</div>
-    <div class="contact-btn facebook" onclick="contactFacebook()">فيسبوك</div>
-    <div class="contact-btn tiktok" onclick="contactTikTok()">تيك توك</div>
+<!-- Hero Slider -->
+<div class="hero-slider">
+    <div class="slider-container" id="sliderContainer">
+        <div class="slide">
+            <div class="slide-icon">🎉✨</div>
+            <div class="slide-title">خصم يصل إلى 30%</div>
+            <div class="slide-desc">على جميع الشواحن السريعة</div>
+        </div>
+        <div class="slide">
+            <div class="slide-icon">🚚💨</div>
+            <div class="slide-title">توصيل مجاني</div>
+            <div class="slide-desc">للطلبات فوق 50,000 دينار</div>
+        </div>
+        <div class="slide">
+            <div class="slide-icon">🎁🎈</div>
+            <div class="slide-title">هدايا مع كل طلب</div>
+            <div class="slide-desc">استنساخ - تصوير - بحوث</div>
+        </div>
+    </div>
+    <div class="slider-dots" id="sliderDots"></div>
 </div>
 
 <div class="search-container">
     <div class="search-box">
-        <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن منتج...">
+        <input type="text" class="search-input" id="searchInput" placeholder="🔍 ابحث عن منتج...">
         <button class="clear-btn" id="clearBtn">✖</button>
     </div>
 </div>
@@ -330,46 +507,291 @@
 <div id="productsContainer" class="products-grid"></div>
 
 <div class="bottom-nav">
-    <div class="nav-item active" data-tab="all">الكل</div>
-    <div class="nav-item" data-tab="favorites">المفضلة</div>
-    <div class="nav-item" data-tab="cart">السلة</div>
+    <div class="nav-item active" data-tab="all">🏠 الرئيسية</div>
+    <div class="nav-item" data-tab="favorites">❤️ المفضلة</div>
+    <div class="nav-item" data-tab="cart">🛒 السلة</div>
+    <div class="nav-item" data-tab="about">ℹ️ عن المتجر</div>
 </div>
 
 <div class="footer">
-    <p>مكتبة حكايه - جميع الحقوق محفوظة</p>
-    <p>📍 كوت - حي الحكيم الاولى</p>
+    <p>📍 كوت - حي الحكيم الاولى - قرب سيطرة العمارة القديمة</p>
+    <p>📞 07757777566 | ✈️ @hikaya_b</p>
 </div>
 
 <script>
-    // ----------------------------- DATA -----------------------------
-    const PRODUCTS_DATA = [
+    // ======================= DATA =======================
+    let products = [
         { id: 1, name: "شاحن سريع 33W", price: 25000, oldPrice: 35000, icon: "⚡", category: "charger" },
         { id: 2, name: "شاحن سيارة 45W", price: 20000, oldPrice: null, icon: "🚗", category: "charger" },
-        { id: 3, name: "شاحن لاسلكي 15W", price: 30000, oldPrice: 45000, icon: "🔄", category: "charger" },
+        { id: 3, name: "شاحن لاسلكي 15W", price: 30000, oldPrice: 45000, icon: "📡", category: "charger" },
         { id: 4, name: "سماعة بلوتوث TWS", price: 25000, oldPrice: null, icon: "🎧", category: "audio" },
         { id: 5, name: "سماعة رأس لاسلكية", price: 50000, oldPrice: 75000, icon: "🎧", category: "audio" },
-        { id: 6, name: "جراب سيليكون", price: 8000, oldPrice: null, icon: "📱", category: "case" },
+        { id: 6, name: "جراب سيليكون شفاف", price: 8000, oldPrice: null, icon: "📱", category: "case" },
         { id: 7, name: "جراب حماية قوي", price: 20000, oldPrice: 30000, icon: "🛡️", category: "case" },
-        { id: 8, name: "حامل سيارة", price: 15000, oldPrice: null, icon: "🚗", category: "mount" },
+        { id: 8, name: "حامل سيارة مغناطيسي", price: 15000, oldPrice: null, icon: "🚗", category: "mount" },
         { id: 9, name: "كابل USB-C 2م", price: 8000, oldPrice: null, icon: "🔌", category: "cable" },
-        { id: 10, name: "كابل Lightning", price: 10000, oldPrice: 15000, icon: "🔌", category: "cable" },
+        { id: 10, name: "كابل Lightning 1.5م", price: 10000, oldPrice: 15000, icon: "🍎", category: "cable" },
         { id: 11, name: "باور بانك 10000mAh", price: 35000, oldPrice: null, icon: "🔋", category: "powerbank" },
         { id: 12, name: "باور بانك 20000mAh", price: 55000, oldPrice: 80000, icon: "🔋", category: "powerbank" }
     ];
 
-    // ----------------------------- STATE -----------------------------
     let cart = JSON.parse(localStorage.getItem('hekaya_cart')) || [];
     let favorites = JSON.parse(localStorage.getItem('hekaya_favorites')) || [];
     let currentTab = 'all';
     let searchQuery = '';
 
-    // ----------------------------- DOM Elements -----------------------------
-    const productsContainer = document.getElementById('productsContainer');
+    // ======================= SLIDER =======================
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('sliderDots');
+
+    function initSlider() {
+        for(let i = 0; i < slides.length; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+        goToSlide(0);
+        setInterval(() => goToSlide(currentSlide + 1), 5000);
+    }
+
+    function goToSlide(index) {
+        currentSlide = (index + slides.length) % slides.length;
+        document.querySelector('.slider-container').style.transform = `translateX(-${currentSlide * 100}%)`;
+        document.querySelectorAll('.dot').forEach((d, i) => {
+            d.classList.toggle('active', i === currentSlide);
+        });
+    }
+
+    // ======================= CORE FUNCTIONS =======================
+    function saveToLocalStorage() {
+        localStorage.setItem('hekaya_cart', JSON.stringify(cart));
+        localStorage.setItem('hekaya_favorites', JSON.stringify(favorites));
+        updateBadges();
+    }
+
+    function updateBadges() {
+        const cartBadge = document.getElementById('cartBadge');
+        const favBadge = document.getElementById('favoritesBadge');
+        
+        if(cart.length > 0) {
+            cartBadge.style.display = 'flex';
+            cartBadge.innerText = cart.length;
+        } else cartBadge.style.display = 'none';
+        
+        if(favorites.length > 0) {
+            favBadge.style.display = 'flex';
+            favBadge.innerText = favorites.length;
+        } else favBadge.style.display = 'none';
+    }
+
+    function isInCart(id) { return cart.some(item => item.id === id); }
+    function isInFavorites(id) { return favorites.includes(id); }
+
+    function addToCart(product) {
+        if (!isInCart(product.id)) {
+            cart.push({ id: product.id, name: product.name, price: product.price });
+            saveToLocalStorage();
+            showNotification(`✅ تمت إضافة ${product.name} إلى السلة`);
+            if(currentTab === 'cart') renderProducts();
+        } else {
+            showNotification(`⚠️ ${product.name} موجود بالفعل في السلة`);
+        }
+    }
+
+    function removeFromCart(productId) {
+        const product = products.find(p => p.id === productId);
+        cart = cart.filter(item => item.id !== productId);
+        saveToLocalStorage();
+        showNotification(`🗑️ تم إزالة ${product.name} من السلة`);
+        if(currentTab === 'cart') renderProducts();
+    }
+
+    function toggleFavorite(productId) {
+        const product = products.find(p => p.id === productId);
+        if (isInFavorites(productId)) {
+            favorites = favorites.filter(id => id !== productId);
+            showNotification(`💔 تم إزالة ${product.name} من المفضلة`);
+        } else {
+            favorites.push(productId);
+            showNotification(`❤️ تمت إضافة ${product.name} إلى المفضلة`);
+        }
+        saveToLocalStorage();
+        if(currentTab === 'favorites') renderProducts();
+        else renderProducts();
+    }
+
+    function getFilteredProducts() {
+        let filtered = [...products];
+        if (searchQuery) {
+            filtered = filtered.filter(p => p.name.includes(searchQuery));
+        }
+        if (currentTab === 'favorites') {
+            filtered = filtered.filter(p => favorites.includes(p.id));
+        } else if (currentTab === 'cart') {
+            filtered = cart.map(c => products.find(p => p.id === c.id)).filter(p => p);
+        }
+        return filtered;
+    }
+
+    // ======================= RENDERING =======================
+    function renderProducts() {
+        const container = document.getElementById('productsContainer');
+        const filtered = getFilteredProducts();
+        
+        if (filtered.length === 0) {
+            container.innerHTML = `<div class="empty-state">✨ لا توجد منتجات ✨</div>`;
+            return;
+        }
+        
+        container.innerHTML = filtered.map(product => {
+            const inCart = isInCart(product.id);
+            const inFav = isInFavorites(product.id);
+            const hasDiscount = product.oldPrice && product.oldPrice > product.price;
+            
+            return `
+                <div class="product-card" style="animation-delay: ${product.id * 0.05}s">
+                    ${hasDiscount ? `<div class="discount-badge">🔥 خصم ${Math.round((1 - product.price/product.oldPrice)*100)}%</div>` : ''}
+                    <div class="product-icon">${product.icon}</div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">
+                        ${hasDiscount ? `<span class="old-price">${product.oldPrice.toLocaleString()} د.ع</span>` : ''}
+                        ${product.price.toLocaleString()} د.ع
+                    </div>
+                    <div class="product-actions">
+                        <div class="action-btn ${inFav ? 'fav-active' : ''}" onclick="toggleFavorite(${product.id})">
+                            ${inFav ? '❤️ مفضلة' : '🤍 مفضلة'}
+                        </div>
+                        ${currentTab === 'cart' 
+                            ? `<div class="action-btn" style="background:var(--error); color:white;" onclick="removeFromCart(${product.id})">🗑️ حذف</div>`
+                            : `<div class="action-btn ${inCart ? 'cart-active' : ''}" onclick="${inCart ? `removeFromCart(${product.id})` : `addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})`}">
+                                ${inCart ? '✅ في السلة' : '🛒 أضف للسلة'}
+                            </div>`
+                        }
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // ======================= ABOUT SECTION =======================
+    function renderAboutSection() {
+        const container = document.getElementById('productsContainer');
+        container.innerHTML = `
+            <div class="about-section">
+                <div class="about-header">
+                    <h2>📚 مكتبة حكايه</h2>
+                    <p>✨ قرطاسية - اكسسوارات - موبايلات - العاب - هدايا ✨</p>
+                </div>
+                <div class="about-content">
+                    <div class="info-row">
+                        <div class="info-icon">📍</div>
+                        <div class="info-text">
+                            <strong>العنوان</strong>
+                            <span>كوت - حي الحكيم الاولى - قرب سيطرة العمارة القديمة</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon">📞</div>
+                        <div class="info-text">
+                            <strong>اتصال</strong>
+                            <span>07757777566</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon">💬</div>
+                        <div class="info-text">
+                            <strong>واتساب</strong>
+                            <span>07757777566</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon">✈️</div>
+                        <div class="info-text">
+                            <strong>تيليجرام</strong>
+                            <span>@hikaya_b</span>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--gold); margin: 20px 0 10px; text-align: center;">📱 تابعونا على وسائل التواصل</h3>
+                    <div class="social-grid">
+                        <div class="social-card" onclick="window.open('https://wa.me/9647757777566', '_blank')">
+                            <div class="social-icon">📱</div>
+                            <div class="social-name">واتساب</div>
+                        </div>
+                        <div class="social-card" onclick="window.open('https://t.me/hikaya_b', '_blank')">
+                            <div class="social-icon">✈️</div>
+                            <div class="social-name">تيليجرام</div>
+                        </div>
+                        <div class="social-card" onclick="window.open('https://instagram.com/hikaya', '_blank')">
+                            <div class="social-icon">📸</div>
+                            <div class="social-name">انستقرام</div>
+                        </div>
+                        <div class="social-card" onclick="window.open('https://facebook.com/hikaya', '_blank')">
+                            <div class="social-icon">👤</div>
+                            <div class="social-name">فيسبوك</div>
+                        </div>
+                        <div class="social-card" onclick="window.open('https://tiktok.com/@hikaya', '_blank')">
+                            <div class="social-icon">🎵</div>
+                            <div class="social-name">تيك توك</div>
+                        </div>
+                        <div class="social-card" onclick="window.open('https://maps.app.goo.gl/FeFawvomK2qhTJxdA', '_blank')">
+                            <div class="social-icon">🗺️</div>
+                            <div class="social-name">الموقع</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-row" style="border-bottom: none; margin-top: 15px;">
+                        <div class="info-icon">🕐</div>
+                        <div class="info-text">
+                            <strong>أوقات العمل</strong>
+                            <span>السبت - الخميس: 9ص - 9م</span>
+                            <span>الجمعة: 4م - 9م</span>
+                        </div>
+                    </div>
+                    
+                    <button class="location-btn" onclick="window.open('https://maps.app.goo.gl/FeFawvomK2qhTJxdA', '_blank')">
+                        🗺️ فتح الموقع على خرائط Google
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    // ======================= NAVIGATION =======================
+    function setActiveTab(tab) {
+        currentTab = tab;
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if(item.dataset.tab === tab) item.classList.add('active');
+            else item.classList.remove('active');
+        });
+        
+        if(tab === 'about') {
+            renderAboutSection();
+        } else {
+            renderProducts();
+        }
+    }
+
+    // ======================= SEARCH =======================
     const searchInput = document.getElementById('searchInput');
     const clearBtn = document.getElementById('clearBtn');
-    const themeToggle = document.getElementById('themeToggle');
+    
+    searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        clearBtn.style.display = searchQuery ? 'block' : 'none';
+        if(currentTab !== 'about') renderProducts();
+    });
+    
+    clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchQuery = '';
+        clearBtn.style.display = 'none';
+        if(currentTab !== 'about') renderProducts();
+    });
 
-    // ----------------------------- Helper Functions -----------------------------
+    // ======================= NOTIFICATION =======================
     function showNotification(message, isDiscount = false) {
         const existing = document.querySelector('.notification');
         if(existing) existing.remove();
@@ -381,172 +803,48 @@
         setTimeout(() => notif.remove(), 2500);
     }
 
-    function saveToLocalStorage() {
-        localStorage.setItem('hekaya_cart', JSON.stringify(cart));
-        localStorage.setItem('hekaya_favorites', JSON.stringify(favorites));
-    }
-
-    function isInCart(productId) { return cart.some(item => item.id === productId); }
-    function isInFavorites(productId) { return favorites.includes(productId); }
-
-    function addToCart(product) {
-        if (!isInCart(product.id)) {
-            cart.push({ id: product.id, name: product.name, price: product.price });
-            saveToLocalStorage();
-            showNotification(`تمت إضافة ${product.name} إلى السلة`);
-            renderProducts();
-        } else {
-            showNotification(`${product.name} موجود بالفعل في السلة`);
-        }
-    }
-
-    function removeFromCart(productId) {
-        cart = cart.filter(item => item.id !== productId);
-        saveToLocalStorage();
-        showNotification(`تم إزالة المنتج من السلة`);
-        if(currentTab === 'cart') renderProducts();
-        else renderProducts();
-    }
-
-    function toggleFavorite(productId) {
-        if (isInFavorites(productId)) {
-            favorites = favorites.filter(id => id !== productId);
-            showNotification(`تم إزالة من المفضلة`);
-        } else {
-            favorites.push(productId);
-            showNotification(`تمت إضافة إلى المفضلة`);
-        }
-        saveToLocalStorage();
-        renderProducts();
-    }
-
-    function getFilteredProducts() {
-        let filtered = [...PRODUCTS_DATA];
-        
-        if (searchQuery) {
-            filtered = filtered.filter(p => p.name.includes(searchQuery));
-        }
-        
-        if (currentTab === 'favorites') {
-            filtered = filtered.filter(p => favorites.includes(p.id));
-        } else if (currentTab === 'cart') {
-            filtered = cart.map(c => PRODUCTS_DATA.find(p => p.id === c.id)).filter(p => p);
-        }
-        
-        return filtered;
-    }
-
-    // ----------------------------- Rendering -----------------------------
-    function renderProducts() {
-        const products = getFilteredProducts();
-        
-        if (products.length === 0) {
-            productsContainer.innerHTML = `<div class="empty-state">لا توجد منتجات</div>`;
-            return;
-        }
-        
-        productsContainer.innerHTML = products.map(product => {
-            const inCart = isInCart(product.id);
-            const inFav = isInFavorites(product.id);
-            const hasDiscount = product.oldPrice && product.oldPrice > product.price;
-            
-            return `
-                <div class="product-card">
-                    ${hasDiscount ? `<div class="discount-badge">عرض حار</div>` : ''}
-                    <span class="product-icon">${product.icon}</span>
-                    <div class="product-name">${product.name}</div>
-                    <div class="product-price">
-                        ${hasDiscount ? `<span class="old-price">${product.oldPrice.toLocaleString()} د.ع</span>` : ''}
-                        ${product.price.toLocaleString()} د.ع
-                    </div>
-                    <div class="product-actions">
-                        <div class="action-btn ${inFav ? 'fav-active' : ''}" onclick="toggleFavorite(${product.id})">${inFav ? '★ مفضلة' : '☆ مفضلة'}</div>
-                        ${currentTab === 'cart' 
-                            ? `<div class="action-btn" style="background:var(--error); color:white;" onclick="removeFromCart(${product.id})">🗑 حذف</div>`
-                            : `<div class="action-btn ${inCart ? 'cart-active' : ''}" onclick="${inCart ? `removeFromCart(${product.id})` : `addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})`}">${inCart ? '✓ في السلة' : '➕ سلة'}</div>`
-                        }
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
-
-    // ----------------------------- Search -----------------------------
-    searchInput.addEventListener('input', (e) => {
-        searchQuery = e.target.value;
-        clearBtn.style.display = searchQuery ? 'block' : 'none';
-        renderProducts();
-    });
-    clearBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        searchQuery = '';
-        clearBtn.style.display = 'none';
-        renderProducts();
-    });
-
-    // ----------------------------- Bottom Navigation -----------------------------
-    function setActiveTab(tab) {
-        currentTab = tab;
-        document.querySelectorAll('.nav-item').forEach(item => {
-            if(item.dataset.tab === tab) item.classList.add('active');
-            else item.classList.remove('active');
-        });
-        renderProducts();
-    }
-    
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', () => setActiveTab(item.dataset.tab));
-    });
-
-    // ----------------------------- Contact Functions -----------------------------
-    function contactWhatsApp() { window.open('https://wa.me/9647757777566', '_blank'); }
-    function contactTelegram() { window.open('https://t.me/hikaya_b', '_blank'); }
-    function contactCall() { window.open('tel:07757777566', '_blank'); }
-    function contactInstagram() { window.open('https://instagram.com/hikaya', '_blank'); }
-    function contactFacebook() { window.open('https://facebook.com/hikaya', '_blank'); }
-    function contactTikTok() { window.open('https://tiktok.com/@hikaya', '_blank'); }
-
-    // Expose functions to global scope for onclick
-    window.toggleFavorite = toggleFavorite;
-    window.addToCart = addToCart;
-    window.removeFromCart = removeFromCart;
-    window.contactWhatsApp = contactWhatsApp;
-    window.contactTelegram = contactTelegram;
-    window.contactCall = contactCall;
-    window.contactInstagram = contactInstagram;
-    window.contactFacebook = contactFacebook;
-    window.contactTikTok = contactTikTok;
-
-    // ----------------------------- Theme -----------------------------
+    // ======================= THEME =======================
     function initTheme() {
         const saved = localStorage.getItem('theme');
         if (saved === 'light') {
             document.body.classList.add('light-theme');
-            themeToggle.innerHTML = '☀️';
+            document.getElementById('themeToggle').innerHTML = '☀️';
         } else {
-            themeToggle.innerHTML = '🌙';
+            document.getElementById('themeToggle').innerHTML = '🌙';
         }
     }
-    themeToggle.addEventListener('click', () => {
+    
+    document.getElementById('themeToggle').addEventListener('click', () => {
         document.body.classList.toggle('light-theme');
         const isLight = document.body.classList.contains('light-theme');
         localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        themeToggle.innerHTML = isLight ? '☀️' : '🌙';
+        document.getElementById('themeToggle').innerHTML = isLight ? '☀️' : '🌙';
     });
 
-    // ----------------------------- Initialization -----------------------------
-    function showWelcomeDiscount() {
-        setTimeout(() => {
-            showNotification('🔥 خصم 20% على الشواحن السريعة - لفترة محدودة!', true);
-        }, 1000);
-        setTimeout(() => {
-            showNotification('🎉 توصيل مجاني للطلبات فوق 50,000 دينار عراقي');
-        }, 4000);
-    }
+    // ======================= INITIALIZATION =======================
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => setActiveTab(item.dataset.tab));
+    });
+    
+    document.getElementById('favoritesIconBtn').addEventListener('click', () => setActiveTab('favorites'));
+    document.getElementById('cartIconBtn').addEventListener('click', () => setActiveTab('cart'));
+    
+    window.toggleFavorite = toggleFavorite;
+    window.addToCart = addToCart;
+    window.removeFromCart = removeFromCart;
     
     initTheme();
-    renderProducts();
-    showWelcomeDiscount();
+    initSlider();
+    setActiveTab('all');
+    updateBadges();
+    
+    // Welcome notification
+    setTimeout(() => {
+        showNotification('✨ مرحباً بك في مكتبة حكايه ✨', false);
+    }, 500);
+    setTimeout(() => {
+        showNotification('🔥 خصم 20% على جميع الشواحن لفترة محدودة!', true);
+    }, 3000);
 </script>
 </body>
 </html>
