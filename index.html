@@ -7,8 +7,6 @@
     <title>مكتبة حكايه</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Sign-In -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         * {
             margin: 0;
@@ -289,6 +287,30 @@
             margin-left: 5px;
         }
 
+        /* Category Products Section */
+        .category-products-section {
+            display: none;
+            padding: 12px;
+        }
+
+        .category-products-section.active {
+            display: block;
+        }
+
+        .back-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 16px;
+            margin: 10px 16px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
         /* Social Links Grid */
         .social-grid {
             display: grid;
@@ -513,13 +535,6 @@
             85% { opacity: 1; transform: translateY(0); }
             100% { opacity: 0; transform: translateY(-20px); }
         }
-
-        /* Google Sign In Button */
-        .g_id_signin {
-            display: flex;
-            justify-content: center;
-            margin: 10px 0;
-        }
     </style>
 </head>
 <body>
@@ -556,32 +571,42 @@
     <button class="offer-btn">تسوق الآن</button>
 </div>
 
-<!-- الأقسام -->
-<div class="section-title">
-    <h3>📂 الأقسام</h3>
-    <a href="#" id="viewAllLink">عرض الكل</a>
-</div>
-<div class="categories-grid" id="categoriesGrid"></div>
+<!-- Main Home Content -->
+<div id="homeContent">
+    <div class="section-title">
+        <h3>📂 الأقسام</h3>
+        <a href="#" id="viewAllLink">عرض الكل</a>
+    </div>
+    <div class="categories-grid" id="categoriesGrid"></div>
 
-<!-- المنتجات الأكثر مبيعاً -->
-<div class="section-title">
-    <h3>⭐ المنتجات الأكثر مبيعاً</h3>
-    <a href="#">عرض الكل</a>
-</div>
-<div class="products-grid" id="bestSellersGrid"></div>
+    <div class="section-title">
+        <h3>⭐ المنتجات الأكثر مبيعاً</h3>
+        <a href="#">عرض الكل</a>
+    </div>
+    <div class="products-grid" id="bestSellersGrid"></div>
 
-<!-- المنتجات المميزة -->
-<div class="section-title">
-    <h3>✨ منتجات مميزة</h3>
-    <a href="#">عرض الكل</a>
-</div>
-<div class="products-grid" id="featuredGrid"></div>
+    <div class="section-title">
+        <h3>✨ منتجات مميزة</h3>
+        <a href="#">عرض الكل</a>
+    </div>
+    <div class="products-grid" id="featuredGrid"></div>
 
-<!-- روابط التواصل الاجتماعي -->
-<div class="section-title">
-    <h3>🌐 تابعونا</h3>
+    <div class="section-title">
+        <h3>🌐 تابعونا</h3>
+    </div>
+    <div class="social-grid" id="socialGrid"></div>
 </div>
-<div class="social-grid" id="socialGrid"></div>
+
+<!-- Category Products Section (Hidden by default) -->
+<div id="categoryProductsSection" class="category-products-section">
+    <button class="back-btn" onclick="backToHome()">
+        <i class="fas fa-arrow-right"></i> العودة للرئيسية
+    </button>
+    <div class="section-title">
+        <h3 id="categoryTitle">المنتجات</h3>
+    </div>
+    <div id="categoryProductsGrid" class="products-grid"></div>
+</div>
 
 <!-- Bottom Navigation -->
 <div class="bottom-nav">
@@ -613,9 +638,8 @@
         <div class="user-avatar" id="userAvatar">
             <i class="fas fa-user"></i>
         </div>
-        <h3 id="userName">مكتبة حكايه</h3>
-        <p id="userEmail" style="font-size: 11px; margin-top: 5px;">تسجيل الدخول للمتابعة</p>
-        <div id="googleSignInButton" class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="medium" data-logo_alignment="left"></div>
+        <h3>مكتبة حكايه</h3>
+        <p style="font-size: 11px; margin-top: 5px;">مرحباً بك!</p>
     </div>
     <div class="menu-item" onclick="navigateTo('home')">
         <i class="fas fa-home"></i>
@@ -657,35 +681,57 @@
         <i class="fas fa-undo-alt"></i>
         <span>سياسة الاسترجاع</span>
     </div>
-    <div class="menu-item" onclick="logout()" id="logoutBtn" style="display:none;">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>تسجيل الخروج</span>
-    </div>
 </div>
 
 <script>
     // ======================= PRODUCTS DATA =======================
     const products = [
-        { id: 1, name: "صافون ورقي", price: 1250, oldPrice: null, icon: "🧼", category: "stationery", isBestSeller: true, isFeatured: false },
-        { id: 2, name: "مجموعة أدوات تركيب أزرار الكبس", price: 16000, oldPrice: null, icon: "🔧", category: "tools", isBestSeller: false, isFeatured: true },
-        { id: 3, name: "سكوشي", price: 5000, oldPrice: 7500, icon: "🧸", category: "toys", isBestSeller: true, isFeatured: false },
-        { id: 4, name: "حافظة طعام", price: 12000, oldPrice: null, icon: "🥗", category: "home", isBestSeller: false, isFeatured: true },
-        { id: 5, name: "دفتر ملاحظات", price: 3000, oldPrice: null, icon: "📓", category: "stationery", isBestSeller: true, isFeatured: false },
-        { id: 6, name: "ستيكرات", price: 2000, oldPrice: null, icon: "🎨", category: "art", isBestSeller: false, isFeatured: true },
-        { id: 7, name: "قلم حبر جاف", price: 1500, oldPrice: null, icon: "✒️", category: "stationery", isBestSeller: true, isFeatured: false },
-        { id: 8, name: "ميدالية", price: 8000, oldPrice: 12000, icon: "🏅", category: "gifts", isBestSeller: false, isFeatured: true }
+        // القرطاسية
+        { id: 1, name: "دفتر ملاحظات", price: 3000, oldPrice: null, icon: "📓", category: "stationery", isBestSeller: true, isFeatured: false },
+        { id: 2, name: "قلم حبر جاف", price: 1500, oldPrice: null, icon: "✒️", category: "stationery", isBestSeller: true, isFeatured: false },
+        { id: 3, name: "قلم رصاص HB", price: 1000, oldPrice: null, icon: "✏️", category: "stationery", isBestSeller: false, isFeatured: false },
+        { id: 4, name: "ممحاة", price: 800, oldPrice: null, icon: "🧽", category: "stationery", isBestSeller: false, isFeatured: false },
+        { id: 5, name: "براية", price: 1200, oldPrice: null, icon: "✂️", category: "stationery", isBestSeller: false, isFeatured: false },
+        { id: 6, name: "مسطرة 30سم", price: 1500, oldPrice: null, icon: "📏", category: "stationery", isBestSeller: false, isFeatured: false },
+        // الألعاب
+        { id: 7, name: "سكوشي", price: 5000, oldPrice: 7500, icon: "🧸", category: "toys", isBestSeller: true, isFeatured: false },
+        { id: 8, name: "سيارة سباق", price: 15000, oldPrice: 20000, icon: "🏎️", category: "toys", isBestSeller: false, isFeatured: true },
+        { id: 9, name: "دمية", price: 12000, oldPrice: null, icon: "🎎", category: "toys", isBestSeller: false, isFeatured: false },
+        { id: 10, name: "ألعاب تركيب", price: 25000, oldPrice: null, icon: "🧩", category: "toys", isBestSeller: false, isFeatured: false },
+        // الهدايا
+        { id: 11, name: "ميدالية", price: 8000, oldPrice: 12000, icon: "🏅", category: "gifts", isBestSeller: false, isFeatured: true },
+        { id: 12, name: "صندوق هدايا", price: 15000, oldPrice: null, icon: "🎁", category: "gifts", isBestSeller: false, isFeatured: false },
+        { id: 13, name: "بالونات", price: 5000, oldPrice: null, icon: "🎈", category: "gifts", isBestSeller: false, isFeatured: false },
+        // الإلكترونيات
+        { id: 14, name: "شاحن سريع 33W", price: 25000, oldPrice: 35000, icon: "⚡", category: "electronics", isBestSeller: true, isFeatured: false },
+        { id: 15, name: "سماعة بلوتوث", price: 25000, oldPrice: null, icon: "🎧", category: "electronics", isBestSeller: true, isFeatured: false },
+        { id: 16, name: "كابل USB-C", price: 8000, oldPrice: null, icon: "🔌", category: "electronics", isBestSeller: false, isFeatured: false },
+        // المستلزمات المدرسية
+        { id: 17, name: "حقيبة مدرسية", price: 35000, oldPrice: null, icon: "🎒", category: "school", isBestSeller: true, isFeatured: false },
+        { id: 18, name: "قلم ماركر", price: 2500, oldPrice: null, icon: "🖍️", category: "school", isBestSeller: false, isFeatured: false },
+        { id: 19, name: "ألوان خشبية", price: 8000, oldPrice: null, icon: "🎨", category: "school", isBestSeller: false, isFeatured: false },
+        // الأعمال اليدوية
+        { id: 20, name: "ستيكرات", price: 2000, oldPrice: null, icon: "🎨", category: "craft", isBestSeller: false, isFeatured: true },
+        { id: 21, name: "صمغ سائل", price: 3000, oldPrice: null, icon: "🧴", category: "craft", isBestSeller: false, isFeatured: false },
+        { id: 22, name: "ورق ملون", price: 5000, oldPrice: null, icon: "📄", category: "craft", isBestSeller: false, isFeatured: false },
+        // الكتب
+        { id: 23, name: "رواية", price: 15000, oldPrice: null, icon: "📖", category: "books", isBestSeller: true, isFeatured: false },
+        { id: 24, name: "كتاب تلوين", price: 8000, oldPrice: null, icon: "🎨", category: "books", isBestSeller: false, isFeatured: false },
+        // المطارات والأكواب
+        { id: 25, name: "كوب حراري", price: 12000, oldPrice: 18000, icon: "☕", category: "kitchen", isBestSeller: false, isFeatured: true },
+        { id: 26, name: "مطارة ماء", price: 10000, oldPrice: null, icon: "💧", category: "kitchen", isBestSeller: false, isFeatured: false }
     ];
 
-    // Categories
+    // Categories with Arabic names and icons
     const categories = [
-        { name: "القرطاسية", icon: "fa-book", category: "stationery" },
-        { name: "الألعاب", icon: "fa-gamepad", category: "toys" },
-        { name: "الهدايا", icon: "fa-gift", category: "gifts" },
-        { name: "الإلكترونيات", icon: "fa-mobile-alt", category: "electronics" },
-        { name: "المستلزمات المدرسية", icon: "fa-pencil-alt", category: "school" },
-        { name: "الأعمال اليدوية", icon: "fa-palette", category: "craft" },
-        { name: "الكتب", icon: "fa-book-open", category: "books" },
-        { name: "المطارات والأكواب", icon: "fa-mug-hot", category: "kitchen" }
+        { id: "stationery", name: "القرطاسية", icon: "fa-book", iconEmoji: "📚" },
+        { id: "toys", name: "الألعاب", icon: "fa-gamepad", iconEmoji: "🎮" },
+        { id: "gifts", name: "الهدايا", icon: "fa-gift", iconEmoji: "🎁" },
+        { id: "electronics", name: "الإلكترونيات", icon: "fa-mobile-alt", iconEmoji: "📱" },
+        { id: "school", name: "المستلزمات المدرسية", icon: "fa-pencil-alt", iconEmoji: "✏️" },
+        { id: "craft", name: "الأعمال اليدوية", icon: "fa-palette", iconEmoji: "🎨" },
+        { id: "books", name: "الكتب", icon: "fa-book-open", iconEmoji: "📖" },
+        { id: "kitchen", name: "المطارات والأكواب", icon: "fa-mug-hot", iconEmoji: "☕" }
     ];
 
     // Social Links
@@ -703,101 +749,58 @@
     let cart = JSON.parse(localStorage.getItem('hekaya_cart')) || [];
     let favorites = JSON.parse(localStorage.getItem('hekaya_favorites')) || [];
     let currentTab = 'home';
-    let isLoggedIn = false;
-    let currentUser = null;
+    let currentCategory = null;
 
-    // Google Sign-In Configuration
-    window.onload = function() {
-        // Initialize Google Sign-In
-        google.accounts.id.initialize({
-            client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com', // Replace with your client ID
-            callback: handleCredentialResponse
-        });
-        google.accounts.id.renderButton(
-            document.getElementById('googleSignInButton'),
-            { theme: 'outline', size: 'medium', text: 'signin_with', shape: 'rectangular' }
-        );
-        google.accounts.id.prompt();
-        
-        loadTheme();
-        renderCategories();
-        renderBestSellers();
-        renderFeatured();
-        renderSocialLinks();
-        updateCartBadge();
-        checkLoginStatus();
-    };
-
-    function handleCredentialResponse(response) {
-        const data = parseJwt(response.credential);
-        currentUser = {
-            name: data.name,
-            email: data.email,
-            picture: data.picture
-        };
-        isLoggedIn = true;
-        localStorage.setItem('hekaya_user', JSON.stringify(currentUser));
-        updateUserUI();
-        showToast(`✅ مرحباً ${data.name}`);
-    }
-
-    function parseJwt(token) {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
-        return JSON.parse(jsonPayload);
-    }
-
-    function checkLoginStatus() {
-        const savedUser = localStorage.getItem('hekaya_user');
-        if(savedUser) {
-            currentUser = JSON.parse(savedUser);
-            isLoggedIn = true;
-            updateUserUI();
-        }
-    }
-
-    function updateUserUI() {
-        const avatarDiv = document.getElementById('userAvatar');
-        const nameSpan = document.getElementById('userName');
-        const emailSpan = document.getElementById('userEmail');
-        const logoutBtn = document.getElementById('logoutBtn');
-        
-        if(isLoggedIn && currentUser) {
-            avatarDiv.innerHTML = currentUser.picture ? `<img src="${currentUser.picture}" style="width:60px;height:60px;border-radius:50%;">` : `<i class="fas fa-user-circle" style="font-size:40px;"></i>`;
-            nameSpan.innerText = currentUser.name;
-            emailSpan.innerText = currentUser.email;
-            logoutBtn.style.display = 'flex';
-            document.getElementById('googleSignInButton').style.display = 'none';
-        } else {
-            avatarDiv.innerHTML = '<i class="fas fa-user"></i>';
-            nameSpan.innerText = 'مكتبة حكايه';
-            emailSpan.innerText = 'تسجيل الدخول للمتابعة';
-            logoutBtn.style.display = 'none';
-            document.getElementById('googleSignInButton').style.display = 'block';
-        }
-    }
-
-    function logout() {
-        isLoggedIn = false;
-        currentUser = null;
-        localStorage.removeItem('hekaya_user');
-        updateUserUI();
-        showToast('👋 تم تسجيل الخروج');
-        closeMenu();
-    }
-
-    // Render Functions
+    // Render Categories
     function renderCategories() {
         const container = document.getElementById('categoriesGrid');
         container.innerHTML = categories.map(cat => `
-            <div class="category-card" onclick="filterByCategory('${cat.category}')">
+            <div class="category-card" onclick="showCategoryProducts('${cat.id}', '${cat.name}')">
                 <div class="category-icon"><i class="fas ${cat.icon}"></i></div>
                 <div class="category-name">${cat.name}</div>
             </div>
         `).join('');
     }
 
+    // Show products by category
+    function showCategoryProducts(categoryId, categoryName) {
+        currentCategory = categoryId;
+        const filteredProducts = products.filter(p => p.category === categoryId);
+        
+        document.getElementById('homeContent').style.display = 'none';
+        document.getElementById('categoryProductsSection').classList.add('active');
+        document.getElementById('categoryTitle').innerHTML = `${getCategoryIcon(categoryId)} ${categoryName}`;
+        
+        const container = document.getElementById('categoryProductsGrid');
+        if(filteredProducts.length === 0) {
+            container.innerHTML = `<div style="text-align:center; padding:40px; color:var(--text-dim);">لا توجد منتجات في هذا القسم</div>`;
+            return;
+        }
+        
+        container.innerHTML = filteredProducts.map(product => `
+            <div class="product-card" onclick="showProductDetail(${product.id})">
+                <div class="product-image">${product.icon}</div>
+                <div class="product-title">${product.name}</div>
+                <div class="product-price">
+                    ${product.oldPrice ? `<span class="product-old-price">${product.oldPrice.toLocaleString()} د.ع</span>` : ''}
+                    ${product.price.toLocaleString()} د.ع
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function getCategoryIcon(categoryId) {
+        const cat = categories.find(c => c.id === categoryId);
+        return cat ? cat.iconEmoji : '📦';
+    }
+
+    function backToHome() {
+        document.getElementById('homeContent').style.display = 'block';
+        document.getElementById('categoryProductsSection').classList.remove('active');
+        currentCategory = null;
+    }
+
+    // Render Best Sellers
     function renderBestSellers() {
         const container = document.getElementById('bestSellersGrid');
         const bestSellers = products.filter(p => p.isBestSeller);
@@ -813,6 +816,7 @@
         `).join('');
     }
 
+    // Render Featured Products
     function renderFeatured() {
         const container = document.getElementById('featuredGrid');
         const featured = products.filter(p => p.isFeatured);
@@ -828,6 +832,7 @@
         `).join('');
     }
 
+    // Render Social Links
     function renderSocialLinks() {
         const container = document.getElementById('socialGrid');
         container.innerHTML = socialLinks.map(link => `
@@ -850,11 +855,6 @@
     }
 
     function addToCart(productId) {
-        if(!isLoggedIn) {
-            showToast('🔐 الرجاء تسجيل الدخول أولاً');
-            openMenu();
-            return;
-        }
         const product = products.find(p => p.id === productId);
         if(!cart.find(item => item.id === productId)) {
             cart.push({ id: product.id, name: product.name, price: product.price });
@@ -864,6 +864,36 @@
         } else {
             showToast(`⚠️ ${product.name} موجود بالفعل في السلة`);
         }
+    }
+
+    function removeFromCart(productId) {
+        const product = products.find(p => p.id === productId);
+        cart = cart.filter(item => item.id !== productId);
+        localStorage.setItem('hekaya_cart', JSON.stringify(cart));
+        updateCartBadge();
+        showToast(`🗑️ تم إزالة ${product.name} من السلة`);
+        if(currentTab === 'cart') renderCartItems();
+    }
+
+    function renderCartItems() {
+        const container = document.getElementById('featuredGrid'); // Reusing for cart view
+        if(cart.length === 0) {
+            container.innerHTML = `<div style="text-align:center; padding:40px; color:var(--text-dim);">السلة فارغة</div>`;
+            return;
+        }
+        container.innerHTML = cart.map(item => {
+            const product = products.find(p => p.id === item.id);
+            return `
+                <div class="product-card">
+                    <div class="product-image">${product.icon}</div>
+                    <div class="product-title">${product.name}</div>
+                    <div class="product-price">${product.price.toLocaleString()} د.ع</div>
+                    <div class="product-actions" style="display:flex; gap:8px; margin-top:8px;">
+                        <button onclick="removeFromCart(${product.id})" style="background:var(--primary); color:white; border:none; padding:5px 10px; border-radius:20px;">حذف</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
     }
 
     // UI Functions
@@ -989,37 +1019,24 @@
             else item.classList.remove('active');
         });
         
+        backToHome();
+        
         if(tab === 'home') {
-            document.querySelectorAll('.section-title, .hero-banner, .categories-grid, .products-grid, .social-grid').forEach(el => {
-                if(el.id !== 'categoriesGrid' && el.id !== 'bestSellersGrid' && el.id !== 'featuredGrid' && el.id !== 'socialGrid') {
-                    if(el.style) el.style.display = '';
-                }
-            });
-            document.getElementById('categoriesGrid').style.display = 'grid';
-            document.getElementById('bestSellersGrid').style.display = 'grid';
-            document.getElementById('featuredGrid').style.display = 'grid';
-            document.getElementById('socialGrid').style.display = 'grid';
-        } else {
-            document.querySelectorAll('.section-title, .hero-banner').forEach(el => el.style.display = 'none');
-            document.getElementById('categoriesGrid').style.display = 'none';
-            document.getElementById('bestSellersGrid').style.display = 'none';
-            document.getElementById('featuredGrid').style.display = 'none';
-            document.getElementById('socialGrid').style.display = 'none';
-            showToast(`📱 ${tab === 'favorites' ? 'المفضلة' : (tab === 'cart' ? 'السلة' : 'الحساب')} - قريباً`);
+            document.getElementById('homeContent').style.display = 'block';
+        } else if(tab === 'favorites') {
+            document.getElementById('homeContent').style.display = 'block';
+            showToast('❤️ المفضلة - قريباً');
+        } else if(tab === 'cart') {
+            document.getElementById('homeContent').style.display = 'block';
+            renderCartItems();
+            showToast('🛒 السلة');
+        } else if(tab === 'account') {
+            document.getElementById('homeContent').style.display = 'block';
+            showToast('👤 الحساب - قريباً');
         }
     }
 
-    function filterByCategory(category) {
-        showToast(`📂 ${categories.find(c => c.category === category)?.name || category}`);
-    }
-
-    // Event Listeners
-    document.getElementById('themeToggleBtn').addEventListener('click', toggleTheme);
-    document.getElementById('viewAllLink')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        showToast("📦 جميع الأقسام");
-    });
-
+    // Search
     document.getElementById('searchInput')?.addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
         if(searchTerm) {
@@ -1032,14 +1049,23 @@
         }
     });
 
+    // View All Link
+    document.getElementById('viewAllLink')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        showToast("📦 جميع الأقسام متاحة من القائمة العلوية");
+    });
+
+    // Bottom Navigation Event Listeners
     document.querySelectorAll('.nav-item').forEach(item => {
         item.addEventListener('click', () => setActiveTab(item.dataset.tab));
     });
 
     // Make functions global for onclick
+    window.showCategoryProducts = showCategoryProducts;
+    window.backToHome = backToHome;
     window.addToCart = addToCart;
+    window.removeFromCart = removeFromCart;
     window.showProductDetail = showProductDetail;
-    window.filterByCategory = filterByCategory;
     window.showOffer = showOffer;
     window.openMenu = openMenu;
     window.closeMenu = closeMenu;
@@ -1051,7 +1077,14 @@
     window.openPrivacy = openPrivacy;
     window.openReturns = openReturns;
     window.toggleThemeMenu = toggleThemeMenu;
-    window.logout = logout;
+
+    // Initialize
+    renderCategories();
+    renderBestSellers();
+    renderFeatured();
+    renderSocialLinks();
+    updateCartBadge();
+    loadTheme();
 </script>
 </body>
 </html>
