@@ -3,43 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="theme-color" content="#FFFFFF">
-    <title>مكتبة حكايه - المتجر الذهبي</title>
+    <title>مكتبة حكايه - المتجر</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         :root {
             --bg-color: #FDFCF8; --card-bg: #FFFFFF; --text-color: #1A1A1A; --text-dim: #6B6B6B;
-            --primary: #D4AF37; --primary-dark: #B8960F; --border-color: #F0E6D2;
+            --primary: #D4AF37; --border-color: #F0E6D2;
             --gradient: linear-gradient(135deg, #D4AF37 0%, #FFE066 50%, #D4AF37 100%);
         }
-        body.dark {
-            --bg-color: #0D0D0D; --card-bg: #1A1A1A; --text-color: #F5F5F5;
-            --primary: #D4AF37; --border-color: #2A2A2A;
-        }
+        body.dark { --bg-color: #0D0D0D; --card-bg: #1A1A1A; --text-color: #F5F5F5; --border-color: #2A2A2A; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-color); color: var(--text-color); transition: all 0.3s; padding-bottom: 70px; }
         
-        .header { background: var(--card-bg); padding: 12px 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--primary); }
-        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .header { background: var(--card-bg); padding: 12px 16px; border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
         .logo-area h1 { font-size: 20px; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .logo-area p { font-size: 9px; color: var(--primary); }
-        .header-icons { display: flex; gap: 12px; align-items: center; }
         .theme-toggle { background: var(--gradient); border: none; border-radius: 30px; padding: 6px 12px; cursor: pointer; font-size: 12px; font-weight: bold; color: #1A1A1A; }
         
         .login-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 1000; display: flex; align-items: center; justify-content: center; }
-        .login-box { background: var(--card-bg); border-radius: 28px; padding: 25px; width: 85%; max-width: 350px; border: 2px solid var(--primary); }
-        .login-box h3 { text-align: center; color: var(--primary); margin-bottom: 20px; }
+        .login-box { background: var(--card-bg); border-radius: 28px; padding: 25px; width: 85%; max-width: 350px; border: 2px solid var(--primary); text-align: center; }
         .login-input { width: 100%; padding: 12px; margin: 8px 0; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-color); }
         .login-btn { background: var(--gradient); border: none; padding: 12px; border-radius: 30px; width: 100%; font-weight: bold; margin-top: 10px; cursor: pointer; }
-        .error-msg { color: #E53935; font-size: 12px; text-align: center; margin-top: 10px; display: none; }
+        .error-msg { color: #E53935; font-size: 12px; margin-top: 10px; display: none; }
         
         .slider-container { margin: 12px; position: relative; overflow: hidden; border-radius: 24px; }
         .slider-wrapper { display: flex; transition: transform 0.5s ease; cursor: grab; }
-        .slider-wrapper:active { cursor: grabbing; }
         .slide { min-width: 100%; background: var(--gradient); padding: 20px; text-align: center; color: #1A1A1A; }
         .slide-icon { font-size: 40px; margin-bottom: 5px; }
         .slide-title { font-size: 18px; font-weight: bold; }
-        .slide-desc { font-size: 11px; opacity: 0.9; }
         .slider-dots { display: flex; justify-content: center; gap: 8px; padding: 10px; position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.3); }
         .dot { width: 6px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 50%; cursor: pointer; }
         .dot.active { background: white; width: 20px; border-radius: 10px; }
@@ -49,38 +39,20 @@
         .search-box i { color: var(--primary); }
         .search-input { flex: 1; border: none; background: transparent; padding: 0 10px; outline: none; color: var(--text-color); }
         
-        .categories-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 10px 16px; }
-        .category-card { text-align: center; cursor: pointer; transition: all 0.3s; padding: 8px 4px; border-radius: 16px; background: var(--card-bg); border: 1px solid var(--border-color); }
-        .category-icon { background: var(--gradient); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
-        .category-icon i { font-size: 24px; color: #1A1A1A; }
-        .category-name { font-size: 10px; color: var(--text-dim); font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        
         .section-title { display: flex; justify-content: space-between; padding: 15px 16px 5px; }
         .section-title h3 { color: var(--primary); font-size: 18px; }
-        .section-title a { color: var(--primary); font-size: 12px; cursor: pointer; }
         
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 10px 16px; }
         .product-card { background: var(--card-bg); border-radius: 16px; padding: 12px; border: 1px solid var(--border-color); cursor: pointer; }
-        .product-image { width: 100%; height: 100px; background: var(--bg-color); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
-        .product-title { font-size: 12px; font-weight: bold; margin: 8px 0 4px; }
-        .product-price { font-size: 13px; font-weight: bold; color: var(--primary); }
+        .product-image { font-size: 40px; text-align: center; }
+        .product-title { font-size: 12px; font-weight: bold; text-align: center; margin: 8px 0; }
+        .product-price { font-size: 13px; font-weight: bold; color: var(--primary); text-align: center; }
         .product-actions { display: flex; gap: 8px; margin-top: 8px; }
         .product-action-btn { flex: 1; background: var(--gradient); border: none; border-radius: 20px; padding: 5px; font-size: 10px; font-weight: bold; cursor: pointer; }
         
-        .category-products-section { display: none; padding: 12px; }
-        .category-products-section.active { display: block; }
-        .back-btn { background: var(--gradient); border: none; border-radius: 40px; padding: 8px 16px; margin: 10px; cursor: pointer; }
-        
-        .cart-container { padding: 12px; }
-        .cart-summary { background: var(--card-bg); border-radius: 20px; padding: 15px; margin-top: 15px; border: 1px solid var(--border-color); }
+        .cart-summary { background: var(--card-bg); border-radius: 20px; padding: 15px; margin: 12px; }
         .cart-total { font-size: 18px; font-weight: bold; color: var(--primary); text-align: center; margin: 10px 0; }
         .checkout-btn { background: var(--gradient); border: none; padding: 12px; border-radius: 30px; width: 100%; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
-        
-        .all-products-modal { position: fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.9); z-index:1000; overflow-y:auto; display: none; }
-        .all-products-modal.active { display: block; }
-        .modal-header { background: var(--gradient); padding: 15px; border-radius: 20px; display: flex; justify-content: space-between; margin: 15px; }
-        .modal-header h3 { color: #1A1A1A; }
-        .close-modal-btn { background: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; }
         
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg); display: flex; justify-content: space-around; padding: 8px 12px; border-top: 1px solid var(--border-color); z-index: 100; }
         .nav-item { text-align: center; cursor: pointer; padding: 5px; border-radius: 30px; }
@@ -92,19 +64,6 @@
         .cart-icon { position: relative; }
         .badge { background: var(--primary); color: #1A1A1A; font-size: 9px; border-radius: 50%; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: -5px; right: -8px; }
         
-        .settings-modal { position: fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.9); z-index:1000; display: none; align-items: center; justify-content: center; }
-        .settings-modal.active { display: flex; }
-        .settings-content { background: var(--card-bg); border-radius: 28px; width: 90%; max-width: 400px; max-height: 80vh; overflow-y: auto; padding: 20px; border: 2px solid var(--primary); }
-        .settings-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
-        .settings-header h3 { color: var(--primary); }
-        .settings-input { width: 100%; padding: 10px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-color); margin-bottom: 10px; }
-        .settings-btn { background: var(--gradient); border: none; padding: 10px; border-radius: 30px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 5px; }
-        
-        .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 16px; }
-        .social-card { background: var(--card-bg); border-radius: 20px; padding: 12px; text-align: center; cursor: pointer; border: 1px solid var(--border-color); }
-        .social-icon { font-size: 28px; margin-bottom: 6px; }
-        .social-name { font-size: 11px; font-weight: bold; color: var(--primary); }
-        
         .toast { position: fixed; bottom: 80px; left: 20px; right: 20px; background: var(--gradient); color: #1A1A1A; padding: 12px; border-radius: 50px; text-align: center; z-index: 1000; animation: fadeOut 2.5s; font-weight: bold; }
         @keyframes fadeOut { 0% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
         .empty-state { text-align: center; padding: 40px; color: var(--text-dim); }
@@ -112,48 +71,11 @@
 </head>
 <body>
 
-<!-- Login Overlay -->
-<div id="loginOverlay" class="login-overlay">
-    <div class="login-box">
-        <h3>🔐 تسجيل الدخول</h3>
-        <input type="text" id="loginUsername" class="login-input" placeholder="اسم المستخدم">
-        <input type="password" id="loginPassword" class="login-input" placeholder="كلمة المرور">
-        <div id="loginError" class="error-msg"></div>
-        <button class="login-btn" onclick="login()">تسجيل الدخول</button>
-        <button class="login-btn" onclick="showRegister()" style="background: var(--card-bg); border: 1px solid var(--primary);">إنشاء حساب جديد</button>
-    </div>
-</div>
-
-<!-- Register Overlay -->
-<div id="registerOverlay" class="login-overlay" style="display: none;">
-    <div class="login-box">
-        <h3>📝 إنشاء حساب جديد</h3>
-        <input type="text" id="regUsername" class="login-input" placeholder="اسم المستخدم *">
-        <input type="password" id="regPassword" class="login-input" placeholder="كلمة المرور *">
-        <input type="text" id="regFullName" class="login-input" placeholder="الاسم الكامل *">
-        <input type="tel" id="regPhone" class="login-input" placeholder="رقم الهاتف *">
-        <input type="text" id="regAddress" class="login-input" placeholder="العنوان *">
-        <div id="regError" class="error-msg"></div>
-        <button class="login-btn" onclick="register()">إنشاء حساب</button>
-        <button class="login-btn" onclick="showLogin()" style="background: var(--card-bg); border: 1px solid var(--primary);">عودة لتسجيل الدخول</button>
-    </div>
-</div>
-
-<!-- Header -->
 <div class="header">
-    <div class="header-content">
-        <div class="logo-area">
-            <h1>✨ مكتبة حكايه ✨</h1>
-            <p>التميز في كل منتج</p>
-        </div>
-        <div class="header-icons">
-            <div class="theme-toggle" id="themeToggleBtn">🌙 ليلي</div>
-            <i class="fas fa-cog" onclick="openSettings()" style="font-size: 20px; color: var(--primary); cursor: pointer;"></i>
-        </div>
-    </div>
+    <div class="logo-area"><h1>✨ مكتبة حكايه ✨</h1></div>
+    <div class="theme-toggle" id="themeToggleBtn">🌙 ليلي</div>
 </div>
 
-<!-- Search -->
 <div class="search-container">
     <div class="search-box">
         <i class="fas fa-search"></i>
@@ -161,36 +83,22 @@
     </div>
 </div>
 
-<!-- Slider -->
 <div class="slider-container">
     <div class="slider-wrapper" id="sliderWrapper">
-        <div class="slide"><div class="slide-icon">🎉✨</div><div class="slide-title">خصم 30%</div><div class="slide-desc">على جميع المنتجات</div></div>
-        <div class="slide"><div class="slide-icon">🚚💨</div><div class="slide-title">توصيل مجاني</div><div class="slide-desc">للطلبات فوق 50,000</div></div>
-        <div class="slide"><div class="slide-icon">🎁🎈</div><div class="slide-title">هدايا مع كل طلب</div><div class="slide-desc">استنساخ - تصوير - بحوث</div></div>
+        <div class="slide"><div class="slide-icon">🎉✨</div><div class="slide-title">خصم 30%</div></div>
+        <div class="slide"><div class="slide-icon">🚚💨</div><div class="slide-title">توصيل مجاني</div></div>
+        <div class="slide"><div class="slide-icon">🎁🎈</div><div class="slide-title">هدايا مع كل طلب</div></div>
     </div>
     <div class="slider-dots" id="sliderDots"></div>
 </div>
 
-<!-- Home Content -->
 <div id="homeContent">
-    <div class="section-title"><h3>📂 جميع الأقسام</h3><a onclick="showAllCategories()">عرض الكل</a></div>
-    <div class="categories-grid" id="categoriesGrid"></div>
-    <div class="section-title"><h3>⭐ الأكثر مبيعاً</h3><a onclick="showAllProducts('bestSellers')">عرض الكل</a></div>
-    <div class="products-grid" id="bestSellersGrid"></div>
-    <div class="section-title"><h3>✨ منتجات مميزة</h3><a onclick="showAllProducts('featured')">عرض الكل</a></div>
-    <div class="products-grid" id="featuredGrid"></div>
-    <div class="section-title"><h3>🌐 تابعونا</h3></div>
-    <div class="social-grid" id="socialGrid"></div>
+    <div class="section-title"><h3>⭐ الأكثر مبيعاً</h3></div>
+    <div id="bestSellersGrid" class="products-grid"></div>
+    <div class="section-title"><h3>✨ منتجات مميزة</h3></div>
+    <div id="featuredGrid" class="products-grid"></div>
 </div>
 
-<!-- Category Products -->
-<div id="categoryProductsSection" class="category-products-section">
-    <button class="back-btn" onclick="backToHome()">↩️ العودة للرئيسية</button>
-    <div class="section-title"><h3 id="categoryTitle">المنتجات</h3></div>
-    <div id="categoryProductsGrid" class="products-grid"></div>
-</div>
-
-<!-- Cart Content -->
 <div id="cartContent" style="display: none;">
     <div class="section-title"><h3>🛒 سلة المشتريات</h3></div>
     <div id="cartItemsGrid" class="products-grid"></div>
@@ -200,328 +108,88 @@
     </div>
 </div>
 
-<!-- Favorites Content -->
-<div id="favoritesContent" style="display: none;">
-    <div class="section-title"><h3>❤️ المفضلة</h3></div>
-    <div id="favoritesItemsGrid" class="products-grid"></div>
-</div>
-
-<!-- All Products Modal -->
-<div id="allProductsModal" class="all-products-modal">
-    <div style="padding:20px; max-width:600px; margin:0 auto;">
-        <div class="modal-header"><h3 id="modalTitle">المنتجات</h3><button class="close-modal-btn" onclick="closeModal()">✖</button></div>
-        <div id="allProductsGrid" class="products-grid"></div>
-    </div>
-</div>
-
-<!-- Settings Modal -->
-<div id="settingsModal" class="settings-modal">
-    <div class="settings-content">
-        <div class="settings-header"><h3>⚙️ الإعدادات</h3><button class="close-modal-btn" onclick="closeSettings()">✖</button></div>
-        <div style="text-align:center; margin-bottom:15px;">
-            <div id="userAvatar" style="width:60px;height:60px;background:var(--gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:28px;">👤</div>
-            <h4 id="displayName">زائر</h4>
-        </div>
-        <div class="settings-label">👤 تحديث الملف الشخصي</div>
-        <input type="text" id="profileFullName" class="settings-input" placeholder="الاسم الكامل">
-        <input type="tel" id="profilePhone" class="settings-input" placeholder="رقم الهاتف">
-        <input type="text" id="profileAddress" class="settings-input" placeholder="العنوان">
-        <button class="settings-btn" onclick="updateProfile()">تحديث المعلومات</button>
-        
-        <div class="settings-label">🎨 المظهر</div>
-        <select id="themeSelect" class="settings-input"><option value="light">فاتح</option><option value="dark">داكن</option></select>
-        
-        <button class="settings-btn" onclick="logout()" id="logoutBtn">🚪 تسجيل الخروج</button>
-        <button class="settings-btn" onclick="closeSettings()">إغلاق</button>
-    </div>
-</div>
-
-<!-- Bottom Navigation -->
 <div class="bottom-nav">
     <div class="nav-item active" data-tab="home"><i class="fas fa-home"></i><span>الرئيسية</span></div>
-    <div class="nav-item" data-tab="favorites"><i class="fas fa-heart"></i><span>المفضلة</span></div>
     <div class="nav-item" data-tab="cart"><div class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="badge" id="cartBadge" style="display:none;">0</span></div><span>السلة</span></div>
 </div>
 
 <script>
-    // ======================= DATA =======================
-    const GIST_ID = "a959aaf811a0bff1c2accf7fc9c3fe0d";
-    const GITHUB_TOKEN = "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";
+    // ======================= ⚠️ غيّر هذه القيم ⚠️ =======================
+    // ضع الـ Gist ID الجديد هنا (من الرابط بعد إنشاء الـ Gist)
+    const GIST_ID = "https://gist.github.com/sharktheking/29c912a386122519c2f33862d4fbf698";
+    // ضع التوكن الجديد هنا
+    const GITHUB_TOKEN = "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";
+    // ================================================================
+    
     const GIST_URL = `https://api.github.com/gists/${GIST_ID}`;
-    const HEADERS = { "Authorization": `token ${GITHUB_TOKEN}`, "Content-Type": "application/json" };
+    const WHATSAPP_NUMBER = "9647757777566";
     
-    const categories = [
-        { id: "stationery", name: "القرطاسية", icon: "fa-book", iconEmoji: "📚" },
-        { id: "toys", name: "الألعاب", icon: "fa-gamepad", iconEmoji: "🎮" },
-        { id: "gifts", name: "الهدايا", icon: "fa-gift", iconEmoji: "🎁" },
-        { id: "electronics", name: "الإلكترونيات", icon: "fa-mobile-alt", iconEmoji: "📱" },
-        { id: "school", name: "المستلزمات المدرسية", icon: "fa-pencil-alt", iconEmoji: "✏️" }
-    ];
-    
+    // المنتجات
     const products = [
-        { id: 1, name: "دفتر ملاحظات فاخر", price: 3000, oldPrice: null, icon: "📓", category: "stationery", isBestSeller: true, isFeatured: false },
-        { id: 2, name: "قلم حبر ذهبي", price: 1500, oldPrice: null, icon: "✒️", category: "stationery", isBestSeller: true, isFeatured: false },
-        { id: 3, name: "سكوشي فاخر", price: 5000, oldPrice: 7500, icon: "🧸", category: "toys", isBestSeller: true, isFeatured: false },
-        { id: 4, name: "شاحن سريع 33W", price: 25000, oldPrice: 35000, icon: "⚡", category: "electronics", isBestSeller: true, isFeatured: false }
+        { id: 1, name: "دفتر ملاحظات فاخر", price: 3000, icon: "📓", isBestSeller: true },
+        { id: 2, name: "قلم حبر ذهبي", price: 1500, icon: "✒️", isBestSeller: true },
+        { id: 3, name: "سكوشي فاخر", price: 5000, oldPrice: 7500, icon: "🧸", isBestSeller: true },
+        { id: 4, name: "شاحن سريع 33W", price: 25000, oldPrice: 35000, icon: "⚡", isBestSeller: true }
     ];
     
-    const socialLinks = [
-        { name: "واتساب", icon: "fab fa-whatsapp", url: "https://wa.me/9647757777566", color: "#25D366" }
-    ];
-    
+    // بيانات المستخدم (محلية)
     let users = JSON.parse(localStorage.getItem('hekaya_users')) || [];
     let currentUser = null;
     let cart = [];
-    let favorites = [];
     let currentTab = 'home';
-    let currentCategory = null;
     
     if(users.length === 0) {
         users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "", address: "" }];
         localStorage.setItem('hekaya_users', JSON.stringify(users));
     }
     
-    // ======================= RENDER FUNCTIONS =======================
-    function renderCategories() {
-        const container = document.getElementById('categoriesGrid');
-        container.innerHTML = categories.map(cat => `
-            <div class="category-card" onclick="showCategoryProducts('${cat.id}', '${cat.name}')">
-                <div class="category-icon"><i class="fas ${cat.icon}"></i></div>
-                <div class="category-name">${cat.name}</div>
-            </div>
-        `).join('');
-    }
-    
-    function showCategoryProducts(categoryId, categoryName) {
-        currentCategory = categoryId;
-        const filtered = products.filter(p => p.category === categoryId);
-        document.getElementById('homeContent').style.display = 'none';
-        document.getElementById('cartContent').style.display = 'none';
-        document.getElementById('favoritesContent').style.display = 'none';
-        document.getElementById('categoryProductsSection').classList.add('active');
-        document.getElementById('categoryTitle').innerHTML = `${getCategoryIcon(categoryId)} ${categoryName}`;
-        const container = document.getElementById('categoryProductsGrid');
-        if(filtered.length === 0) { container.innerHTML = '<div class="empty-state">لا توجد منتجات</div>'; return; }
-        container.innerHTML = filtered.map(p => `
-            <div class="product-card" onclick="showProductDetail(${p.id})">
-                <div class="product-image">${p.icon}</div>
-                <div class="product-title">${p.name}</div>
-                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
-                <div class="product-actions">
-                    <button class="product-action-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒</button>
-                    <button class="product-action-btn" onclick="event.stopPropagation(); toggleFavorite(${p.id})">❤️</button>
-                </div>
-            </div>
-        `).join('');
-    }
-    
-    function getCategoryIcon(categoryId) {
-        const cat = categories.find(c => c.id === categoryId);
-        return cat ? cat.iconEmoji : '📦';
-    }
-    
-    function backToHome() {
-        document.getElementById('homeContent').style.display = 'block';
-        document.getElementById('categoryProductsSection').classList.remove('active');
-        document.getElementById('cartContent').style.display = 'none';
-        document.getElementById('favoritesContent').style.display = 'none';
-        currentCategory = null;
-    }
-    
-    function renderBestSellers() {
-        const container = document.getElementById('bestSellersGrid');
-        const best = products.filter(p => p.isBestSeller).slice(0,4);
-        container.innerHTML = best.map(p => `
-            <div class="product-card" onclick="showProductDetail(${p.id})">
-                <div class="product-image">${p.icon}</div>
-                <div class="product-title">${p.name}</div>
-                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
-                <div class="product-actions">
-                    <button class="product-action-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒</button>
-                    <button class="product-action-btn" onclick="event.stopPropagation(); toggleFavorite(${p.id})">❤️</button>
-                </div>
-            </div>
-        `).join('');
-    }
-    
-    function renderFeatured() {
-        const container = document.getElementById('featuredGrid');
-        const featured = products.filter(p => p.isFeatured).slice(0,4);
-        container.innerHTML = featured.map(p => `
-            <div class="product-card" onclick="showProductDetail(${p.id})">
-                <div class="product-image">${p.icon}</div>
-                <div class="product-title">${p.name}</div>
-                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
-                <div class="product-actions">
-                    <button class="product-action-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒</button>
-                    <button class="product-action-btn" onclick="event.stopPropagation(); toggleFavorite(${p.id})">❤️</button>
-                </div>
-            </div>
-        `).join('');
-    }
-    
-    function renderSocialLinks() {
-        const container = document.getElementById('socialGrid');
-        container.innerHTML = socialLinks.map(link => `
-            <div class="social-card" onclick="window.open('${link.url}','_blank')">
-                <i class="${link.icon}" style="font-size:28px; color:${link.color};"></i>
-                <div class="social-name">${link.name}</div>
-            </div>
-        `).join('');
-    }
-    
-    function showAllCategories() {
-        document.getElementById('modalTitle').innerHTML = '📂 جميع الأقسام';
-        document.getElementById('allProductsGrid').innerHTML = categories.map(cat => `
-            <div class="category-card" onclick="showCategoryProducts('${cat.id}','${cat.name}'); closeModal();">
-                <div class="category-icon"><i class="fas ${cat.icon}"></i></div>
-                <div class="category-name">${cat.name}</div>
-            </div>
-        `).join('');
-        document.getElementById('allProductsModal').classList.add('active');
-    }
-    
-    function showAllProducts(type) {
-        let title = type === 'bestSellers' ? '⭐ الأكثر مبيعاً' : '✨ المنتجات المميزة';
-        let filtered = type === 'bestSellers' ? products.filter(p => p.isBestSeller) : products.filter(p => p.isFeatured);
-        document.getElementById('modalTitle').innerHTML = title;
-        document.getElementById('allProductsGrid').innerHTML = filtered.map(p => `
-            <div class="product-card" onclick="showProductDetail(${p.id}); closeModal();">
-                <div class="product-image">${p.icon}</div>
-                <div class="product-title">${p.name}</div>
-                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
-            </div>
-        `).join('');
-        document.getElementById('allProductsModal').classList.add('active');
-    }
-    
-    function closeModal() { document.getElementById('allProductsModal').classList.remove('active'); }
-    
-    // ======================= SLIDER =======================
-    let currentSlide = 0;
-    const sliderWrapper = document.getElementById('sliderWrapper');
-    const slides = document.querySelectorAll('.slide');
-    
-    function initSlider() {
-        for(let i=0; i<slides.length; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            dot.onclick = () => goToSlide(i);
-            document.getElementById('sliderDots').appendChild(dot);
-        }
-        goToSlide(0);
-        setInterval(() => goToSlide(currentSlide+1), 5000);
-        let startX;
-        sliderWrapper.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
-        sliderWrapper.addEventListener('touchend', (e) => {
-            let diff = e.changedTouches[0].clientX - startX;
-            if(Math.abs(diff) > 50) goToSlide(diff > 0 ? currentSlide-1 : currentSlide+1);
-        });
-    }
-    
-    function goToSlide(index) {
-        currentSlide = (index + slides.length) % slides.length;
-        sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-        document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===currentSlide));
-    }
-    
-    // ======================= CART FUNCTIONS =======================
-    function updateCartBadge() {
-        const badge = document.getElementById('cartBadge');
-        const total = document.getElementById('cartTotal');
-        if(cart.length > 0) {
-            badge.style.display = 'inline-flex';
-            badge.innerText = cart.length;
-        } else { badge.style.display = 'none'; }
-        if(total) {
-            const sum = cart.reduce((s, item) => s + item.price, 0);
-            total.innerHTML = `المجموع: ${sum.toLocaleString()} د.ع`;
+    // ======================= حفظ الطلب في GitHub =======================
+    async function saveOrderToGithub(order) {
+        try {
+            // جلب البيانات الحالية
+            const response = await fetch(GIST_URL, {
+                headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+            });
+            
+            let allData = { products: [], users: [], orders: [] };
+            
+            if(response.ok) {
+                const data = await response.json();
+                if(data.files && data.files['hekaya_data.json']) {
+                    allData = JSON.parse(data.files['hekaya_data.json'].content);
+                }
+            }
+            
+            // إضافة الطلب الجديد
+            if(!allData.orders) allData.orders = [];
+            allData.orders.unshift(order);
+            allData.lastUpdate = new Date().toISOString();
+            
+            // حفظ البيانات
+            const content = JSON.stringify(allData, null, 2);
+            const saveResponse = await fetch(GIST_URL, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    files: { 'hekaya_data.json': { content: content } }
+                })
+            });
+            
+            return saveResponse.ok;
+        } catch(error) {
+            console.error('Error:', error);
+            return false;
         }
     }
     
-    function addToCart(productId) {
-        if(!currentUser) { showToast('❌ الرجاء تسجيل الدخول أولاً'); return; }
-        const product = products.find(p => p.id === productId);
-        if(!cart.find(item => item.id === productId)) {
-            cart.push({ id: product.id, name: product.name, price: product.price });
-            saveUserData();
-            updateCartBadge();
-            showToast(`✅ تم إضافة ${product.name} إلى السلة`);
-        } else { showToast(`⚠️ ${product.name} موجود بالفعل`); }
-    }
-    
-    function removeFromCart(productId) {
-        cart = cart.filter(item => item.id !== productId);
-        saveUserData();
-        updateCartBadge();
-        if(currentTab === 'cart') renderCartItems();
-        showToast(`🗑️ تم إزالة المنتج من السلة`);
-    }
-    
-    function toggleFavorite(productId) {
-        if(!currentUser) { showToast('❌ الرجاء تسجيل الدخول أولاً'); return; }
-        if(favorites.includes(productId)) {
-            favorites = favorites.filter(id => id !== productId);
-            showToast(`💔 تم إزالة من المفضلة`);
-        } else {
-            favorites.push(productId);
-            showToast(`❤️ تمت إضافة إلى المفضلة`);
-        }
-        saveUserData();
-        if(currentTab === 'favorites') renderFavoritesItems();
-    }
-    
-    function renderCartItems() {
-        const container = document.getElementById('cartItemsGrid');
-        if(cart.length === 0) { container.innerHTML = '<div class="empty-state">🛒 السلة فارغة</div>'; return; }
-        container.innerHTML = cart.map(item => {
-            const p = products.find(p => p.id === item.id);
-            return `<div class="product-card">
-                <div class="product-image">${p.icon}</div>
-                <div class="product-title">${p.name}</div>
-                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
-                <button class="product-action-btn" onclick="removeFromCart(${p.id})">🗑️ حذف</button>
-            </div>`;
-        }).join('');
-        updateCartBadge();
-    }
-    
-    function renderFavoritesItems() {
-        const container = document.getElementById('favoritesItemsGrid');
-        if(favorites.length === 0) { container.innerHTML = '<div class="empty-state">❤️ لا توجد مفضلات</div>'; return; }
-        container.innerHTML = favorites.map(id => {
-            const p = products.find(p => p.id === id);
-            return `<div class="product-card">
-                <div class="product-image">${p.icon}</div>
-                <div class="product-title">${p.name}</div>
-                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
-                <div class="product-actions">
-                    <button class="product-action-btn" onclick="addToCart(${p.id})">🛒</button>
-                    <button class="product-action-btn" onclick="toggleFavorite(${p.id})">🗑️</button>
-                </div>
-            </div>`;
-        }).join('');
-    }
-    
-    function showProductDetail(id) {
-        const p = products.find(p => p.id === id);
-        const modal = document.createElement('div');
-        modal.style.cssText = `position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.95); display:flex; align-items:center; justify-content:center; z-index:1000;`;
-        modal.innerHTML = `<div style="background:var(--card-bg); border-radius:28px; padding:20px; width:85%; max-width:320px; text-align:center; border:2px solid var(--primary);">
-            <div style="font-size:64px;">${p.icon}</div>
-            <h3>${p.name}</h3>
-            <div><span style="font-size:20px; font-weight:bold; color:var(--primary);">${p.price.toLocaleString()} د.ع</span></div>
-            <button onclick="addToCart(${p.id}); this.parentElement.parentElement.remove()" style="background:var(--gradient); border:none; padding:10px; border-radius:30px; width:100%; margin-top:5px;">🛒 إضافة للسلة</button>
-            <button onclick="toggleFavorite(${p.id}); this.parentElement.parentElement.remove()" style="background:var(--card-bg); border:1px solid var(--primary); padding:10px; border-radius:30px; width:100%; margin-top:5px;">❤️ إضافة للمفضلة</button>
-            <button onclick="this.parentElement.parentElement.remove()" style="background:var(--border-color); padding:10px; border-radius:30px; width:100%; margin-top:5px;">إغلاق</button>
-        </div>`;
-        document.body.appendChild(modal);
-    }
-    
-    // ======================= CHECKOUT - FIXED =======================
+    // ======================= إرسال الطلب =======================
     async function checkout() {
         if(!currentUser) {
             showToast('❌ الرجاء تسجيل الدخول أولاً');
+            login();
             return;
         }
         if(cart.length === 0) {
@@ -549,177 +217,171 @@
             timestamp: Date.now()
         };
         
-        try {
-            // Load existing orders
-            let orders = [];
-            const response = await fetch(GIST_URL, { headers: { 'Authorization': `token ${GITHUB_TOKEN}` } });
+        const saved = await saveOrderToGithub(order);
+        
+        if(saved) {
+            cart = [];
+            saveUserData();
+            updateCartTotal();
+            if(currentTab === 'cart') renderCartItems();
+            showToast(`✅ تم إرسال الطلب بنجاح! رقم الطلب: ${order.orderNumber}`);
             
-            if(response.ok) {
-                const data = await response.json();
-                if(data.files && data.files['hekaya_orders.json']) {
-                    orders = JSON.parse(data.files['hekaya_orders.json'].content);
-                }
-            }
-            
-            orders.unshift(order);
-            const content = JSON.stringify(orders, null, 2);
-            
-            // Create or update orders file
-            let fileData = { files: { 'hekaya_orders.json': { content: content } } };
-            
-            // Check if gist exists, get its ID
-            let gistId = GIST_ID;
-            let patchUrl = `https://api.github.com/gists/${gistId}`;
-            
-            const saveResponse = await fetch(patchUrl, {
-                method: 'PATCH',
-                headers: HEADERS,
-                body: JSON.stringify(fileData)
-            });
-            
-            if(saveResponse.ok) {
-                cart = [];
-                saveUserData();
-                updateCartBadge();
-                if(currentTab === 'cart') renderCartItems();
-                showToast(`✅ تم إرسال الطلب بنجاح! رقم الطلب: ${order.orderNumber}`);
-                
-                // Send to WhatsApp
-                const msg = encodeURIComponent(`طلب جديد من ${order.customer.fullName}\nرقم الطلب: ${order.orderNumber}\nالمجموع: ${order.total.toLocaleString()} د.ع\nالعنوان: ${order.customer.address}`);
-                window.open(`https://wa.me/9647757777566?text=${msg}`, '_blank');
-            } else {
-                const errorText = await saveResponse.text();
-                console.error('Save error:', errorText);
-                showToast('❌ فشل إرسال الطلب: ' + saveResponse.status);
-            }
-        } catch(e) {
-            console.error('Checkout error:', e);
-            showToast('❌ خطأ في الاتصال: ' + e.message);
+            // إرسال واتساب
+            const itemsList = order.items.map(item => `• ${item.name}: ${item.price.toLocaleString()} د.ع`).join('\n');
+            const msg = encodeURIComponent(`🛒 طلب جديد\n👤 ${order.customer.fullName}\n📞 ${order.customer.phone}\n📍 ${order.customer.address}\n📋 ${itemsList}\n💰 ${order.total.toLocaleString()} د.ع`);
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+        } else {
+            showToast('❌ فشل إرسال الطلب، حاول مرة أخرى');
         }
     }
     
-    // ======================= USER MANAGEMENT =======================
+    // ======================= باقي الدوال =======================
+    function renderBestSellers() {
+        const container = document.getElementById('bestSellersGrid');
+        container.innerHTML = products.filter(p => p.isBestSeller).map(p => `
+            <div class="product-card" onclick="showProductDetail(${p.id})">
+                <div class="product-image">${p.icon}</div>
+                <div class="product-title">${p.name}</div>
+                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
+                <div class="product-actions">
+                    <button class="product-action-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function renderFeatured() {
+        const container = document.getElementById('featuredGrid');
+        container.innerHTML = products.filter(p => p.oldPrice).map(p => `
+            <div class="product-card" onclick="showProductDetail(${p.id})">
+                <div class="product-image">${p.icon}</div>
+                <div class="product-title">${p.name}</div>
+                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
+                <div class="product-actions">
+                    <button class="product-action-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function renderCartItems() {
+        const container = document.getElementById('cartItemsGrid');
+        if(cart.length === 0) { container.innerHTML = '<div class="empty-state">🛒 السلة فارغة</div>'; updateCartTotal(); return; }
+        container.innerHTML = cart.map(item => {
+            const p = products.find(p => p.id === item.id);
+            return `<div class="product-card">
+                <div class="product-image">${p.icon}</div>
+                <div class="product-title">${p.name}</div>
+                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
+                <button class="product-action-btn" onclick="removeFromCart(${p.id})">🗑️ حذف</button>
+            </div>`;
+        }).join('');
+        updateCartTotal();
+    }
+    
+    function updateCartTotal() {
+        const total = document.getElementById('cartTotal');
+        const badge = document.getElementById('cartBadge');
+        const sum = cart.reduce((s, item) => s + item.price, 0);
+        if(total) total.innerHTML = `المجموع: ${sum.toLocaleString()} د.ع`;
+        if(cart.length > 0) { badge.style.display = 'inline-flex'; badge.innerText = cart.length; }
+        else badge.style.display = 'none';
+    }
+    
+    function addToCart(productId) {
+        if(!currentUser) { showToast('❌ الرجاء تسجيل الدخول أولاً'); login(); return; }
+        const product = products.find(p => p.id === productId);
+        if(!cart.find(item => item.id === productId)) {
+            cart.push({ id: product.id, name: product.name, price: product.price });
+            saveUserData();
+            updateCartTotal();
+            showToast(`✅ تم إضافة ${product.name} إلى السلة`);
+        } else { showToast(`⚠️ ${product.name} موجود بالفعل`); }
+    }
+    
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.id !== productId);
+        saveUserData();
+        updateCartTotal();
+        if(currentTab === 'cart') renderCartItems();
+        showToast(`🗑️ تم إزالة المنتج من السلة`);
+    }
+    
+    function showProductDetail(id) {
+        const p = products.find(p => p.id === id);
+        alert(`${p.name}\nالسعر: ${p.price.toLocaleString()} د.ع`);
+    }
+    
     function checkLoginStatus() {
         const saved = localStorage.getItem('hekaya_current_user');
         if(saved) {
             currentUser = JSON.parse(saved);
-            document.getElementById('loginOverlay').style.display = 'none';
-            updateUserUI();
+            document.getElementById('loginOverlay')?.remove();
             loadUserData();
             return true;
         }
-        document.getElementById('loginOverlay').style.display = 'flex';
+        login();
         return false;
     }
     
-    function updateUserUI() {
-        if(currentUser) {
-            document.getElementById('displayName').innerText = currentUser.fullName || currentUser.username;
-            document.getElementById('profileFullName').value = currentUser.fullName || '';
-            document.getElementById('profilePhone').value = currentUser.phone || '';
-            document.getElementById('profileAddress').value = currentUser.address || '';
-            document.getElementById('userAvatar').innerHTML = currentUser.fullName ? currentUser.fullName.charAt(0).toUpperCase() : '👤';
+    function login() {
+        const username = prompt('👤 اسم المستخدم:');
+        const password = prompt('🔑 كلمة المرور:');
+        const user = users.find(u => u.username === username && u.password === password);
+        if(user) {
+            currentUser = user;
+            localStorage.setItem('hekaya_current_user', JSON.stringify(currentUser));
+            loadUserData();
+            showToast(`✅ مرحباً ${user.fullName || username}`);
+            if(document.getElementById('loginOverlay')) document.getElementById('loginOverlay').remove();
+        } else {
+            alert('❌ اسم المستخدم أو كلمة المرور غير صحيحة');
+            login();
         }
-    }
-    
-    function loadUserData() {
-        const savedCart = localStorage.getItem(`cart_${currentUser.username}`);
-        const savedFav = localStorage.getItem(`fav_${currentUser.username}`);
-        cart = savedCart ? JSON.parse(savedCart) : [];
-        favorites = savedFav ? JSON.parse(savedFav) : [];
-        updateCartBadge();
-        if(currentTab === 'cart') renderCartItems();
-        if(currentTab === 'favorites') renderFavoritesItems();
     }
     
     function saveUserData() {
         if(currentUser) {
             localStorage.setItem(`cart_${currentUser.username}`, JSON.stringify(cart));
-            localStorage.setItem(`fav_${currentUser.username}`, JSON.stringify(favorites));
         }
     }
     
-    function login() {
-        const username = document.getElementById('loginUsername').value;
-        const password = document.getElementById('loginPassword').value;
-        const user = users.find(u => u.username === username && u.password === password);
-        if(user) {
-            currentUser = user;
-            localStorage.setItem('hekaya_current_user', JSON.stringify(currentUser));
-            document.getElementById('loginOverlay').style.display = 'none';
-            updateUserUI();
-            loadUserData();
-            showToast(`✅ مرحباً ${user.fullName || username}`);
-        } else {
-            document.getElementById('loginError').innerText = 'اسم المستخدم أو كلمة المرور غير صحيحة';
-            document.getElementById('loginError').style.display = 'block';
+    function loadUserData() {
+        const savedCart = localStorage.getItem(`cart_${currentUser.username}`);
+        cart = savedCart ? JSON.parse(savedCart) : [];
+        updateCartTotal();
+    }
+    
+    // السلايدر
+    let currentSlide = 0;
+    const sliderWrapper = document.getElementById('sliderWrapper');
+    const slides = document.querySelectorAll('.slide');
+    
+    function initSlider() {
+        for(let i=0; i<slides.length; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.onclick = () => goToSlide(i);
+            document.getElementById('sliderDots').appendChild(dot);
         }
-    }
-    
-    function showRegister() {
-        document.getElementById('loginOverlay').style.display = 'none';
-        document.getElementById('registerOverlay').style.display = 'flex';
-    }
-    
-    function showLogin() {
-        document.getElementById('registerOverlay').style.display = 'none';
-        document.getElementById('loginOverlay').style.display = 'flex';
-    }
-    
-    function register() {
-        const username = document.getElementById('regUsername').value;
-        const password = document.getElementById('regPassword').value;
-        const fullName = document.getElementById('regFullName').value;
-        const phone = document.getElementById('regPhone').value;
-        const address = document.getElementById('regAddress').value;
+        goToSlide(0);
+        setInterval(() => goToSlide(currentSlide+1), 5000);
         
-        if(!username || !password || !fullName || !phone || !address) {
-            document.getElementById('regError').innerText = 'الرجاء ملء جميع الحقول';
-            document.getElementById('regError').style.display = 'block';
-            return;
-        }
-        if(users.find(u => u.username === username)) {
-            document.getElementById('regError').innerText = 'اسم المستخدم موجود بالفعل';
-            return;
-        }
-        const newUser = { username, password, fullName, phone, address };
-        users.push(newUser);
-        localStorage.setItem('hekaya_users', JSON.stringify(users));
-        currentUser = newUser;
-        localStorage.setItem('hekaya_current_user', JSON.stringify(currentUser));
-        document.getElementById('registerOverlay').style.display = 'none';
-        updateUserUI();
-        loadUserData();
-        showToast(`✅ مرحباً ${fullName}`);
+        let startX;
+        sliderWrapper.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
+        sliderWrapper.addEventListener('touchend', (e) => {
+            let diff = e.changedTouches[0].clientX - startX;
+            if(Math.abs(diff) > 50) goToSlide(diff > 0 ? currentSlide-1 : currentSlide+1);
+        });
     }
     
-    function updateProfile() {
-        if(!currentUser) return;
-        currentUser.fullName = document.getElementById('profileFullName').value;
-        currentUser.phone = document.getElementById('profilePhone').value;
-        currentUser.address = document.getElementById('profileAddress').value;
-        const index = users.findIndex(u => u.username === currentUser.username);
-        if(index !== -1) users[index] = currentUser;
-        localStorage.setItem('hekaya_users', JSON.stringify(users));
-        localStorage.setItem('hekaya_current_user', JSON.stringify(currentUser));
-        updateUserUI();
-        showToast('✅ تم تحديث الملف الشخصي');
+    function goToSlide(index) {
+        currentSlide = (index + slides.length) % slides.length;
+        sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+        document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===currentSlide));
     }
     
-    function logout() {
-        currentUser = null;
-        localStorage.removeItem('hekaya_current_user');
-        cart = [];
-        favorites = [];
-        document.getElementById('loginOverlay').style.display = 'flex';
-        updateCartBadge();
-        showToast('👋 تم تسجيل الخروج');
-    }
-    
-    // ======================= SETTINGS & THEME =======================
-    function openSettings() { document.getElementById('settingsModal').classList.add('active'); }
-    function closeSettings() { document.getElementById('settingsModal').classList.remove('active'); }
-    
+    // الثيم
     function loadTheme() {
         if(localStorage.getItem('hekaya_theme') === 'dark') {
             document.body.classList.add('dark');
@@ -734,7 +396,6 @@
         document.getElementById('themeToggleBtn').innerHTML = isDark ? '☀️ نهاري' : '🌙 ليلي';
     }
     
-    // ======================= NAVIGATION =======================
     function setActiveTab(tab) {
         currentTab = tab;
         document.querySelectorAll('.nav-item').forEach(item => {
@@ -743,11 +404,8 @@
         });
         document.getElementById('homeContent').style.display = 'none';
         document.getElementById('cartContent').style.display = 'none';
-        document.getElementById('favoritesContent').style.display = 'none';
-        document.getElementById('categoryProductsSection').classList.remove('active');
         if(tab === 'home') document.getElementById('homeContent').style.display = 'block';
         else if(tab === 'cart') { document.getElementById('cartContent').style.display = 'block'; renderCartItems(); }
-        else if(tab === 'favorites') { document.getElementById('favoritesContent').style.display = 'block'; renderFavoritesItems(); }
     }
     
     function showToast(msg) {
@@ -758,7 +416,7 @@
         setTimeout(() => toast.remove(), 2500);
     }
     
-    // Search
+    // البحث
     document.getElementById('searchInput').addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
         if(term) {
@@ -767,40 +425,18 @@
         }
     });
     
-    // Event Listeners
+    // الأحداث
     document.querySelectorAll('.nav-item').forEach(item => item.addEventListener('click', () => setActiveTab(item.dataset.tab)));
     document.getElementById('themeToggleBtn').onclick = toggleTheme;
-    document.getElementById('themeSelect').addEventListener('change', (e) => {
-        if(e.target.value === 'dark') document.body.classList.add('dark');
-        else document.body.classList.remove('dark');
-    });
     
-    // Make functions global
-    window.showCategoryProducts = showCategoryProducts;
-    window.backToHome = backToHome;
+    // جعل الدوال عامة
     window.addToCart = addToCart;
-    window.toggleFavorite = toggleFavorite;
-    window.removeFromCart = removeFromCart;
-    window.showProductDetail = showProductDetail;
-    window.showAllCategories = showAllCategories;
-    window.showAllProducts = showAllProducts;
-    window.closeModal = closeModal;
-    window.openSettings = openSettings;
-    window.closeSettings = closeSettings;
-    window.login = login;
-    window.showRegister = showRegister;
-    window.showLogin = showLogin;
-    window.register = register;
-    window.updateProfile = updateProfile;
-    window.logout = logout;
-    window.setActiveTab = setActiveTab;
     window.checkout = checkout;
+    window.setActiveTab = setActiveTab;
     
-    // Initialize
-    renderCategories();
+    // التشغيل
     renderBestSellers();
     renderFeatured();
-    renderSocialLinks();
     initSlider();
     loadTheme();
     checkLoginStatus();
