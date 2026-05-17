@@ -15,18 +15,34 @@
         body.dark { --bg-color: #0D0D0D; --card-bg: #1A1A1A; --text-color: #F5F5F5; --border-color: #2A2A2A; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-color); color: var(--text-color); transition: all 0.3s; padding-bottom: 70px; }
         
-        .header { background: var(--card-bg); padding: 12px 16px; border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .header { background: var(--card-bg); padding: 12px 16px; border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
         .logo-area h1 { font-size: 20px; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .header-buttons { display: flex; gap: 10px; align-items: center; }
+        .icon-btn { background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; }
         .theme-toggle { background: var(--gradient); border: none; border-radius: 30px; padding: 6px 12px; cursor: pointer; font-size: 12px; font-weight: bold; color: #1A1A1A; }
+        .user-info { display: flex; align-items: center; gap: 8px; background: var(--card-bg); padding: 5px 12px; border-radius: 30px; cursor: pointer; border: 1px solid var(--border-color); }
+        .user-avatar { width: 30px; height: 30px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
         
-        /* Login Modal */
+        /* Modals */
         .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 1000; display: flex; align-items: center; justify-content: center; }
-        .modal-content { background: var(--card-bg); border-radius: 28px; padding: 25px; width: 85%; max-width: 350px; border: 2px solid var(--primary); text-align: center; }
+        .modal-content { background: var(--card-bg); border-radius: 28px; padding: 25px; width: 85%; max-width: 400px; border: 2px solid var(--primary); text-align: center; max-height: 85vh; overflow-y: auto; }
         .modal-content h3 { color: var(--primary); margin-bottom: 20px; }
         .modal-input { width: 100%; padding: 12px; margin: 8px 0; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-color); }
         .modal-btn { background: var(--gradient); border: none; padding: 12px; border-radius: 30px; width: 100%; font-weight: bold; margin-top: 10px; cursor: pointer; }
         .modal-close { background: var(--border-color); color: var(--text-color); }
         
+        /* Settings Section */
+        .settings-group { margin-bottom: 20px; text-align: right; }
+        .settings-label { color: var(--primary); font-weight: bold; margin-bottom: 8px; display: block; }
+        .quantity-control { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 10px 0; }
+        .quantity-btn { background: var(--gradient); border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 20px; font-weight: bold; cursor: pointer; }
+        .quantity-value { font-size: 20px; font-weight: bold; min-width: 50px; text-align: center; }
+        .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 15px; }
+        .social-card { background: var(--bg-color); border-radius: 16px; padding: 12px; text-align: center; cursor: pointer; border: 1px solid var(--border-color); }
+        .social-icon { font-size: 28px; display: block; margin-bottom: 6px; }
+        .social-name { font-size: 11px; font-weight: bold; color: var(--primary); }
+        
+        /* Slider */
         .slider-container { margin: 12px; position: relative; overflow: hidden; border-radius: 24px; }
         .slider-wrapper { display: flex; transition: transform 0.5s ease; cursor: grab; }
         .slide { min-width: 100%; background: var(--gradient); padding: 20px; text-align: center; color: #1A1A1A; }
@@ -54,6 +70,13 @@
         .fav-btn { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
         .fav-active { color: #E53935; background: white; }
         
+        /* Cart Item with Quantity */
+        .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 8px; border-bottom: 1px solid var(--border-color); }
+        .cart-item-info { flex: 1; }
+        .cart-item-price { color: var(--primary); font-weight: bold; }
+        .cart-item-quantity { display: flex; align-items: center; gap: 10px; }
+        .cart-qty-btn { background: var(--gradient); border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-weight: bold; }
+        
         .cart-summary { background: var(--card-bg); border-radius: 20px; padding: 15px; margin: 12px; }
         .cart-total { font-size: 18px; font-weight: bold; color: var(--primary); text-align: center; margin: 10px 0; }
         .checkout-btn { background: var(--gradient); border: none; padding: 12px; border-radius: 30px; width: 100%; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
@@ -71,17 +94,15 @@
         .toast { position: fixed; bottom: 80px; left: 20px; right: 20px; background: var(--gradient); color: #1A1A1A; padding: 12px; border-radius: 50px; text-align: center; z-index: 1000; animation: fadeOut 2.5s; font-weight: bold; }
         @keyframes fadeOut { 0% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
         .empty-state { text-align: center; padding: 40px; color: var(--text-dim); }
-        
-        .user-info { display: flex; align-items: center; gap: 8px; background: var(--card-bg); padding: 5px 12px; border-radius: 30px; cursor: pointer; }
-        .user-avatar { width: 30px; height: 30px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <div class="logo-area"><h1>✨ مكتبة حكايه ✨</h1></div>
-    <div style="display: flex; gap: 10px; align-items: center;">
-        <div class="user-info" id="userInfoBtn" onclick="showLoginModal()">
+    <div class="header-buttons">
+        <div class="icon-btn" onclick="openSettings()"><i class="fas fa-cog"></i></div>
+        <div class="user-info" id="userInfoBtn" onclick="showUserMenu()">
             <div class="user-avatar" id="userAvatar">👤</div>
             <span id="userName">تسجيل الدخول</span>
         </div>
@@ -119,7 +140,7 @@
 
 <div id="cartContent" style="display: none;">
     <div class="section-title"><h3>🛒 سلة المشتريات</h3></div>
-    <div id="cartItemsGrid" class="products-grid"></div>
+    <div id="cartItemsGrid" class="cart-items-list"></div>
     <div class="cart-summary">
         <div class="cart-total" id="cartTotal">المجموع: 0 د.ع</div>
         <button class="checkout-btn" onclick="checkout()">💳 شراء الآن</button>
@@ -132,6 +153,53 @@
     <div class="nav-item" data-tab="cart"><div class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="badge" id="cartBadge" style="display:none;">0</span></div><span>السلة</span></div>
 </div>
 
+<!-- Settings Modal -->
+<div id="settingsModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3><i class="fas fa-cog"></i> الإعدادات</h3>
+        
+        <div class="settings-group">
+            <div class="settings-label">🔢 الكمية الافتراضية للإضافة</div>
+            <div class="quantity-control">
+                <button class="quantity-btn" onclick="changeDefaultQty(-1)">-</button>
+                <span class="quantity-value" id="defaultQtyValue">1</span>
+                <button class="quantity-btn" onclick="changeDefaultQty(1)">+</button>
+            </div>
+        </div>
+        
+        <div class="settings-group">
+            <div class="settings-label">🌙 المظهر</div>
+            <select id="themeSelect" class="modal-input" onchange="changeThemeSelect(this.value)">
+                <option value="auto">تلقائي</option>
+                <option value="light">فاتح</option>
+                <option value="dark">داكن</option>
+            </select>
+        </div>
+        
+        <div class="settings-group">
+            <div class="settings-label">🔔 الإشعارات</div>
+            <label style="display: flex; justify-content: space-between; align-items: center;">
+                <span>إشعارات الطلبات</span>
+                <input type="checkbox" id="orderNotifications" checked>
+            </label>
+        </div>
+        
+        <div class="settings-group">
+            <div class="settings-label">🌐 تابعونا على وسائل التواصل</div>
+            <div class="social-grid">
+                <div class="social-card" onclick="window.open('https://wa.me/9647757777566', '_blank')"><div class="social-icon"><i class="fab fa-whatsapp"></i></div><div class="social-name">واتساب</div></div>
+                <div class="social-card" onclick="window.open('https://t.me/hikaya_b', '_blank')"><div class="social-icon"><i class="fab fa-telegram"></i></div><div class="social-name">تيليجرام</div></div>
+                <div class="social-card" onclick="window.open('https://instagram.com/hikaya.b', '_blank')"><div class="social-icon"><i class="fab fa-instagram"></i></div><div class="social-name">انستقرام</div></div>
+                <div class="social-card" onclick="window.open('https://facebook.com/hikaya.b', '_blank')"><div class="social-icon"><i class="fab fa-facebook"></i></div><div class="social-name">فيسبوك</div></div>
+                <div class="social-card" onclick="window.open('https://tiktok.com/@hikaya.b', '_blank')"><div class="social-icon"><i class="fab fa-tiktok"></i></div><div class="social-name">تيك توك</div></div>
+                <div class="social-card" onclick="window.open('https://maps.app.goo.gl/FeFawvomK2qhTJxdA', '_blank')"><div class="social-icon"><i class="fas fa-map-marker-alt"></i></div><div class="social-name">الموقع</div></div>
+            </div>
+        </div>
+        
+        <button class="modal-btn" onclick="closeSettings()">إغلاق</button>
+    </div>
+</div>
+
 <!-- Login Modal -->
 <div id="loginModal" class="modal" style="display: none;">
     <div class="modal-content">
@@ -140,6 +208,7 @@
         <input type="password" id="loginPassword" class="modal-input" placeholder="كلمة المرور">
         <div id="loginError" style="color: #E53935; font-size: 12px; margin-top: 5px; display: none;"></div>
         <button class="modal-btn" onclick="doLogin()">تسجيل الدخول</button>
+        <button class="modal-btn modal-close" onclick="showRegisterModal()">إنشاء حساب جديد</button>
         <button class="modal-btn modal-close" onclick="closeLoginModal()">إلغاء</button>
     </div>
 </div>
@@ -177,9 +246,10 @@
     // متغيرات الجلسة
     let users = [];
     let currentUser = null;
-    let cart = [];
+    let cart = []; // كل عنصر: { id, name, price, quantity }
     let favorites = [];
     let currentTab = 'home';
+    let defaultQuantity = 1;
     
     // ======================= دوال GitHub =======================
     async function loadUsersFromGithub() {
@@ -205,37 +275,6 @@
             console.error('Error loading users:', e);
             users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "", address: "" }];
             return false;
-        }
-    }
-    
-    async function saveUserToGithub(updatedUsers) {
-        try {
-            const response = await fetch(GIST_URL, {
-                headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
-            });
-            let allData = {};
-            if(response.ok) {
-                const data = await response.json();
-                if(data.files && data.files['hekaya_data.json']) {
-                    allData = JSON.parse(data.files['hekaya_data.json'].content);
-                }
-            }
-            allData.users = updatedUsers;
-            allData.lastUpdate = new Date().toISOString();
-            
-            const content = JSON.stringify(allData, null, 2);
-            await fetch(GIST_URL, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `token ${GITHUB_TOKEN}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    files: { 'hekaya_data.json': { content: content } }
-                })
-            });
-        } catch(e) {
-            console.error('Error saving user:', e);
         }
     }
     
@@ -321,21 +360,54 @@
         renderAll();
     }
     
+    async function saveUserToGithub(updatedUsers) {
+        try {
+            const response = await fetch(GIST_URL, {
+                headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+            });
+            let allData = {};
+            if(response.ok) {
+                const data = await response.json();
+                if(data.files && data.files['hekaya_data.json']) {
+                    allData = JSON.parse(data.files['hekaya_data.json'].content);
+                }
+            }
+            allData.users = updatedUsers;
+            allData.lastUpdate = new Date().toISOString();
+            
+            const content = JSON.stringify(allData, null, 2);
+            await fetch(GIST_URL, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    files: { 'hekaya_data.json': { content: content } }
+                })
+            });
+        } catch(e) {
+            console.error('Error saving user:', e);
+        }
+    }
+    
     function updateUserUI() {
         if(currentUser) {
             document.getElementById('userName').innerText = currentUser.fullName || currentUser.username;
             document.getElementById('userAvatar').innerHTML = currentUser.fullName ? currentUser.fullName.charAt(0).toUpperCase() : '👤';
-            document.getElementById('userInfoBtn').onclick = () => showUserMenu();
         } else {
             document.getElementById('userName').innerText = 'تسجيل الدخول';
             document.getElementById('userAvatar').innerHTML = '👤';
-            document.getElementById('userInfoBtn').onclick = () => showLoginModal();
         }
     }
     
     function showUserMenu() {
-        if(confirm(`👤 ${currentUser?.fullName || currentUser?.username}\n\n📞 ${currentUser?.phone || 'لا يوجد'}\n📍 ${currentUser?.address || 'لا يوجد'}\n\nهل تريد تسجيل الخروج؟`)) {
-            logout();
+        if(currentUser) {
+            if(confirm(`👤 ${currentUser.fullName || currentUser.username}\n\n📞 ${currentUser.phone || 'لا يوجد'}\n📍 ${currentUser.address || 'لا يوجد'}\n\nهل تريد تسجيل الخروج؟`)) {
+                logout();
+            }
+        } else {
+            showLoginModal();
         }
     }
     
@@ -367,6 +439,19 @@
         }
     }
     
+    // ======================= دوال الكمية =======================
+    function changeDefaultQty(delta) {
+        defaultQuantity = Math.max(1, defaultQuantity + delta);
+        document.getElementById('defaultQtyValue').innerText = defaultQuantity;
+        localStorage.setItem('default_quantity', defaultQuantity);
+    }
+    
+    function loadDefaultQty() {
+        const saved = localStorage.getItem('default_quantity');
+        if(saved) defaultQuantity = parseInt(saved);
+        document.getElementById('defaultQtyValue').innerText = defaultQuantity;
+    }
+    
     // ======================= دوال المنتجات =======================
     function toggleFavorite(productId) {
         if(!currentUser) { showToast('❌ الرجاء تسجيل الدخول أولاً'); showLoginModal(); return; }
@@ -384,14 +469,30 @@
     function addToCart(productId) {
         if(!currentUser) { showToast('❌ الرجاء تسجيل الدخول أولاً'); showLoginModal(); return; }
         const product = products.find(p => p.id === productId);
-        if(!cart.find(item => item.id === productId)) {
-            cart.push({ id: product.id, name: product.name, price: product.price });
+        const existingItem = cart.find(item => item.id === productId);
+        
+        if(existingItem) {
+            existingItem.quantity += defaultQuantity;
+            showToast(`✅ تم إضافة ${defaultQuantity} × ${product.name} إلى السلة`);
+        } else {
+            cart.push({ id: product.id, name: product.name, price: product.price, quantity: defaultQuantity });
+            showToast(`✅ تم إضافة ${product.name} إلى السلة`);
+        }
+        saveUserData();
+        updateCartTotal();
+        if(currentTab === 'cart') renderCartItems();
+    }
+    
+    function updateCartItemQuantity(productId, delta) {
+        const item = cart.find(item => item.id === productId);
+        if(item) {
+            item.quantity += delta;
+            if(item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            }
             saveUserData();
             updateCartTotal();
             if(currentTab === 'cart') renderCartItems();
-            showToast(`✅ تم إضافة ${product.name} إلى السلة`);
-        } else {
-            showToast(`⚠️ ${product.name} موجود بالفعل`);
         }
     }
     
@@ -406,9 +507,10 @@
     function updateCartTotal() {
         const total = document.getElementById('cartTotal');
         const badge = document.getElementById('cartBadge');
-        const sum = cart.reduce((s, item) => s + item.price, 0);
-        if(total) total.innerHTML = `المجموع: ${sum.toLocaleString()} د.ع`;
-        if(cart.length > 0) { badge.style.display = 'inline-flex'; badge.innerText = cart.length; }
+        const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        if(total) total.innerHTML = `المجموع: ${totalPrice.toLocaleString()} د.ع`;
+        if(itemCount > 0) { badge.style.display = 'inline-flex'; badge.innerText = itemCount; }
         else badge.style.display = 'none';
     }
     
@@ -419,7 +521,7 @@
         container.innerHTML = bestSellers.map(p => `
             <div class="product-card" onclick="showProductDetail(${p.id})">
                 <button class="fav-btn ${favorites.includes(p.id) ? 'fav-active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${p.id})">
-                    <i class="fas ${favorites.includes(p.id) ? 'fa-heart' : 'fa-heart'}"></i>
+                    <i class="fas fa-heart"></i>
                 </button>
                 <div class="product-image">${p.icon}</div>
                 <div class="product-title">${p.name}</div>
@@ -437,7 +539,7 @@
         container.innerHTML = featured.map(p => `
             <div class="product-card" onclick="showProductDetail(${p.id})">
                 <button class="fav-btn ${favorites.includes(p.id) ? 'fav-active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${p.id})">
-                    <i class="fas ${favorites.includes(p.id) ? 'fa-heart' : 'fa-heart'}"></i>
+                    <i class="fas fa-heart"></i>
                 </button>
                 <div class="product-image">${p.icon}</div>
                 <div class="product-title">${p.name}</div>
@@ -481,12 +583,16 @@
         container.innerHTML = cart.map(item => {
             const p = products.find(p => p.id === item.id);
             return `
-                <div class="product-card">
-                    <div class="product-image">${p.icon}</div>
-                    <div class="product-title">${p.name}</div>
-                    <div class="product-price">${p.price.toLocaleString()} د.ع</div>
-                    <div class="product-actions">
-                        <button class="product-action-btn" onclick="removeFromCart(${p.id})">🗑️ حذف</button>
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <div>${p.icon} ${p.name}</div>
+                        <div class="cart-item-price">${(p.price * item.quantity).toLocaleString()} د.ع</div>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="cart-qty-btn" onclick="updateCartItemQuantity(${item.id}, -1)">-</button>
+                        <span style="min-width: 30px; text-align: center;">${item.quantity}</span>
+                        <button class="cart-qty-btn" onclick="updateCartItemQuantity(${item.id}, 1)">+</button>
+                        <button class="cart-qty-btn" style="background:#E53935;" onclick="removeFromCart(${item.id})">🗑️</button>
                     </div>
                 </div>
             `;
@@ -513,6 +619,15 @@
         
         showToast('🔄 جاري معالجة الطلب...');
         
+        // تحويل السلة إلى قائمة المنتجات مع الكميات
+        const itemsList = [];
+        for (const item of cart) {
+            const product = products.find(p => p.id === item.id);
+            for(let i = 0; i < item.quantity; i++) {
+                itemsList.push({ id: item.id, name: item.name, price: item.price, icon: product ? product.icon : '📦' });
+            }
+        }
+        
         const order = {
             orderNumber: `ORD-${Date.now()}`,
             customer: {
@@ -521,11 +636,8 @@
                 phone: currentUser.phone || 'غير مدخل',
                 address: currentUser.address || 'غير مدخل'
             },
-            items: cart.map(item => {
-                const product = products.find(p => p.id === item.id);
-                return { id: item.id, name: item.name, price: item.price, icon: product ? product.icon : '📦' };
-            }),
-            total: cart.reduce((sum, item) => sum + item.price, 0),
+            items: itemsList,
+            total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
             status: 'جديد',
             date: new Date().toLocaleString('ar-IQ'),
             timestamp: Date.now()
@@ -540,11 +652,64 @@
             if(currentTab === 'cart') renderCartItems();
             showToast(`✅ تم إرسال الطلب بنجاح! رقم الطلب: ${order.orderNumber}`);
             
-            const itemsList = order.items.map(item => `• ${item.name}: ${item.price.toLocaleString()} د.ع`).join('\n');
-            const msg = encodeURIComponent(`🛒 طلب جديد\n👤 ${order.customer.fullName}\n📞 ${order.customer.phone}\n📍 ${order.customer.address}\n📋 ${itemsList}\n💰 ${order.total.toLocaleString()} د.ع`);
+            const itemsText = itemsList.map(item => `• ${item.name}: ${item.price.toLocaleString()} د.ع`).join('\n');
+            const msg = encodeURIComponent(`🛒 طلب جديد من مكتبة حكايه\n\n👤 العميل: ${order.customer.fullName}\n📞 الهاتف: ${order.customer.phone}\n📍 العنوان: ${order.customer.address}\n\n📋 المنتجات:\n${itemsText}\n\n💰 المجموع: ${order.total.toLocaleString()} د.ع`);
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
         } else {
             showToast('❌ فشل إرسال الطلب، حاول مرة أخرى');
+        }
+    }
+    
+    // ======================= دوال الإعدادات =======================
+    function openSettings() { document.getElementById('settingsModal').style.display = 'flex'; }
+    function closeSettings() { document.getElementById('settingsModal').style.display = 'none'; }
+    
+    function changeThemeSelect(value) {
+        if(value === 'dark') {
+            document.body.classList.add('dark');
+            localStorage.setItem('hekaya_theme', 'dark');
+            document.getElementById('themeToggleBtn').innerHTML = '☀️ نهاري';
+        } else if(value === 'light') {
+            document.body.classList.remove('dark');
+            localStorage.setItem('hekaya_theme', 'light');
+            document.getElementById('themeToggleBtn').innerHTML = '🌙 ليلي';
+        } else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if(prefersDark) document.body.classList.add('dark');
+            else document.body.classList.remove('dark');
+            localStorage.removeItem('hekaya_theme');
+        }
+    }
+    
+    function loadTheme() {
+        const savedTheme = localStorage.getItem('hekaya_theme');
+        if(savedTheme === 'dark') {
+            document.body.classList.add('dark');
+            document.getElementById('themeToggleBtn').innerHTML = '☀️ نهاري';
+            document.getElementById('themeSelect').value = 'dark';
+        } else if(savedTheme === 'light') {
+            document.body.classList.remove('dark');
+            document.getElementById('themeToggleBtn').innerHTML = '🌙 ليلي';
+            document.getElementById('themeSelect').value = 'light';
+        } else {
+            document.getElementById('themeSelect').value = 'auto';
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if(prefersDark) document.body.classList.add('dark');
+            else document.body.classList.remove('dark');
+        }
+    }
+    
+    function toggleTheme() {
+        if(document.body.classList.contains('dark')) {
+            document.body.classList.remove('dark');
+            localStorage.setItem('hekaya_theme', 'light');
+            document.getElementById('themeToggleBtn').innerHTML = '🌙 ليلي';
+            document.getElementById('themeSelect').value = 'light';
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem('hekaya_theme', 'dark');
+            document.getElementById('themeToggleBtn').innerHTML = '☀️ نهاري';
+            document.getElementById('themeSelect').value = 'dark';
         }
     }
     
@@ -559,6 +724,7 @@
     
     document.getElementById('loginModal').addEventListener('click', (e) => { if(e.target === document.getElementById('loginModal')) closeLoginModal(); });
     document.getElementById('registerModal').addEventListener('click', (e) => { if(e.target === document.getElementById('registerModal')) closeRegisterModal(); });
+    document.getElementById('settingsModal').addEventListener('click', (e) => { if(e.target === document.getElementById('settingsModal')) closeSettings(); });
     
     // السلايدر
     let currentSlide = 0;
@@ -586,21 +752,6 @@
         currentSlide = (index + slides.length) % slides.length;
         sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
         document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===currentSlide));
-    }
-    
-    // الثيم
-    function loadTheme() {
-        if(localStorage.getItem('hekaya_theme') === 'dark') {
-            document.body.classList.add('dark');
-            document.getElementById('themeToggleBtn').innerHTML = '☀️ نهاري';
-        }
-    }
-    
-    function toggleTheme() {
-        document.body.classList.toggle('dark');
-        const isDark = document.body.classList.contains('dark');
-        localStorage.setItem('hekaya_theme', isDark ? 'dark' : 'light');
-        document.getElementById('themeToggleBtn').innerHTML = isDark ? '☀️ نهاري' : '🌙 ليلي';
     }
     
     function setActiveTab(tab) {
@@ -649,11 +800,19 @@
     window.doLogin = doLogin;
     window.doRegister = doRegister;
     window.showProductDetail = showProductDetail;
+    window.updateCartItemQuantity = updateCartItemQuantity;
     window.removeFromCart = removeFromCart;
+    window.openSettings = openSettings;
+    window.closeSettings = closeSettings;
+    window.changeDefaultQty = changeDefaultQty;
+    window.showUserMenu = showUserMenu;
+    window.changeThemeSelect = changeThemeSelect;
     
     // بدء التشغيل
     async function init() {
         await loadUsersFromGithub();
+        loadDefaultQty();
+        loadTheme();
         const savedUser = localStorage.getItem('hekaya_current_user');
         if(savedUser) {
             currentUser = JSON.parse(savedUser);
@@ -663,7 +822,6 @@
         renderBestSellers();
         renderFeatured();
         initSlider();
-        loadTheme();
         setActiveTab('home');
     }
     
