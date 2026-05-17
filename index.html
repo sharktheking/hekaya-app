@@ -269,7 +269,11 @@
 </div>
 
 <script>
-    // ======================= الإعدادات =======================
+    // ======================= إعدادات GitHub =======================
+    // استخدم هذا التوكن الجديد (تم إنشاؤه خصيصاً لهذا التطبيق)
+    const GIST_ID = "29c912a386122519c2f33862d4fbf698";
+    const GITHUB_TOKEN = "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";
+    const GIST_URL = `https://api.github.com/gists/${GIST_ID}`;
     const WHATSAPP_NUMBER = "9647757777566";
     
     // الأقسام (Categories)
@@ -305,12 +309,59 @@
     let defaultQuantity = 1;
     let currentCategory = null;
     
-    // بيانات المستخدم الافتراضية
+    // تحميل المستخدمين من localStorage
     if(localStorage.getItem('hekaya_users')) {
         users = JSON.parse(localStorage.getItem('hekaya_users'));
     } else {
         users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "0777777777", address: "بغداد" }];
         localStorage.setItem('hekaya_users', JSON.stringify(users));
+    }
+    
+    // ======================= دوال GitHub =======================
+    async function saveOrderToGithub(order) {
+        try {
+            // جلب البيانات الحالية من Gist
+            const response = await fetch(GIST_URL, {
+                headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+            });
+            
+            let allData = { orders: [] };
+            if(response.ok) {
+                const data = await response.json();
+                if(data.files && data.files['hekaya_data.json']) {
+                    allData = JSON.parse(data.files['hekaya_data.json'].content);
+                }
+            }
+            
+            // إضافة الطلب الجديد
+            if(!allData.orders) allData.orders = [];
+            allData.orders.unshift(order);
+            allData.lastUpdate = new Date().toISOString();
+            
+            // حفظ البيانات في Gist
+            const content = JSON.stringify(allData, null, 2);
+            const saveResponse = await fetch(GIST_URL, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    files: { 'hekaya_data.json': { content: content } }
+                })
+            });
+            
+            if(saveResponse.ok) {
+                console.log('✅ Order saved to GitHub');
+                return true;
+            } else {
+                console.error('Save failed:', await saveResponse.text());
+                return false;
+            }
+        } catch(error) {
+            console.error('Error saving order:', error);
+            return false;
+        }
     }
     
     // ======================= الأقسام =======================
@@ -642,44 +693,67 @@
         if(currentTab === 'cart') renderCartItems();
     }
     
-    // ======================= الطلب - إرسال إلى واتساب فقط =======================
-    function checkout() {
+    // ======================= الطلب - إرسال إلى GitHub وواتساب =======================
+    async function checkout() {
         if(!currentUser) { showToastMessage('❌ الرجاء تسجيل الدخول أولاً'); showLoginModal(); return; }
         if(cart.length === 0) { showToastMessage('🛒 السلة فارغة'); return; }
         
-        // تجهيز قائمة المنتجات للواتساب
-        let itemsText = "";
-        let totalPrice = 0;
+        showToastMessage('🔄 جاري معالجة الطلب...');
+        
+        // تجهيز المنتجات للطلب
+        const itemsList = [];
         for (const item of cart) {
             const product = products.find(p => p.id === item.id);
-            const itemTotal = product.price * item.quantity;
-            itemsText += `• ${product.name} x${item.quantity} = ${itemTotal.toLocaleString()} د.ع\n`;
-            totalPrice += itemTotal;
+            for(let i = 0; i < item.quantity; i++) {
+                itemsList.push({ id: item.id, name: item.name, price: item.price, icon: product ? product.icon : '📦' });
+            }
         }
         
-        const message = `🛒 طلب جديد من مكتبة حكايه
-
-👤 العميل: ${currentUser.fullName || currentUser.username}
-📞 الهاتف: ${currentUser.phone || 'غير مدخل'}
-📍 العنوان: ${currentUser.address || 'غير مدخل'}
-
-📋 المنتجات:
-${itemsText}
-
-💰 المجموع الكلي: ${totalPrice.toLocaleString()} د.ع
-
-📅 التاريخ: ${new Date().toLocaleString('ar-IQ')}`;
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         
-        // تفريغ السلة
-        cart = [];
-        saveUserData();
-        updateCartTotal();
-        if(currentTab === 'cart') renderCartItems();
+        const order = {
+            orderNumber: `ORD-${Date.now()}`,
+            customer: {
+                username: currentUser.username,
+                fullName: currentUser.fullName || currentUser.username,
+                phone: currentUser.phone || 'غير مدخل',
+                address: currentUser.address || 'غير مدخل'
+            },
+            items: itemsList,
+            total: totalPrice,
+            status: 'جديد',
+            date: new Date().toLocaleString('ar-IQ'),
+            timestamp: Date.now()
+        };
         
-        // فتح واتساب
-        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
-        showToastMessage(`✅ تم إرسال الطلب إلى واتساب`);
+        // حفظ الطلب في GitHub
+        const saved = await saveOrderToGithub(order);
+        
+        if(saved) {
+            // تفريغ السلة
+            cart = [];
+            saveUserData();
+            updateCartTotal();
+            if(currentTab === 'cart') renderCartItems();
+            showToastMessage(`✅ تم إرسال الطلب بنجاح! رقم الطلب: ${order.orderNumber}`);
+            
+            // إرسال إلى واتساب
+            let itemsText = "";
+            for (const item of cartSnapshot) {
+                const product = products.find(p => p.id === item.id);
+                const itemTotal = product.price * item.quantity;
+                itemsText += `• ${product.name} x${item.quantity} = ${itemTotal.toLocaleString()} د.ع\n`;
+            }
+            
+            const msg = encodeURIComponent(`🛒 طلب جديد من مكتبة حكايه\n\n👤 العميل: ${order.customer.fullName}\n📞 الهاتف: ${order.customer.phone}\n📍 العنوان: ${order.customer.address}\n\n📋 المنتجات:\n${itemsText}\n\n💰 المجموع: ${totalPrice.toLocaleString()} د.ع`);
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+        } else {
+            showToastMessage('❌ فشل إرسال الطلب، حاول مرة أخرى');
+        }
     }
+    
+    // لحفظ نسخة من السلة قبل تفريغها
+    let cartSnapshot = [];
     
     // ======================= دوال الإعدادات =======================
     function openSettings() { document.getElementById('settingsModal').style.display = 'flex'; }
