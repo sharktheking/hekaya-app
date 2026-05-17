@@ -36,27 +36,10 @@
             70% { opacity: 1; }
             100% { opacity: 0; visibility: hidden; }
         }
-        .startup-logo {
-            font-size: 80px;
-            animation: bounce 1s ease infinite;
-        }
-        .startup-title {
-            font-size: 28px;
-            font-weight: bold;
-            color: #0A0A0A;
-            margin-top: 20px;
-            text-align: center;
-        }
-        .startup-subtitle {
-            font-size: 14px;
-            color: #0A0A0A;
-            margin-top: 10px;
-            opacity: 0.8;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
+        .startup-logo { font-size: 80px; animation: bounce 1s ease infinite; }
+        .startup-title { font-size: 28px; font-weight: bold; color: #0A0A0A; margin-top: 20px; text-align: center; }
+        .startup-subtitle { font-size: 14px; color: #0A0A0A; margin-top: 10px; opacity: 0.8; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         
         .header { background: var(--card-bg); padding: 12px 16px; border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
         .logo-area h1 { font-size: 20px; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -67,28 +50,13 @@
         .user-avatar { width: 30px; height: 30px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
         
         /* Categories */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            padding: 12px;
-            margin: 8px 0;
-        }
-        .category-card {
-            text-align: center;
-            cursor: pointer;
-            padding: 10px 5px;
-            border-radius: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            transition: transform 0.2s;
-        }
+        .categories-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 12px; margin: 8px 0; }
+        .category-card { text-align: center; cursor: pointer; padding: 10px 5px; border-radius: 20px; background: var(--card-bg); border: 1px solid var(--border-color); transition: transform 0.2s; }
         .category-card:active { transform: scale(0.95); }
         .category-icon { background: var(--gradient); border-radius: 50%; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
         .category-icon i { font-size: 28px; color: #1A1A1A; }
         .category-name { font-size: 11px; color: var(--text-dim); font-weight: 500; }
         
-        /* Modal */
         .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 1000; display: flex; align-items: center; justify-content: center; }
         .modal-content { background: var(--card-bg); border-radius: 28px; padding: 25px; width: 85%; max-width: 400px; border: 2px solid var(--primary); text-align: center; max-height: 85vh; overflow-y: auto; }
         .modal-content h3 { color: var(--primary); margin-bottom: 20px; }
@@ -96,7 +64,6 @@
         .modal-btn { background: var(--gradient); border: none; padding: 12px; border-radius: 30px; width: 100%; font-weight: bold; margin-top: 10px; cursor: pointer; }
         .modal-close { background: var(--border-color); color: var(--text-color); }
         
-        /* Settings */
         .settings-group { margin-bottom: 20px; text-align: right; }
         .settings-label { color: var(--primary); font-weight: bold; margin-bottom: 8px; display: block; }
         .quantity-control { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 10px 0; }
@@ -107,7 +74,6 @@
         .social-icon { font-size: 28px; display: block; margin-bottom: 6px; }
         .social-name { font-size: 11px; font-weight: bold; color: var(--primary); }
         
-        /* Slider */
         .slider-container { margin: 12px; position: relative; overflow: hidden; border-radius: 24px; }
         .slider-wrapper { display: flex; transition: transform 0.5s ease; cursor: grab; }
         .slide { min-width: 100%; background: var(--gradient); padding: 20px; text-align: center; color: #1A1A1A; }
@@ -135,12 +101,10 @@
         .fav-btn { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
         .fav-active { color: #E53935; background: white; }
         
-        /* Category Products Section */
         .category-products-section { display: none; padding: 12px; }
         .category-products-section.active { display: block; }
         .back-btn { background: var(--gradient); border: none; border-radius: 40px; padding: 8px 16px; margin: 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
         
-        /* Cart */
         .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 8px; border-bottom: 1px solid var(--border-color); }
         .cart-item-info { flex: 1; }
         .cart-item-price { color: var(--primary); font-weight: bold; }
@@ -245,7 +209,6 @@
 <div id="settingsModal" class="modal" style="display: none;">
     <div class="modal-content">
         <h3><i class="fas fa-cog"></i> الإعدادات</h3>
-        
         <div class="settings-group">
             <div class="settings-label">🔢 الكمية الافتراضية للإضافة</div>
             <div class="quantity-control">
@@ -254,7 +217,6 @@
                 <button class="quantity-btn" onclick="changeDefaultQty(1)">+</button>
             </div>
         </div>
-        
         <div class="settings-group">
             <div class="settings-label">🌙 المظهر</div>
             <select id="themeSelect" class="modal-input" onchange="changeThemeSelect(this.value)">
@@ -263,7 +225,6 @@
                 <option value="dark">داكن</option>
             </select>
         </div>
-        
         <div class="settings-group">
             <div class="settings-label">🌐 تابعونا على وسائل التواصل</div>
             <div class="social-grid">
@@ -275,7 +236,6 @@
                 <div class="social-card" onclick="window.open('https://maps.app.goo.gl/FeFawvomK2qhTJxdA', '_blank')"><div class="social-icon"><i class="fas fa-map-marker-alt"></i></div><div class="social-name">الموقع</div></div>
             </div>
         </div>
-        
         <button class="modal-btn" onclick="closeSettings()">إغلاق</button>
     </div>
 </div>
@@ -309,10 +269,7 @@
 </div>
 
 <script>
-    // ======================= الإعدادات - تم تحديثها =======================
-    const GIST_ID = "29c912a386122519c2f33862d4fbf698";
-    const GITHUB_TOKEN = "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";
-    const GIST_URL = `https://api.github.com/gists/${GIST_ID}`;
+    // ======================= الإعدادات =======================
     const WHATSAPP_NUMBER = "9647757777566";
     
     // الأقسام (Categories)
@@ -348,65 +305,12 @@
     let defaultQuantity = 1;
     let currentCategory = null;
     
-    // ======================= دوال GitHub =======================
-    async function loadUsersFromGithub() {
-        try {
-            const response = await fetch(GIST_URL, {
-                headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
-            });
-            if(response.ok) {
-                const data = await response.json();
-                if(data.files && data.files['hekaya_data.json']) {
-                    const content = JSON.parse(data.files['hekaya_data.json'].content);
-                    if(content.users && content.users.length > 0) {
-                        users = content.users;
-                    } else {
-                        users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "", address: "" }];
-                    }
-                    return true;
-                }
-            }
-            users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "", address: "" }];
-            return false;
-        } catch(e) {
-            console.error('Error loading users:', e);
-            users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "", address: "" }];
-            return false;
-        }
-    }
-    
-    async function saveOrderToGithub(order) {
-        try {
-            const response = await fetch(GIST_URL, {
-                headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
-            });
-            let allData = {};
-            if(response.ok) {
-                const data = await response.json();
-                if(data.files && data.files['hekaya_data.json']) {
-                    allData = JSON.parse(data.files['hekaya_data.json'].content);
-                }
-            }
-            if(!allData.orders) allData.orders = [];
-            allData.orders.unshift(order);
-            allData.lastUpdate = new Date().toISOString();
-            
-            const content = JSON.stringify(allData, null, 2);
-            const saveResponse = await fetch(GIST_URL, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `token ${GITHUB_TOKEN}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    files: { 'hekaya_data.json': { content: content } }
-                })
-            });
-            return saveResponse.ok;
-        } catch(error) {
-            console.error('Error saving order:', error);
-            return false;
-        }
+    // بيانات المستخدم الافتراضية
+    if(localStorage.getItem('hekaya_users')) {
+        users = JSON.parse(localStorage.getItem('hekaya_users'));
+    } else {
+        users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "0777777777", address: "بغداد" }];
+        localStorage.setItem('hekaya_users', JSON.stringify(users));
     }
     
     // ======================= الأقسام =======================
@@ -466,17 +370,11 @@
     }
     
     function showAllCategories() {
-        const allCats = categories.map(cat => `
-            <div class="category-card" onclick="showCategoryProducts('${cat.id}', '${cat.name}'); closeModal();" style="margin:5px;">
-                <div class="category-icon"><i class="fas ${cat.icon}"></i></div>
-                <div class="category-name">${cat.name}</div>
-            </div>
-        `).join('');
-        showToastMessage("📂 جميع الأقسام");
+        showToastMessage("📂 جميع الأقسام متاحة من القائمة العلوية");
     }
     
     // ======================= دوال المستخدم =======================
-    async function doLogin() {
+    function doLogin() {
         const username = document.getElementById('loginUsername').value;
         const password = document.getElementById('loginPassword').value;
         const user = users.find(u => u.username === username && u.password === password);
@@ -494,7 +392,7 @@
         }
     }
     
-    async function doRegister() {
+    function doRegister() {
         const username = document.getElementById('regUsername').value;
         const password = document.getElementById('regPassword').value;
         const fullName = document.getElementById('regFullName').value;
@@ -513,7 +411,7 @@
         }
         const newUser = { username, password, fullName, phone, address };
         users.push(newUser);
-        await saveUserToGithub(users);
+        localStorage.setItem('hekaya_users', JSON.stringify(users));
         currentUser = newUser;
         localStorage.setItem('hekaya_current_user', JSON.stringify(currentUser));
         loadUserData();
@@ -521,37 +419,6 @@
         closeRegisterModal();
         showToastMessage(`✅ مرحباً ${fullName}`);
         renderAll();
-    }
-    
-    async function saveUserToGithub(updatedUsers) {
-        try {
-            const response = await fetch(GIST_URL, {
-                headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
-            });
-            let allData = {};
-            if(response.ok) {
-                const data = await response.json();
-                if(data.files && data.files['hekaya_data.json']) {
-                    allData = JSON.parse(data.files['hekaya_data.json'].content);
-                }
-            }
-            allData.users = updatedUsers;
-            allData.lastUpdate = new Date().toISOString();
-            
-            const content = JSON.stringify(allData, null, 2);
-            await fetch(GIST_URL, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `token ${GITHUB_TOKEN}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    files: { 'hekaya_data.json': { content: content } }
-                })
-            });
-        } catch(e) {
-            console.error('Error saving user:', e);
-        }
     }
     
     function updateUserUI() {
@@ -775,51 +642,43 @@
         if(currentTab === 'cart') renderCartItems();
     }
     
-    // ======================= الطلب =======================
-    async function checkout() {
+    // ======================= الطلب - إرسال إلى واتساب فقط =======================
+    function checkout() {
         if(!currentUser) { showToastMessage('❌ الرجاء تسجيل الدخول أولاً'); showLoginModal(); return; }
         if(cart.length === 0) { showToastMessage('🛒 السلة فارغة'); return; }
         
-        showToastMessage('🔄 جاري معالجة الطلب...');
-        
-        const itemsList = [];
+        // تجهيز قائمة المنتجات للواتساب
+        let itemsText = "";
+        let totalPrice = 0;
         for (const item of cart) {
             const product = products.find(p => p.id === item.id);
-            for(let i = 0; i < item.quantity; i++) {
-                itemsList.push({ id: item.id, name: item.name, price: item.price, icon: product ? product.icon : '📦' });
-            }
+            const itemTotal = product.price * item.quantity;
+            itemsText += `• ${product.name} x${item.quantity} = ${itemTotal.toLocaleString()} د.ع\n`;
+            totalPrice += itemTotal;
         }
         
-        const order = {
-            orderNumber: `ORD-${Date.now()}`,
-            customer: {
-                username: currentUser.username,
-                fullName: currentUser.fullName || currentUser.username,
-                phone: currentUser.phone || 'غير مدخل',
-                address: currentUser.address || 'غير مدخل'
-            },
-            items: itemsList,
-            total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
-            status: 'جديد',
-            date: new Date().toLocaleString('ar-IQ'),
-            timestamp: Date.now()
-        };
+        const message = `🛒 طلب جديد من مكتبة حكايه
+
+👤 العميل: ${currentUser.fullName || currentUser.username}
+📞 الهاتف: ${currentUser.phone || 'غير مدخل'}
+📍 العنوان: ${currentUser.address || 'غير مدخل'}
+
+📋 المنتجات:
+${itemsText}
+
+💰 المجموع الكلي: ${totalPrice.toLocaleString()} د.ع
+
+📅 التاريخ: ${new Date().toLocaleString('ar-IQ')}`;
         
-        const saved = await saveOrderToGithub(order);
+        // تفريغ السلة
+        cart = [];
+        saveUserData();
+        updateCartTotal();
+        if(currentTab === 'cart') renderCartItems();
         
-        if(saved) {
-            cart = [];
-            saveUserData();
-            updateCartTotal();
-            if(currentTab === 'cart') renderCartItems();
-            showToastMessage(`✅ تم إرسال الطلب بنجاح! رقم الطلب: ${order.orderNumber}`);
-            
-            const itemsText = itemsList.map(item => `• ${item.name}: ${item.price.toLocaleString()} د.ع`).join('\n');
-            const msg = encodeURIComponent(`🛒 طلب جديد من مكتبة حكايه\n\n👤 العميل: ${order.customer.fullName}\n📞 الهاتف: ${order.customer.phone}\n📍 العنوان: ${order.customer.address}\n\n📋 المنتجات:\n${itemsText}\n\n💰 المجموع: ${order.total.toLocaleString()} د.ع`);
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
-        } else {
-            showToastMessage('❌ فشل إرسال الطلب، حاول مرة أخرى');
-        }
+        // فتح واتساب
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        showToastMessage(`✅ تم إرسال الطلب إلى واتساب`);
     }
     
     // ======================= دوال الإعدادات =======================
@@ -979,8 +838,7 @@
     window.showAllCategories = showAllCategories;
     
     // بدء التشغيل
-    async function init() {
-        await loadUsersFromGithub();
+    function init() {
         loadDefaultQty();
         loadTheme();
         renderCategories();
