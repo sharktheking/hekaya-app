@@ -53,7 +53,7 @@
         .search-box i { color: var(--primary); }
         .search-input { flex: 1; border: none; background: transparent; padding: 0 10px; outline: none; color: var(--text-color); }
         
-        /* Categories Grid - 4 columns */
+        /* Categories Grid */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -62,16 +62,7 @@
             max-height: 500px;
             overflow-y: auto;
         }
-        .category-card {
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            padding: 8px 4px;
-            border-radius: 16px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-        }
-        .category-card:hover { transform: translateY(-3px); }
+        .category-card { text-align: center; cursor: pointer; transition: all 0.3s; padding: 8px 4px; border-radius: 16px; background: var(--card-bg); border: 1px solid var(--border-color); }
         .category-icon { background: var(--gradient); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
         .category-icon i { font-size: 24px; color: #1A1A1A; }
         .category-name { font-size: 10px; color: var(--text-dim); font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -90,22 +81,23 @@
         .product-actions { display: flex; gap: 8px; margin-top: 8px; }
         .product-action-btn { flex: 1; background: var(--gradient); border: none; border-radius: 20px; padding: 5px; font-size: 10px; font-weight: bold; cursor: pointer; }
         
+        /* Cart Page */
+        .cart-container { padding: 12px; }
+        .cart-summary { background: var(--card-bg); border-radius: 20px; padding: 15px; margin-top: 15px; border: 1px solid var(--border-color); }
+        .cart-total { font-size: 18px; font-weight: bold; color: var(--primary); text-align: center; margin: 10px 0; }
+        .checkout-btn { background: var(--gradient); border: none; padding: 12px; border-radius: 30px; width: 100%; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        
         /* Category Products Section */
         .category-products-section { display: none; padding: 12px; }
         .category-products-section.active { display: block; }
         .back-btn { background: var(--gradient); border: none; border-radius: 40px; padding: 8px 16px; margin: 10px; cursor: pointer; }
         
-        /* All Products Modal */
+        /* Modal */
         .all-products-modal { position: fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.9); z-index:1000; overflow-y:auto; display: none; }
         .all-products-modal.active { display: block; }
         .modal-header { background: var(--gradient); padding: 15px; border-radius: 20px; display: flex; justify-content: space-between; margin: 15px; }
         .modal-header h3 { color: #1A1A1A; }
         .close-modal-btn { background: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; }
-        
-        /* Cart & Favorites */
-        #cartContent, #favoritesContent { display: none; }
-        .cart-icon { position: relative; }
-        .badge { background: var(--primary); color: #1A1A1A; font-size: 9px; border-radius: 50%; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: -5px; right: -8px; }
         
         /* Bottom Navigation */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg); display: flex; justify-content: space-around; padding: 8px 12px; border-top: 1px solid var(--border-color); z-index: 100; }
@@ -115,25 +107,29 @@
         .nav-item.active { background: var(--gradient); }
         .nav-item.active i, .nav-item.active span { color: #1A1A1A; }
         
+        /* Cart Icon Badge */
+        .cart-icon { position: relative; }
+        .badge { background: var(--primary); color: #1A1A1A; font-size: 9px; border-radius: 50%; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; position: absolute; top: -5px; right: -8px; }
+        
         /* Settings Modal */
         .settings-modal { position: fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.9); z-index:1000; display: none; align-items: center; justify-content: center; }
         .settings-modal.active { display: flex; }
         .settings-content { background: var(--card-bg); border-radius: 28px; width: 90%; max-width: 400px; max-height: 80vh; overflow-y: auto; padding: 20px; border: 2px solid var(--primary); }
         .settings-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
         .settings-header h3 { color: var(--primary); }
-        .settings-label { font-weight: bold; margin: 10px 0 5px; color: var(--primary); }
         .settings-input { width: 100%; padding: 10px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-color); margin-bottom: 10px; }
         .settings-btn { background: var(--gradient); border: none; padding: 10px; border-radius: 30px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 5px; }
-        
-        .toast { position: fixed; bottom: 80px; left: 20px; right: 20px; background: var(--gradient); color: #1A1A1A; padding: 12px; border-radius: 50px; text-align: center; z-index: 1000; animation: fadeOut 2.5s; font-weight: bold; }
-        @keyframes fadeOut { 0% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
-        .empty-state { text-align: center; padding: 40px; color: var(--text-dim); }
         
         /* Social Grid */
         .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 16px; }
         .social-card { background: var(--card-bg); border-radius: 20px; padding: 12px; text-align: center; cursor: pointer; border: 1px solid var(--border-color); }
         .social-icon { font-size: 28px; margin-bottom: 6px; }
         .social-name { font-size: 11px; font-weight: bold; color: var(--primary); }
+        
+        /* Toast */
+        .toast { position: fixed; bottom: 80px; left: 20px; right: 20px; background: var(--gradient); color: #1A1A1A; padding: 12px; border-radius: 50px; text-align: center; z-index: 1000; animation: fadeOut 2.5s; font-weight: bold; }
+        @keyframes fadeOut { 0% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
+        .empty-state { text-align: center; padding: 40px; color: var(--text-dim); }
     </style>
 </head>
 <body>
@@ -220,10 +216,20 @@
 </div>
 
 <!-- Cart Content -->
-<div id="cartContent"><div class="section-title"><h3>🛒 السلة</h3></div><div id="cartItemsGrid" class="products-grid"></div></div>
+<div id="cartContent" style="display: none;">
+    <div class="section-title"><h3>🛒 سلة المشتريات</h3></div>
+    <div id="cartItemsGrid" class="products-grid"></div>
+    <div class="cart-summary">
+        <div class="cart-total" id="cartTotal">المجموع: 0 د.ع</div>
+        <button class="checkout-btn" onclick="checkout()">💳 شراء الآن</button>
+    </div>
+</div>
 
 <!-- Favorites Content -->
-<div id="favoritesContent"><div class="section-title"><h3>❤️ المفضلة</h3></div><div id="favoritesItemsGrid" class="products-grid"></div></div>
+<div id="favoritesContent" style="display: none;">
+    <div class="section-title"><h3>❤️ المفضلة</h3></div>
+    <div id="favoritesItemsGrid" class="products-grid"></div>
+</div>
 
 <!-- All Products Modal -->
 <div id="allProductsModal" class="all-products-modal">
@@ -263,7 +269,12 @@
 </div>
 
 <script>
-    // ======================= ALL CATEGORIES (50+ SECTIONS) =======================
+    // ======================= CONFIGURATION =======================
+    const GIST_ID = "a959aaf811a0bff1c2accf7fc9c3fe0d";
+    const GITHUB_TOKEN = "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";
+    const ORDERS_GIST_ID = "a959aaf811a0bff1c2accf7fc9c3fe0d"; // نفس الـ Gist ولكن بمفتاح منفصل للطلبات
+    
+    // Categories
     const categories = [
         { id: "stationery", name: "القرطاسية", icon: "fa-book", iconEmoji: "📚" },
         { id: "toys", name: "الألعاب", icon: "fa-gamepad", iconEmoji: "🎮" },
@@ -272,63 +283,17 @@
         { id: "school", name: "المستلزمات المدرسية", icon: "fa-pencil-alt", iconEmoji: "✏️" },
         { id: "craft", name: "الأعمال اليدوية", icon: "fa-palette", iconEmoji: "🎨" },
         { id: "books", name: "الكتب", icon: "fa-book-open", iconEmoji: "📖" },
-        { id: "kitchen", name: "المطارات والأكواب", icon: "fa-mug-hot", iconEmoji: "☕" },
-        { id: "science", name: "مجسمات علمية", icon: "fa-flask", iconEmoji: "🔬" },
-        { id: "glasses", name: "النظارات", icon: "fa-glasses", iconEmoji: "👓" },
-        { id: "lights", name: "تيلا لامب", icon: "fa-lightbulb", iconEmoji: "💡" },
-        { id: "trucks", name: "سيارات الشحن", icon: "fa-truck", iconEmoji: "🚚" },
-        { id: "corporate", name: "الشركات", icon: "fa-building", iconEmoji: "🏢" },
-        { id: "stands", name: "القامات", icon: "fa-chart-line", iconEmoji: "📊" },
-        { id: "watches", name: "الساعات", icon: "fa-clock", iconEmoji: "⌚" },
-        { id: "adhesives", name: "الصمغ واللاصق", icon: "fa-droplet", iconEmoji: "🧴" },
-        { id: "bags", name: "الحقائب", icon: "fa-bag-shopping", iconEmoji: "👜" },
-        { id: "foodContainers", name: "حافظات الطعام", icon: "fa-utensils", iconEmoji: "🥗" },
-        { id: "registers", name: "السجلات", icon: "fa-book", iconEmoji: "📝" },
-        { id: "trend", name: "الترند", icon: "fa-chart-line", iconEmoji: "📈" },
-        { id: "drawing", name: "الرسم", icon: "fa-paintbrush", iconEmoji: "🎨" },
-        { id: "sculpting", name: "النحت", icon: "fa-cube", iconEmoji: "🗿" },
-        { id: "kidsArt", name: "رسم الأطفال", icon: "fa-child", iconEmoji: "👶" },
-        { id: "pools", name: "المسابح", icon: "fa-water", iconEmoji: "🏊" },
-        { id: "graduation", name: "أزياء التخرج", icon: "fa-graduation-cap", iconEmoji: "🎓" },
-        { id: "posters", name: "البوسترات التعليمية", icon: "fa-chalkboard", iconEmoji: "📜" },
-        { id: "sports", name: "المعدات الرياضية", icon: "fa-futbol", iconEmoji: "⚽" },
-        { id: "beauty", name: "العناية الشخصية", icon: "fa-spa", iconEmoji: "💄" },
-        { id: "baby", name: "مستلزمات الأطفال", icon: "fa-baby-carriage", iconEmoji: "👶" },
-        { id: "pets", name: "مستلزمات الحيوانات", icon: "fa-paw", iconEmoji: "🐕" },
-        { id: "office", name: "اللوازم المكتبية", icon: "fa-building", iconEmoji: "📁" },
-        { id: "art", name: "أدوات الرسم والفن", icon: "fa-paintbrush", iconEmoji: "🖌️" },
-        { id: "jewelry", name: "الإكسسوارات والمجوهرات", icon: "fa-gem", iconEmoji: "💎" },
-        { id: "phones", name: "الجوالات والإكسسوارات", icon: "fa-mobile-alt", iconEmoji: "📱" },
-        { id: "computers", name: "الحواسيب والملحقات", icon: "fa-laptop", iconEmoji: "💻" },
-        { id: "cameras", name: "الكاميرات والتصوير", icon: "fa-camera", iconEmoji: "📷" },
-        { id: "audio", name: "الصوتيات والسماعات", icon: "fa-headphones", iconEmoji: "🎧" },
-        { id: "gaming", name: "ألعاب الفيديو", icon: "fa-gamepad", iconEmoji: "🎮" },
-        { id: "home", name: "المستلزمات المنزلية", icon: "fa-home", iconEmoji: "🏠" },
-        { id: "tools", name: "الأدوات والعدد", icon: "fa-tools", iconEmoji: "🔧" },
-        { id: "medical", name: "المستلزمات الطبية", icon: "fa-medkit", iconEmoji: "💊" },
-        { id: "food", name: "المواد الغذائية", icon: "fa-utensils", iconEmoji: "🍔" },
-        { id: "clothing", name: "الملابس والأزياء", icon: "fa-tshirt", iconEmoji: "👕" },
-        { id: "shoes", name: "الأحذية", icon: "fa-shoe-prints", iconEmoji: "👟" },
-        { id: "furniture", name: "الأثاث", icon: "fa-couch", iconEmoji: "🛋️" },
-        { id: "automotive", name: "قطع غيار السيارات", icon: "fa-car", iconEmoji: "🚗" },
-        { id: "agriculture", name: "المستلزمات الزراعية", icon: "fa-tractor", iconEmoji: "🌾" },
-        { id: "construction", name: "مواد البناء", icon: "fa-hard-hat", iconEmoji: "🏗️" }
+        { id: "kitchen", name: "المطارات والأكواب", icon: "fa-mug-hot", iconEmoji: "☕" }
     ];
 
-    // Products Data
+    // Products
     const products = [
         { id: 1, name: "دفتر ملاحظات فاخر", price: 3000, oldPrice: null, icon: "📓", category: "stationery", isBestSeller: true, isFeatured: false },
         { id: 2, name: "قلم حبر ذهبي", price: 1500, oldPrice: null, icon: "✒️", category: "stationery", isBestSeller: true, isFeatured: false },
         { id: 3, name: "سكوشي فاخر", price: 5000, oldPrice: 7500, icon: "🧸", category: "toys", isBestSeller: true, isFeatured: false },
         { id: 4, name: "شاحن سريع 33W", price: 25000, oldPrice: 35000, icon: "⚡", category: "electronics", isBestSeller: true, isFeatured: false },
         { id: 5, name: "ميدالية ذهبية", price: 8000, oldPrice: 12000, icon: "🏅", category: "gifts", isBestSeller: false, isFeatured: true },
-        { id: 6, name: "كوب حراري ذهبي", price: 12000, oldPrice: 18000, icon: "☕", category: "kitchen", isBestSeller: false, isFeatured: true },
-        { id: 7, name: "مجسم ذرة", price: 25000, oldPrice: null, icon: "⚛️", category: "science", isBestSeller: false, isFeatured: true },
-        { id: 8, name: "نظارات شمسية", price: 15000, oldPrice: 25000, icon: "👓", category: "glasses", isBestSeller: false, isFeatured: false },
-        { id: 9, name: "لمبة ليد", price: 12000, oldPrice: null, icon: "💡", category: "lights", isBestSeller: false, isFeatured: false },
-        { id: 10, name: "سيارة شحن", price: 30000, oldPrice: null, icon: "🚚", category: "trucks", isBestSeller: false, isFeatured: true },
-        { id: 11, name: "ساعة يد", price: 20000, oldPrice: 35000, icon: "⌚", category: "watches", isBestSeller: true, isFeatured: false },
-        { id: 12, name: "حقيبة ظهر", price: 40000, oldPrice: null, icon: "🎒", category: "bags", isBestSeller: true, isFeatured: false }
+        { id: 6, name: "كوب حراري ذهبي", price: 12000, oldPrice: 18000, icon: "☕", category: "kitchen", isBestSeller: false, isFeatured: true }
     ];
 
     // Social Links
@@ -340,7 +305,7 @@
         { name: "تيك توك", icon: "fab fa-tiktok", url: "https://tiktok.com/@hikaya_store", color: "#000000" }
     ];
 
-    // User Management
+    // User Data
     let users = JSON.parse(localStorage.getItem('hekaya_users')) || [];
     let currentUser = null;
     let cart = [];
@@ -348,13 +313,13 @@
     let currentTab = 'home';
     let currentCategory = null;
 
-    // Initialize default admin
+    // Initialize admin
     if(users.length === 0) {
         users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "", address: "", isAdmin: true }];
         localStorage.setItem('hekaya_users', JSON.stringify(users));
     }
 
-    // ======================= CATEGORY RENDER =======================
+    // ======================= CATEGORY FUNCTIONS =======================
     function renderCategories() {
         const container = document.getElementById('categoriesGrid');
         container.innerHTML = categories.map(cat => `
@@ -507,11 +472,20 @@
         document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===currentSlide));
     }
 
-    // ======================= CART & FAVORITES =======================
+    // ======================= CART FUNCTIONS =======================
     function updateCartBadge() {
         const badge = document.getElementById('cartBadge');
-        if(cart.length > 0) { badge.style.display = 'inline-flex'; badge.innerText = cart.length; }
-        else badge.style.display = 'none';
+        const total = document.getElementById('cartTotal');
+        if(cart.length > 0) {
+            badge.style.display = 'inline-flex';
+            badge.innerText = cart.length;
+        } else {
+            badge.style.display = 'none';
+        }
+        if(total) {
+            const sum = cart.reduce((s, item) => s + item.price, 0);
+            total.innerHTML = `المجموع: ${sum.toLocaleString()} د.ع`;
+        }
     }
 
     function addToCart(productId) {
@@ -522,7 +496,9 @@
             saveUserData();
             updateCartBadge();
             showToast(`✅ تم إضافة ${product.name} إلى السلة`);
-        } else { showToast(`⚠️ ${product.name} موجود بالفعل`); }
+        } else {
+            showToast(`⚠️ ${product.name} موجود بالفعل في السلة`);
+        }
     }
 
     function removeFromCart(productId) {
@@ -550,21 +526,31 @@
 
     function renderCartItems() {
         const container = document.getElementById('cartItemsGrid');
-        if(cart.length === 0) { container.innerHTML = '<div class="empty-state">🛒 السلة فارغة</div>'; return; }
+        if(cart.length === 0) { 
+            container.innerHTML = '<div class="empty-state">🛒 السلة فارغة</div>';
+            updateCartBadge();
+            return; 
+        }
         container.innerHTML = cart.map(item => {
             const p = products.find(p => p.id === item.id);
             return `<div class="product-card">
                 <div class="product-image">${p.icon}</div>
                 <div class="product-title">${p.name}</div>
                 <div class="product-price">${p.price.toLocaleString()} د.ع</div>
-                <button class="product-action-btn" onclick="removeFromCart(${p.id})">🗑️ حذف</button>
+                <div class="product-actions">
+                    <button class="product-action-btn" onclick="removeFromCart(${p.id})">🗑️ حذف</button>
+                </div>
             </div>`;
         }).join('');
+        updateCartBadge();
     }
 
     function renderFavoritesItems() {
         const container = document.getElementById('favoritesItemsGrid');
-        if(favorites.length === 0) { container.innerHTML = '<div class="empty-state">❤️ لا توجد مفضلات</div>'; return; }
+        if(favorites.length === 0) { 
+            container.innerHTML = '<div class="empty-state">❤️ لا توجد مفضلات</div>';
+            return; 
+        }
         container.innerHTML = favorites.map(id => {
             const p = products.find(p => p.id === id);
             return `<div class="product-card">
@@ -592,6 +578,93 @@
             <button onclick="this.parentElement.parentElement.remove()" style="background:var(--border-color); padding:10px; border-radius:30px; width:100%; margin-top:5px;">إغلاق</button>
         </div>`;
         document.body.appendChild(modal);
+    }
+
+    // ======================= CHECKOUT - SEND TO MANAGER =======================
+    async function checkout() {
+        if(!currentUser) {
+            showToast('❌ الرجاء تسجيل الدخول أولاً');
+            return;
+        }
+        if(cart.length === 0) {
+            showToast('🛒 السلة فارغة');
+            return;
+        }
+        
+        showToast('🔄 جاري معالجة الطلب...');
+        
+        const order = {
+            id: Date.now(),
+            orderNumber: `ORD-${Date.now()}`,
+            customer: {
+                username: currentUser.username,
+                fullName: currentUser.fullName,
+                phone: currentUser.phone,
+                address: currentUser.address
+            },
+            items: cart.map(item => {
+                const product = products.find(p => p.id === item.id);
+                return {
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    icon: product ? product.icon : '📦'
+                };
+            }),
+            total: cart.reduce((sum, item) => sum + item.price, 0),
+            status: 'جديد',
+            date: new Date().toLocaleString('ar-IQ'),
+            timestamp: Date.now()
+        };
+        
+        try {
+            // Load existing orders
+            let orders = [];
+            const response = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+                headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+            });
+            
+            if(response.ok) {
+                const data = await response.json();
+                if(data.files && data.files['hekaya_orders.json']) {
+                    orders = JSON.parse(data.files['hekaya_orders.json'].content);
+                }
+            }
+            
+            orders.unshift(order);
+            
+            // Save orders to Gist
+            const content = JSON.stringify(orders, null, 2);
+            const gistData = {
+                description: 'Hekaya Store Orders',
+                files: { 'hekaya_orders.json': { content: content } }
+            };
+            
+            const saveResponse = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+                method: 'PATCH',
+                headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify(gistData)
+            });
+            
+            if(saveResponse.ok) {
+                // Clear cart
+                cart = [];
+                saveUserData();
+                updateCartBadge();
+                if(currentTab === 'cart') renderCartItems();
+                
+                showToast(`✅ تم إرسال الطلب بنجاح! رقم الطلب: ${order.orderNumber}`);
+                
+                // Send to WhatsApp (optional)
+                const msg = encodeURIComponent(`طلب جديد من ${currentUser.fullName || currentUser.username}\nرقم الطلب: ${order.orderNumber}\nالمجموع: ${order.total.toLocaleString()} د.ع\nالعنوان: ${currentUser.address || 'غير مدخل'}`);
+                window.open(`https://wa.me/9647757777566?text=${msg}`, '_blank');
+            } else {
+                showToast('❌ فشل إرسال الطلب');
+            }
+        } catch(e) {
+            console.error(e);
+            showToast('❌ خطأ في الاتصال');
+        }
     }
 
     // ======================= USER MANAGEMENT =======================
@@ -624,6 +697,8 @@
         cart = savedCart ? JSON.parse(savedCart) : [];
         favorites = savedFav ? JSON.parse(savedFav) : [];
         updateCartBadge();
+        if(currentTab === 'cart') renderCartItems();
+        if(currentTab === 'favorites') renderFavoritesItems();
     }
 
     function saveUserData() {
@@ -775,6 +850,7 @@
     window.backToHome = backToHome;
     window.addToCart = addToCart;
     window.toggleFavorite = toggleFavorite;
+    window.removeFromCart = removeFromCart;
     window.showProductDetail = showProductDetail;
     window.showAllCategories = showAllCategories;
     window.showAllProducts = showAllProducts;
@@ -788,6 +864,7 @@
     window.updateProfile = updateProfile;
     window.logout = logout;
     window.setActiveTab = setActiveTab;
+    window.checkout = checkout;
 
     // Initialize
     renderCategories();
