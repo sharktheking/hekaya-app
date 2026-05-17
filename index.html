@@ -19,11 +19,13 @@
         .logo-area h1 { font-size: 20px; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .theme-toggle { background: var(--gradient); border: none; border-radius: 30px; padding: 6px 12px; cursor: pointer; font-size: 12px; font-weight: bold; color: #1A1A1A; }
         
-        .login-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 1000; display: flex; align-items: center; justify-content: center; }
-        .login-box { background: var(--card-bg); border-radius: 28px; padding: 25px; width: 85%; max-width: 350px; border: 2px solid var(--primary); text-align: center; }
-        .login-input { width: 100%; padding: 12px; margin: 8px 0; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-color); }
-        .login-btn { background: var(--gradient); border: none; padding: 12px; border-radius: 30px; width: 100%; font-weight: bold; margin-top: 10px; cursor: pointer; }
-        .error-msg { color: #E53935; font-size: 12px; margin-top: 10px; display: none; }
+        /* Login Modal */
+        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 1000; display: flex; align-items: center; justify-content: center; }
+        .modal-content { background: var(--card-bg); border-radius: 28px; padding: 25px; width: 85%; max-width: 350px; border: 2px solid var(--primary); text-align: center; }
+        .modal-content h3 { color: var(--primary); margin-bottom: 20px; }
+        .modal-input { width: 100%; padding: 12px; margin: 8px 0; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-color); }
+        .modal-btn { background: var(--gradient); border: none; padding: 12px; border-radius: 30px; width: 100%; font-weight: bold; margin-top: 10px; cursor: pointer; }
+        .modal-close { background: var(--border-color); color: var(--text-color); }
         
         .slider-container { margin: 12px; position: relative; overflow: hidden; border-radius: 24px; }
         .slider-wrapper { display: flex; transition: transform 0.5s ease; cursor: grab; }
@@ -43,12 +45,14 @@
         .section-title h3 { color: var(--primary); font-size: 18px; }
         
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 10px 16px; }
-        .product-card { background: var(--card-bg); border-radius: 16px; padding: 12px; border: 1px solid var(--border-color); cursor: pointer; }
+        .product-card { background: var(--card-bg); border-radius: 16px; padding: 12px; border: 1px solid var(--border-color); cursor: pointer; position: relative; }
         .product-image { font-size: 40px; text-align: center; }
         .product-title { font-size: 12px; font-weight: bold; text-align: center; margin: 8px 0; }
         .product-price { font-size: 13px; font-weight: bold; color: var(--primary); text-align: center; }
         .product-actions { display: flex; gap: 8px; margin-top: 8px; }
         .product-action-btn { flex: 1; background: var(--gradient); border: none; border-radius: 20px; padding: 5px; font-size: 10px; font-weight: bold; cursor: pointer; }
+        .fav-btn { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+        .fav-active { color: #E53935; background: white; }
         
         .cart-summary { background: var(--card-bg); border-radius: 20px; padding: 15px; margin: 12px; }
         .cart-total { font-size: 18px; font-weight: bold; color: var(--primary); text-align: center; margin: 10px 0; }
@@ -67,13 +71,22 @@
         .toast { position: fixed; bottom: 80px; left: 20px; right: 20px; background: var(--gradient); color: #1A1A1A; padding: 12px; border-radius: 50px; text-align: center; z-index: 1000; animation: fadeOut 2.5s; font-weight: bold; }
         @keyframes fadeOut { 0% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
         .empty-state { text-align: center; padding: 40px; color: var(--text-dim); }
+        
+        .user-info { display: flex; align-items: center; gap: 8px; background: var(--card-bg); padding: 5px 12px; border-radius: 30px; cursor: pointer; }
+        .user-avatar { width: 30px; height: 30px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <div class="logo-area"><h1>✨ مكتبة حكايه ✨</h1></div>
-    <div class="theme-toggle" id="themeToggleBtn">🌙 ليلي</div>
+    <div style="display: flex; gap: 10px; align-items: center;">
+        <div class="user-info" id="userInfoBtn" onclick="showLoginModal()">
+            <div class="user-avatar" id="userAvatar">👤</div>
+            <span id="userName">تسجيل الدخول</span>
+        </div>
+        <div class="theme-toggle" id="themeToggleBtn">🌙 ليلي</div>
+    </div>
 </div>
 
 <div class="search-container">
@@ -99,6 +112,11 @@
     <div id="featuredGrid" class="products-grid"></div>
 </div>
 
+<div id="favoritesContent" style="display: none;">
+    <div class="section-title"><h3>❤️ منتجاتي المفضلة</h3></div>
+    <div id="favoritesGrid" class="products-grid"></div>
+</div>
+
 <div id="cartContent" style="display: none;">
     <div class="section-title"><h3>🛒 سلة المشتريات</h3></div>
     <div id="cartItemsGrid" class="products-grid"></div>
@@ -110,62 +128,133 @@
 
 <div class="bottom-nav">
     <div class="nav-item active" data-tab="home"><i class="fas fa-home"></i><span>الرئيسية</span></div>
+    <div class="nav-item" data-tab="favorites"><i class="fas fa-heart"></i><span>المفضلة</span></div>
     <div class="nav-item" data-tab="cart"><div class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="badge" id="cartBadge" style="display:none;">0</span></div><span>السلة</span></div>
 </div>
 
+<!-- Login Modal -->
+<div id="loginModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3>🔐 تسجيل الدخول</h3>
+        <input type="text" id="loginUsername" class="modal-input" placeholder="اسم المستخدم">
+        <input type="password" id="loginPassword" class="modal-input" placeholder="كلمة المرور">
+        <div id="loginError" style="color: #E53935; font-size: 12px; margin-top: 5px; display: none;"></div>
+        <button class="modal-btn" onclick="doLogin()">تسجيل الدخول</button>
+        <button class="modal-btn modal-close" onclick="closeLoginModal()">إلغاء</button>
+    </div>
+</div>
+
+<!-- Register Modal -->
+<div id="registerModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3>📝 إنشاء حساب جديد</h3>
+        <input type="text" id="regUsername" class="modal-input" placeholder="اسم المستخدم *">
+        <input type="password" id="regPassword" class="modal-input" placeholder="كلمة المرور *">
+        <input type="text" id="regFullName" class="modal-input" placeholder="الاسم الكامل *">
+        <input type="tel" id="regPhone" class="modal-input" placeholder="رقم الهاتف">
+        <input type="text" id="regAddress" class="modal-input" placeholder="العنوان">
+        <div id="regError" style="color: #E53935; font-size: 12px; margin-top: 5px; display: none;"></div>
+        <button class="modal-btn" onclick="doRegister()">إنشاء حساب</button>
+        <button class="modal-btn modal-close" onclick="closeRegisterModal()">إلغاء</button>
+    </div>
+</div>
+
 <script>
-    // ======================= ⚠️ غيّر هذه القيم ⚠️ =======================
-    // ضع الـ Gist ID الجديد هنا (من الرابط بعد إنشاء الـ Gist)
-    const GIST_ID = "https://gist.github.com/sharktheking/29c912a386122519c2f33862d4fbf698";
-    // ضع التوكن الجديد هنا
-    const GITHUB_TOKEN = "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";
-    // ================================================================
-    
+    // ======================= الإعدادات =======================
+    const GIST_ID = "29c912a386122519c2f33862d4fbf698";
+    const GITHUB_TOKEN = "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";
     const GIST_URL = `https://api.github.com/gists/${GIST_ID}`;
     const WHATSAPP_NUMBER = "9647757777566";
     
     // المنتجات
     const products = [
-        { id: 1, name: "دفتر ملاحظات فاخر", price: 3000, icon: "📓", isBestSeller: true },
-        { id: 2, name: "قلم حبر ذهبي", price: 1500, icon: "✒️", isBestSeller: true },
-        { id: 3, name: "سكوشي فاخر", price: 5000, oldPrice: 7500, icon: "🧸", isBestSeller: true },
-        { id: 4, name: "شاحن سريع 33W", price: 25000, oldPrice: 35000, icon: "⚡", isBestSeller: true }
+        { id: 1, name: "دفتر ملاحظات فاخر", price: 3000, icon: "📓", isBestSeller: true, isFeatured: false },
+        { id: 2, name: "قلم حبر ذهبي", price: 1500, icon: "✒️", isBestSeller: true, isFeatured: false },
+        { id: 3, name: "سكوشي فاخر", price: 5000, oldPrice: 7500, icon: "🧸", isBestSeller: true, isFeatured: false },
+        { id: 4, name: "شاحن سريع 33W", price: 25000, oldPrice: 35000, icon: "⚡", isBestSeller: true, isFeatured: false }
     ];
     
-    // بيانات المستخدم (محلية)
-    let users = JSON.parse(localStorage.getItem('hekaya_users')) || [];
+    // متغيرات الجلسة
+    let users = [];
     let currentUser = null;
     let cart = [];
+    let favorites = [];
     let currentTab = 'home';
     
-    if(users.length === 0) {
-        users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "", address: "" }];
-        localStorage.setItem('hekaya_users', JSON.stringify(users));
-    }
-    
-    // ======================= حفظ الطلب في GitHub =======================
-    async function saveOrderToGithub(order) {
+    // ======================= دوال GitHub =======================
+    async function loadUsersFromGithub() {
         try {
-            // جلب البيانات الحالية
             const response = await fetch(GIST_URL, {
                 headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
             });
-            
-            let allData = { products: [], users: [], orders: [] };
-            
+            if(response.ok) {
+                const data = await response.json();
+                if(data.files && data.files['hekaya_data.json']) {
+                    const content = JSON.parse(data.files['hekaya_data.json'].content);
+                    if(content.users && content.users.length > 0) {
+                        users = content.users;
+                    } else {
+                        users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "", address: "" }];
+                    }
+                    return true;
+                }
+            }
+            users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "", address: "" }];
+            return false;
+        } catch(e) {
+            console.error('Error loading users:', e);
+            users = [{ username: "admin", password: "A1234", fullName: "مدير النظام", phone: "", address: "" }];
+            return false;
+        }
+    }
+    
+    async function saveUserToGithub(updatedUsers) {
+        try {
+            const response = await fetch(GIST_URL, {
+                headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+            });
+            let allData = {};
             if(response.ok) {
                 const data = await response.json();
                 if(data.files && data.files['hekaya_data.json']) {
                     allData = JSON.parse(data.files['hekaya_data.json'].content);
                 }
             }
+            allData.users = updatedUsers;
+            allData.lastUpdate = new Date().toISOString();
             
-            // إضافة الطلب الجديد
+            const content = JSON.stringify(allData, null, 2);
+            await fetch(GIST_URL, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    files: { 'hekaya_data.json': { content: content } }
+                })
+            });
+        } catch(e) {
+            console.error('Error saving user:', e);
+        }
+    }
+    
+    async function saveOrderToGithub(order) {
+        try {
+            const response = await fetch(GIST_URL, {
+                headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+            });
+            let allData = {};
+            if(response.ok) {
+                const data = await response.json();
+                if(data.files && data.files['hekaya_data.json']) {
+                    allData = JSON.parse(data.files['hekaya_data.json'].content);
+                }
+            }
             if(!allData.orders) allData.orders = [];
             allData.orders.unshift(order);
             allData.lastUpdate = new Date().toISOString();
             
-            // حفظ البيانات
             const content = JSON.stringify(allData, null, 2);
             const saveResponse = await fetch(GIST_URL, {
                 method: 'PATCH',
@@ -177,25 +266,250 @@
                     files: { 'hekaya_data.json': { content: content } }
                 })
             });
-            
             return saveResponse.ok;
         } catch(error) {
-            console.error('Error:', error);
+            console.error('Error saving order:', error);
             return false;
         }
     }
     
-    // ======================= إرسال الطلب =======================
-    async function checkout() {
-        if(!currentUser) {
-            showToast('❌ الرجاء تسجيل الدخول أولاً');
-            login();
+    // ======================= دوال المستخدم =======================
+    async function doLogin() {
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+        const user = users.find(u => u.username === username && u.password === password);
+        if(user) {
+            currentUser = user;
+            localStorage.setItem('hekaya_current_user', JSON.stringify(currentUser));
+            loadUserData();
+            updateUserUI();
+            closeLoginModal();
+            showToast(`✅ مرحباً ${user.fullName || user.username}`);
+            renderAll();
+        } else {
+            document.getElementById('loginError').innerText = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+            document.getElementById('loginError').style.display = 'block';
+        }
+    }
+    
+    async function doRegister() {
+        const username = document.getElementById('regUsername').value;
+        const password = document.getElementById('regPassword').value;
+        const fullName = document.getElementById('regFullName').value;
+        const phone = document.getElementById('regPhone').value;
+        const address = document.getElementById('regAddress').value;
+        
+        if(!username || !password || !fullName) {
+            document.getElementById('regError').innerText = 'الرجاء ملء الحقول المطلوبة';
+            document.getElementById('regError').style.display = 'block';
             return;
         }
+        if(users.find(u => u.username === username)) {
+            document.getElementById('regError').innerText = 'اسم المستخدم موجود بالفعل';
+            document.getElementById('regError').style.display = 'block';
+            return;
+        }
+        const newUser = { username, password, fullName, phone, address };
+        users.push(newUser);
+        await saveUserToGithub(users);
+        currentUser = newUser;
+        localStorage.setItem('hekaya_current_user', JSON.stringify(currentUser));
+        loadUserData();
+        updateUserUI();
+        closeRegisterModal();
+        showToast(`✅ مرحباً ${fullName}`);
+        renderAll();
+    }
+    
+    function updateUserUI() {
+        if(currentUser) {
+            document.getElementById('userName').innerText = currentUser.fullName || currentUser.username;
+            document.getElementById('userAvatar').innerHTML = currentUser.fullName ? currentUser.fullName.charAt(0).toUpperCase() : '👤';
+            document.getElementById('userInfoBtn').onclick = () => showUserMenu();
+        } else {
+            document.getElementById('userName').innerText = 'تسجيل الدخول';
+            document.getElementById('userAvatar').innerHTML = '👤';
+            document.getElementById('userInfoBtn').onclick = () => showLoginModal();
+        }
+    }
+    
+    function showUserMenu() {
+        if(confirm(`👤 ${currentUser?.fullName || currentUser?.username}\n\n📞 ${currentUser?.phone || 'لا يوجد'}\n📍 ${currentUser?.address || 'لا يوجد'}\n\nهل تريد تسجيل الخروج؟`)) {
+            logout();
+        }
+    }
+    
+    function logout() {
+        currentUser = null;
+        localStorage.removeItem('hekaya_current_user');
+        cart = [];
+        favorites = [];
+        updateCartTotal();
+        updateUserUI();
+        showToast('👋 تم تسجيل الخروج');
+        renderAll();
+    }
+    
+    function loadUserData() {
+        if(currentUser) {
+            const savedCart = localStorage.getItem(`cart_${currentUser.username}`);
+            const savedFav = localStorage.getItem(`fav_${currentUser.username}`);
+            cart = savedCart ? JSON.parse(savedCart) : [];
+            favorites = savedFav ? JSON.parse(savedFav) : [];
+            updateCartTotal();
+        }
+    }
+    
+    function saveUserData() {
+        if(currentUser) {
+            localStorage.setItem(`cart_${currentUser.username}`, JSON.stringify(cart));
+            localStorage.setItem(`fav_${currentUser.username}`, JSON.stringify(favorites));
+        }
+    }
+    
+    // ======================= دوال المنتجات =======================
+    function toggleFavorite(productId) {
+        if(!currentUser) { showToast('❌ الرجاء تسجيل الدخول أولاً'); showLoginModal(); return; }
+        if(favorites.includes(productId)) {
+            favorites = favorites.filter(id => id !== productId);
+            showToast(`💔 تم إزالة من المفضلة`);
+        } else {
+            favorites.push(productId);
+            showToast(`❤️ تمت إضافة إلى المفضلة`);
+        }
+        saveUserData();
+        renderAll();
+    }
+    
+    function addToCart(productId) {
+        if(!currentUser) { showToast('❌ الرجاء تسجيل الدخول أولاً'); showLoginModal(); return; }
+        const product = products.find(p => p.id === productId);
+        if(!cart.find(item => item.id === productId)) {
+            cart.push({ id: product.id, name: product.name, price: product.price });
+            saveUserData();
+            updateCartTotal();
+            if(currentTab === 'cart') renderCartItems();
+            showToast(`✅ تم إضافة ${product.name} إلى السلة`);
+        } else {
+            showToast(`⚠️ ${product.name} موجود بالفعل`);
+        }
+    }
+    
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.id !== productId);
+        saveUserData();
+        updateCartTotal();
+        if(currentTab === 'cart') renderCartItems();
+        showToast(`🗑️ تم إزالة المنتج من السلة`);
+    }
+    
+    function updateCartTotal() {
+        const total = document.getElementById('cartTotal');
+        const badge = document.getElementById('cartBadge');
+        const sum = cart.reduce((s, item) => s + item.price, 0);
+        if(total) total.innerHTML = `المجموع: ${sum.toLocaleString()} د.ع`;
+        if(cart.length > 0) { badge.style.display = 'inline-flex'; badge.innerText = cart.length; }
+        else badge.style.display = 'none';
+    }
+    
+    // ======================= دوال العرض =======================
+    function renderBestSellers() {
+        const container = document.getElementById('bestSellersGrid');
+        const bestSellers = products.filter(p => p.isBestSeller);
+        container.innerHTML = bestSellers.map(p => `
+            <div class="product-card" onclick="showProductDetail(${p.id})">
+                <button class="fav-btn ${favorites.includes(p.id) ? 'fav-active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${p.id})">
+                    <i class="fas ${favorites.includes(p.id) ? 'fa-heart' : 'fa-heart'}"></i>
+                </button>
+                <div class="product-image">${p.icon}</div>
+                <div class="product-title">${p.name}</div>
+                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
+                <div class="product-actions">
+                    <button class="product-action-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒 أضف للسلة</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function renderFeatured() {
+        const container = document.getElementById('featuredGrid');
+        const featured = products.filter(p => p.oldPrice);
+        container.innerHTML = featured.map(p => `
+            <div class="product-card" onclick="showProductDetail(${p.id})">
+                <button class="fav-btn ${favorites.includes(p.id) ? 'fav-active' : ''}" onclick="event.stopPropagation(); toggleFavorite(${p.id})">
+                    <i class="fas ${favorites.includes(p.id) ? 'fa-heart' : 'fa-heart'}"></i>
+                </button>
+                <div class="product-image">${p.icon}</div>
+                <div class="product-title">${p.name}</div>
+                <div class="product-price"><span style="text-decoration:line-through;color:#999;">${p.oldPrice.toLocaleString()} د.ع</span> ${p.price.toLocaleString()} د.ع</div>
+                <div class="product-actions">
+                    <button class="product-action-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒 أضف للسلة</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function renderFavorites() {
+        const container = document.getElementById('favoritesGrid');
+        const favProducts = products.filter(p => favorites.includes(p.id));
+        if(favProducts.length === 0) {
+            container.innerHTML = '<div class="empty-state">❤️ لا توجد منتجات مفضلة</div>';
+            return;
+        }
+        container.innerHTML = favProducts.map(p => `
+            <div class="product-card" onclick="showProductDetail(${p.id})">
+                <button class="fav-btn fav-active" onclick="event.stopPropagation(); toggleFavorite(${p.id})">
+                    <i class="fas fa-heart"></i>
+                </button>
+                <div class="product-image">${p.icon}</div>
+                <div class="product-title">${p.name}</div>
+                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
+                <div class="product-actions">
+                    <button class="product-action-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒 أضف للسلة</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function renderCartItems() {
+        const container = document.getElementById('cartItemsGrid');
         if(cart.length === 0) {
-            showToast('🛒 السلة فارغة');
+            container.innerHTML = '<div class="empty-state">🛒 السلة فارغة</div>';
+            updateCartTotal();
             return;
         }
+        container.innerHTML = cart.map(item => {
+            const p = products.find(p => p.id === item.id);
+            return `
+                <div class="product-card">
+                    <div class="product-image">${p.icon}</div>
+                    <div class="product-title">${p.name}</div>
+                    <div class="product-price">${p.price.toLocaleString()} د.ع</div>
+                    <div class="product-actions">
+                        <button class="product-action-btn" onclick="removeFromCart(${p.id})">🗑️ حذف</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        updateCartTotal();
+    }
+    
+    function showProductDetail(id) {
+        const p = products.find(p => p.id === id);
+        alert(`${p.name}\nالسعر: ${p.price.toLocaleString()} د.ع`);
+    }
+    
+    function renderAll() {
+        renderBestSellers();
+        renderFeatured();
+        if(currentTab === 'favorites') renderFavorites();
+        if(currentTab === 'cart') renderCartItems();
+    }
+    
+    // ======================= الطلب =======================
+    async function checkout() {
+        if(!currentUser) { showToast('❌ الرجاء تسجيل الدخول أولاً'); showLoginModal(); return; }
+        if(cart.length === 0) { showToast('🛒 السلة فارغة'); return; }
         
         showToast('🔄 جاري معالجة الطلب...');
         
@@ -226,7 +540,6 @@
             if(currentTab === 'cart') renderCartItems();
             showToast(`✅ تم إرسال الطلب بنجاح! رقم الطلب: ${order.orderNumber}`);
             
-            // إرسال واتساب
             const itemsList = order.items.map(item => `• ${item.name}: ${item.price.toLocaleString()} د.ع`).join('\n');
             const msg = encodeURIComponent(`🛒 طلب جديد\n👤 ${order.customer.fullName}\n📞 ${order.customer.phone}\n📍 ${order.customer.address}\n📋 ${itemsList}\n💰 ${order.total.toLocaleString()} د.ع`);
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
@@ -235,122 +548,17 @@
         }
     }
     
-    // ======================= باقي الدوال =======================
-    function renderBestSellers() {
-        const container = document.getElementById('bestSellersGrid');
-        container.innerHTML = products.filter(p => p.isBestSeller).map(p => `
-            <div class="product-card" onclick="showProductDetail(${p.id})">
-                <div class="product-image">${p.icon}</div>
-                <div class="product-title">${p.name}</div>
-                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
-                <div class="product-actions">
-                    <button class="product-action-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒</button>
-                </div>
-            </div>
-        `).join('');
+    // ======================= دوال الواجهة =======================
+    function showLoginModal() { document.getElementById('loginModal').style.display = 'flex'; }
+    function closeLoginModal() { document.getElementById('loginModal').style.display = 'none'; document.getElementById('loginError').style.display = 'none'; }
+    function showRegisterModal() { 
+        closeLoginModal();
+        document.getElementById('registerModal').style.display = 'flex'; 
     }
+    function closeRegisterModal() { document.getElementById('registerModal').style.display = 'none'; document.getElementById('regError').style.display = 'none'; }
     
-    function renderFeatured() {
-        const container = document.getElementById('featuredGrid');
-        container.innerHTML = products.filter(p => p.oldPrice).map(p => `
-            <div class="product-card" onclick="showProductDetail(${p.id})">
-                <div class="product-image">${p.icon}</div>
-                <div class="product-title">${p.name}</div>
-                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
-                <div class="product-actions">
-                    <button class="product-action-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒</button>
-                </div>
-            </div>
-        `).join('');
-    }
-    
-    function renderCartItems() {
-        const container = document.getElementById('cartItemsGrid');
-        if(cart.length === 0) { container.innerHTML = '<div class="empty-state">🛒 السلة فارغة</div>'; updateCartTotal(); return; }
-        container.innerHTML = cart.map(item => {
-            const p = products.find(p => p.id === item.id);
-            return `<div class="product-card">
-                <div class="product-image">${p.icon}</div>
-                <div class="product-title">${p.name}</div>
-                <div class="product-price">${p.price.toLocaleString()} د.ع</div>
-                <button class="product-action-btn" onclick="removeFromCart(${p.id})">🗑️ حذف</button>
-            </div>`;
-        }).join('');
-        updateCartTotal();
-    }
-    
-    function updateCartTotal() {
-        const total = document.getElementById('cartTotal');
-        const badge = document.getElementById('cartBadge');
-        const sum = cart.reduce((s, item) => s + item.price, 0);
-        if(total) total.innerHTML = `المجموع: ${sum.toLocaleString()} د.ع`;
-        if(cart.length > 0) { badge.style.display = 'inline-flex'; badge.innerText = cart.length; }
-        else badge.style.display = 'none';
-    }
-    
-    function addToCart(productId) {
-        if(!currentUser) { showToast('❌ الرجاء تسجيل الدخول أولاً'); login(); return; }
-        const product = products.find(p => p.id === productId);
-        if(!cart.find(item => item.id === productId)) {
-            cart.push({ id: product.id, name: product.name, price: product.price });
-            saveUserData();
-            updateCartTotal();
-            showToast(`✅ تم إضافة ${product.name} إلى السلة`);
-        } else { showToast(`⚠️ ${product.name} موجود بالفعل`); }
-    }
-    
-    function removeFromCart(productId) {
-        cart = cart.filter(item => item.id !== productId);
-        saveUserData();
-        updateCartTotal();
-        if(currentTab === 'cart') renderCartItems();
-        showToast(`🗑️ تم إزالة المنتج من السلة`);
-    }
-    
-    function showProductDetail(id) {
-        const p = products.find(p => p.id === id);
-        alert(`${p.name}\nالسعر: ${p.price.toLocaleString()} د.ع`);
-    }
-    
-    function checkLoginStatus() {
-        const saved = localStorage.getItem('hekaya_current_user');
-        if(saved) {
-            currentUser = JSON.parse(saved);
-            document.getElementById('loginOverlay')?.remove();
-            loadUserData();
-            return true;
-        }
-        login();
-        return false;
-    }
-    
-    function login() {
-        const username = prompt('👤 اسم المستخدم:');
-        const password = prompt('🔑 كلمة المرور:');
-        const user = users.find(u => u.username === username && u.password === password);
-        if(user) {
-            currentUser = user;
-            localStorage.setItem('hekaya_current_user', JSON.stringify(currentUser));
-            loadUserData();
-            showToast(`✅ مرحباً ${user.fullName || username}`);
-            if(document.getElementById('loginOverlay')) document.getElementById('loginOverlay').remove();
-        } else {
-            alert('❌ اسم المستخدم أو كلمة المرور غير صحيحة');
-            login();
-        }
-    }
-    
-    function saveUserData() {
-        if(currentUser) {
-            localStorage.setItem(`cart_${currentUser.username}`, JSON.stringify(cart));
-        }
-    }
-    
-    function loadUserData() {
-        const savedCart = localStorage.getItem(`cart_${currentUser.username}`);
-        cart = savedCart ? JSON.parse(savedCart) : [];
-        updateCartTotal();
-    }
+    document.getElementById('loginModal').addEventListener('click', (e) => { if(e.target === document.getElementById('loginModal')) closeLoginModal(); });
+    document.getElementById('registerModal').addEventListener('click', (e) => { if(e.target === document.getElementById('registerModal')) closeRegisterModal(); });
     
     // السلايدر
     let currentSlide = 0;
@@ -366,7 +574,6 @@
         }
         goToSlide(0);
         setInterval(() => goToSlide(currentSlide+1), 5000);
-        
         let startX;
         sliderWrapper.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
         sliderWrapper.addEventListener('touchend', (e) => {
@@ -403,8 +610,10 @@
             else item.classList.remove('active');
         });
         document.getElementById('homeContent').style.display = 'none';
+        document.getElementById('favoritesContent').style.display = 'none';
         document.getElementById('cartContent').style.display = 'none';
         if(tab === 'home') document.getElementById('homeContent').style.display = 'block';
+        else if(tab === 'favorites') { document.getElementById('favoritesContent').style.display = 'block'; renderFavorites(); }
         else if(tab === 'cart') { document.getElementById('cartContent').style.display = 'block'; renderCartItems(); }
     }
     
@@ -429,17 +638,36 @@
     document.querySelectorAll('.nav-item').forEach(item => item.addEventListener('click', () => setActiveTab(item.dataset.tab)));
     document.getElementById('themeToggleBtn').onclick = toggleTheme;
     
-    // جعل الدوال عامة
     window.addToCart = addToCart;
     window.checkout = checkout;
     window.setActiveTab = setActiveTab;
+    window.toggleFavorite = toggleFavorite;
+    window.showLoginModal = showLoginModal;
+    window.closeLoginModal = closeLoginModal;
+    window.showRegisterModal = showRegisterModal;
+    window.closeRegisterModal = closeRegisterModal;
+    window.doLogin = doLogin;
+    window.doRegister = doRegister;
+    window.showProductDetail = showProductDetail;
+    window.removeFromCart = removeFromCart;
     
-    // التشغيل
-    renderBestSellers();
-    renderFeatured();
-    initSlider();
-    loadTheme();
-    checkLoginStatus();
+    // بدء التشغيل
+    async function init() {
+        await loadUsersFromGithub();
+        const savedUser = localStorage.getItem('hekaya_current_user');
+        if(savedUser) {
+            currentUser = JSON.parse(savedUser);
+            updateUserUI();
+            loadUserData();
+        }
+        renderBestSellers();
+        renderFeatured();
+        initSlider();
+        loadTheme();
+        setActiveTab('home');
+    }
+    
+    init();
 </script>
 </body>
 </html>
